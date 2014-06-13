@@ -1,0 +1,20 @@
+td {
+font-size: 12px;
+font-weight: bold;
+color:silver;
+}
+A.menu:link, A:active, A:visited {
+FONT-WEIGHT: bold;
+font-size: 12px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+TEXT-DECORATION: none;
+COLOR: #DDDDDD;
+}
+
+A.menu:hover {
+COLOR: #ffffff;
+FONT-WEIGHT: bold;
+font-size: 12px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+TEXT-DECORATION: none;
+}

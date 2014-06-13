@@ -1,0 +1,49 @@
+<script>
+function inverse(id)
+{
+  elem=document.getElementById(id);
+  if (elem.style.display=="none")
+  {
+    elem.style.display="";
+  }
+  else
+  {
+    elem.style.display="none";
+  }
+}
+</script>
+<style>
+body
+{	FONT-SIZE: 13pt; FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif
+}
+small
+{	FONT-SIZE: 8pt;
+}
+img
+{	border: 0;
+}
+</style>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0">
+<table width="700px" height="100%" border="0" cellspacing="0" cellpadding="0">
+<?
+if( !empty($msg) ):
+echo $msg;
+endif;
+?>
+ <tr>
+  <td><a onClick="inverse('menu1')" style="cursor:hand"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu1.jpg" /></a></td>
+ </tr>
+ <tr id="menu1" style="background:#3366ff;color:#00ccff;text-align:center;display:none">
+  <td style="padding-top:15px"><form method="POST">Отдать <input type="text" value="" maxlength="3" name="how_much"> штук <input type="submit" name="give_vetki" value="Да!" /> <small> и получить <strong>ёлочную игрушку</strong> за каждые <strong>10 веток</strong>.</small></form></td>
+ </tr>
+ <tr>
+  <td><a onClick="inverse('menu2')" style="cursor:hand"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu2.jpg" /></a></td>
+ </tr>
+ <tr id="menu2" style="background:#990066;color:#ff00cc;padding:30px;text-align:center;display:none">
+  <td style="padding-top:15px"><form method="POST">Продать <input type="text" value="" maxlength="3" name="how_much"> штук <input type="submit" value="Да!" name="sell_vetki" /> <small> и получить <strong>0.1 кред</strong> за каждую.</small></form></td>
+ </tr>
+ <tr>
+  <td><a style="cursor:hand" href="?act=hit"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu3.jpg" border="0" /></a></td>
+ </tr>
+</table>

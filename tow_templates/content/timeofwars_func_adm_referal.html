@@ -1,0 +1,91 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/main.css">
+<script type="text/javascript">
+function createXmlHttpRequestObject()
+{
+	var xmlHttp;
+	try
+	{
+		xmlHttp = new XMLHttpRequest();
+	}
+	catch(e)
+	{
+		var XmlHttpVersions = new Array('MSXML2.XMLHTTP.6.0','MSXML2.XMLHTTP.5.0','MSXML2.XMLHTTP.4.0','MSXML2.XMLHTTP.3.0','MSXML2.XMLHTTP','Microsoft.XMLHTTP');
+		for (var i=0; i<XmlHttpVersions.length && !xmlHttp; i++)
+		{
+			try
+			{
+				xmlHttp = new ActiveXObject(XmlHttpVersions[i]);
+			}
+			catch (e) {}
+		}
+	}
+	if(!xmlHttp)
+		alert("Ошибка создания объекта XMLHTTPRequest");
+	else
+		return xmlHttp;
+}
+
+var xmlHttp = createXmlHttpRequestObject();
+var page_id;
+function page1(page)
+{
+		if(xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+		{
+			xmlHttp.open("GET", "adm_referal.php?id=<?=$id;?>&page1=" + page, false);
+			page_id = 'page1';
+			xmlHttp.onreadystatechange = handleServerResponse;
+			xmlHttp.send(null);
+		}
+		else
+			setTimeout('page1()', 1000);
+
+}
+
+function page2(page)
+{
+		if(xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+		{
+			xmlHttp.open("GET", "adm_referal.php?id=<?=$id;?>&page2=" + page, false);
+			page_id = 'page2';
+			xmlHttp.onreadystatechange = handleServerResponse;
+			xmlHttp.send(null);
+		}
+		else
+			setTimeout('page2()', 1000);
+
+}
+
+function handleServerResponse()
+{
+	if(xmlHttp.readyState == 4)
+	{
+		if(xmlHttp.status == 200)
+		{
+			response = xmlHttp.responseText;
+
+			if(response != '')
+			{
+					document.getElementById(page_id).innerHTML = response;
+			}
+			else
+			{
+				alert('ошибка');
+
+			}
+
+		}
+		else
+		{
+			alert("Ошибка при обращении к серверу:" + xmlHttp.statusText);
+		}
+	}
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="2" marginwidth="0" marginheight="0" bgcolor="#f0f0f0" style="margin:20px" onload="page1(1);page2(1);">
+<div>Совпадения: <?=$sovpadenia;?> %</div>
+<div>Статус: <?=$status;?></div>
+<div>Рефер <?=$refer;?> заходил с такого же ip как и реферал <b><?=okon4($refer_enters_cnt, array('раз', 'раза', 'раз'));?>.</b></div>
+<div>Реферал <?=$referal;?> заходил с такого же ip как и рефер <b><?=okon4($referal_enters_cnt, array('раз', 'раза', 'раз'));?>.</b></div>
+<div id="page1" align="left">&nbsp;</div><div id="page2" align="left">&nbsp;</div>

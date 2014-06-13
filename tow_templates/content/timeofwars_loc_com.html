@@ -1,0 +1,260 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/comission.js"></script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td>
+    <h3>Городской рынок</h3>
+    <b>Внимание!</b>
+    При покупке вашей вещи к Вам автоматически поступит сумма, за исключением 10% комиссионных<br />
+    Забрать ранее оставленную вещь можно за <i>1</i> кр. Будьте внимательны!
+    <? if(!empty($msg)): echo '<br /><font color="red"><b>'.$msg.'</b></font>'; endif; ?>
+   </td>
+   <td align="right">
+    <input type="button" value="Вернуться" onClick="window.location.href='?goto=pl'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+   </td>
+  </tr>
+ </table>
+ <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+   <form method="post">
+   <td valign="top" align="left">
+    <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#A5A5A5">
+     <tr>
+      <td align="center"><b>Б/у вещи</b></td>
+     </tr>
+     <tr>
+      <td>
+       <table width="100%" cellspacing="1" cellpadding="2" bgcolor="#A5A5A5">
+<?
+if(!empty($_POST['sale']) && empty($_POST['zabrat'])):
+if (!empty($a)):
+
+foreach ($a as $v):
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+?>
+        <tr bgcolor="<?=$bgcolor;?>">
+         <td align="center">
+          <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif"><br />
+          <a href="JavaScript:sell('<?=$v['Un_Id'];?>')">Продать</A>
+         </td>
+         <td valign="top">
+          <a href="#" target="_blank"><?=$v['Thing_Name'];?></a><? if ($v['Clan_need']) { ?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['Clan_need'];?>.gif"><? } ?><br />
+		  <b>Цена: <?=$v['Cost']; ?> кр.</b> <br />
+		  Долговечность: <?=$v['NOWwear'];?>/<?=$v['MAXwear'];?></font><br />
+	      <br />Требуется минимальное:<br />
+ <?
+  if ($v['Level_need']): if ($v['Level_need'] > $player->Level): $v['Level_need'] = '<font color=red><b>'.$v['Level_need'].'</b></font>'; endif; endif;
+  if ($v['Stre_need']):  if ($v['Stre_need'] > $player->Stre): $v['Stre_need'] = '<font color=red><B>'.$v['Stre_need'].'</B></font>'; endif; endif;
+  if ($v['Agil_need']):  if ($v['Agil_need'] > $player->Agil): $v['Agil_need'] = '<font color=red><B>'.$v['Agil_need'].'</B></font>'; endif; endif;
+  if ($v['Intu_need']):  if ($v['Intu_need'] > $player->Intu): $v['Intu_need'] = '<font color=red><B>'.$v['Intu_need'].'</B></font>'; endif; endif;
+  if ($v['Endu_need']):  if ($v['Endu_need'] > $player->Endu): $v['Endu_need'] = '<font color=red><B>'.$v['Endu_need'].'</B></font>'; endif; endif;
+
+  if ($v['Stre_need']): echo '&bull; Сила: '.$v['Stre_need'].'<br />'; endif;
+  if ($v['Agil_need']): echo '&bull; Ловкость: '.$v['Agil_need'].'<br />'; endif;
+  if ($v['Intu_need']): echo '&bull; Интуиция: '.$v['Intu_need'].'<br />'; endif;
+  if ($v['Endu_need']): echo '&bull; Выносливость: '.$v['Endu_need'].'<br />'; endif;
+  if ($v['Level_need']): echo '&bull; Уровень: '.$v['Level_need'].'<br />'; endif;
+
+print '<br />Действует на:<br />';
+
+  if ($v['Level_add']): echo '&bull; Уровень: '.$v['Level_add'].'<br />'; endif;
+  if ($v['MAXdamage']): echo '&bull; Повреждение: '.$v['MINdamage'].' - '.$v['MAXdamage'].'<br />'; endif;
+  if ($v['Armor1']): echo '&bull; Броня головы: '.$v['Armor1'].'<br />'; endif;
+  if ($v['Armor2']): echo '&bull; Броня корпуса: '.$v['Armor2'].'<br />'; endif;
+  if ($v['Armor3']): echo '&bull; Броня пояса: '.$v['Armor3'].'<br />'; endif;
+  if ($v['Armor4']): echo '&bull; Броня ног: '.$v['Armor4'].'<br />'; endif;
+  if ($v['Crit']):   echo '&bull; Вероятность крита: '.$v['Crit'].'%<br />'; endif;
+  if ($v['Uv']):     echo '&bull; Вероятность уворота: '.$v['Uv'].'%<br />'; endif;
+  if ($v['AntiCrit']): echo '&bull; АнтиКрит: '.$v['AntiCrit'].'%<br />'; endif;
+  if ($v['AntiUv']): echo '&bull; АнтиУворот: '.$v['AntiUv'].'%<br />'; endif;
+  if ($v['Stre_add']): echo '&bull; Сила: '.$v['Stre_add'].'<br />'; endif;
+  if ($v['Agil_add']): echo '&bull; Ловкость: '.$v['Agil_add'].'<br />'; endif;
+  if ($v['Intu_add']): echo '&bull; Интуиция: '.$v['Intu_add'].'<br />'; endif;
+  if ($v['Endu_add']): echo '&bull; HP: '.$v['Endu_add'].'<br />'; endif;
+  if ($v['MagicID']):  echo '<br />&bull; <I>Встроена магия</I>: '.$v['MagicID'].'<br />'; endif;
+
+?>
+         </td>
+        </tr>
+<? endforeach; ?>
+<? else: ?>
+        <tr><td bgcolor="#e2e0e0" align="center">В рюкзаке нет вещей</td></tr>
+<? endif; ?>
+<? elseif(!empty($_POST['zabrat'])): ?>
+
+<?
+if (!empty($b)):
+foreach ($b as $v):
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+?>
+        <tr bgcolor="<?=$bgcolor;?>">
+         <td align="center">
+          <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif"><br />
+          <a href="JavaScript:smenit('<?=$v['Un_Id'];?>')">Сменить цену</a><br />
+          <a href="javascript:if (confirm('Вы уверены, что хотите забрать <?=$v['Thing_Name'];?> и заплатить за это 1 кр?')) window.navigate('?do=zabrat&id=<?=$v['Un_Id'];?>')">Забрать за 1 кр.</a>
+         </td>
+         <td valign="top">
+          <a href="#" target="_blank"><?=$v['Thing_Name'];?></a><? if ($v['Clan_need']) { ?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['Clan_need'];?>.gif"><? } ?><br />
+		  <b>Цена: <?=$v['Cost']; ?> кр.</b> <br />
+		  Долговечность: <?=$v['NOWwear'];?>/<?=$v['MAXwear'];?></font><br />
+	      <br />Требуется минимальное:<br />
+<?
+  if ($v['Level_need']): if ($v['Level_need'] > $player->Level): $v['Level_need'] = '<font color=red><b>'.$v['Level_need'].'</b></font>'; endif; endif;
+  if ($v['Stre_need']):  if ($v['Stre_need'] > $player->Stre): $v['Stre_need'] = '<font color=red><B>'.$v['Stre_need'].'</B></font>'; endif; endif;
+  if ($v['Agil_need']):  if ($v['Agil_need'] > $player->Agil): $v['Agil_need'] = '<font color=red><B>'.$v['Agil_need'].'</B></font>'; endif; endif;
+  if ($v['Intu_need']):  if ($v['Intu_need'] > $player->Intu): $v['Intu_need'] = '<font color=red><B>'.$v['Intu_need'].'</B></font>'; endif; endif;
+  if ($v['Endu_need']):  if ($v['Endu_need'] > $player->Endu): $v['Endu_need'] = '<font color=red><B>'.$v['Endu_need'].'</B></font>'; endif; endif;
+
+  if ($v['Stre_need']): echo '&bull; Сила: '.$v['Stre_need'].'<br />'; endif;
+  if ($v['Agil_need']): echo '&bull; Ловкость: '.$v['Agil_need'].'<br />'; endif;
+  if ($v['Intu_need']): echo '&bull; Интуиция: '.$v['Intu_need'].'<br />'; endif;
+  if ($v['Endu_need']): echo '&bull; Выносливость: '.$v['Endu_need'].'<br />'; endif;
+  if ($v['Level_need']): echo '&bull; Уровень: '.$v['Level_need'].'<br />'; endif;
+
+print '<br />Действует на:<br />';
+
+  if ($v['Level_add']): echo '&bull; Уровень: '.$v['Level_add'].'<br />'; endif;
+  if ($v['MAXdamage']): echo '&bull; Повреждение: '.$v['MINdamage'].' - '.$v['MAXdamage'].'<br />'; endif;
+  if ($v['Armor1']): echo '&bull; Броня головы: '.$v['Armor1'].'<br />'; endif;
+  if ($v['Armor2']): echo '&bull; Броня корпуса: '.$v['Armor2'].'<br />'; endif;
+  if ($v['Armor3']): echo '&bull; Броня пояса: '.$v['Armor3'].'<br />'; endif;
+  if ($v['Armor4']): echo '&bull; Броня ног: '.$v['Armor4'].'<br />'; endif;
+  if ($v['Crit']):   echo '&bull; Вероятность крита: '.$v['Crit'].'%<br />'; endif;
+  if ($v['Uv']):     echo '&bull; Вероятность уворота: '.$v['Uv'].'%<br />'; endif;
+  if ($v['AntiCrit']): echo '&bull; АнтиКрит: '.$v['AntiCrit'].'%<br />'; endif;
+  if ($v['AntiUv']): echo '&bull; АнтиУворот: '.$v['AntiUv'].'%<br />'; endif;
+  if ($v['Stre_add']): echo '&bull; Сила: '.$v['Stre_add'].'<br />'; endif;
+  if ($v['Agil_add']): echo '&bull; Ловкость: '.$v['Agil_add'].'<br />'; endif;
+  if ($v['Intu_add']): echo '&bull; Интуиция: '.$v['Intu_add'].'<br />'; endif;
+  if ($v['Endu_add']): echo '&bull; HP: '.$v['Endu_add'].'<br />'; endif;
+  if ($v['MagicID']):  echo '<br />&bull; <I>Встроена магия</I>: '.$v['MagicID'].'<br />'; endif;
+?>
+         </td>
+        </tr>
+<? endforeach; ?>
+<? else: ?>
+        <tr><td bgcolor="#e2e0e0" align="center">В магазине нету ваших вещей</td></tr>
+<? endif; ?>
+
+<? else: ?>
+<? if(empty($_GET['itemid']) && (empty($_GET['do']) || $_GET['do'] != 2)): ?>
+
+<?
+$dat = $db->queryArray("SELECT Id, Slot FROM ".SQL_PREFIX."comission WHERE (Slot = '".$_GET['otdel']."') AND (Slot <> '15') AND (Slot <> '16')  GROUP BY Id ORDER by Thing_Name");
+if(!empty($dat)):
+foreach($dat as $v):
+
+list($maxcost, $mincost, $count, $name, $minNOWwear, $maxNOWwear, $MAXwear) = $db->queryCheck("SELECT max(cost), min(cost), count(Id), Thing_name, min(NOWwear), max(NOWwear), MAXwear FROM ".SQL_PREFIX."comission WHERE Id = '{$v['Id']}' GROUP BY Id");
+
+
+if (preg_match ('/Освящено|Освящено элитно/i', $name)): $name = eregi_replace('\[Освящено\]', '', $name); $name = eregi_replace('\[Освящено элитно\]', '', $name); endif;
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+?>
+        <tr bgcolor="<?=$bgcolor;?>">
+         <td align="center">
+          <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif" /><br />
+          <a href="comission.php?otdel=<?=$v['Slot'];?>&itemid=<?=$v['Id'];?>&do=2">Подробнее</a>
+         </td>
+         <td valign="top">
+          <a href="#" target="_blank"><?=$name;?></a><br />
+<?
+echo '
+Цена: '.$mincost.'-'.$maxcost.'<br />
+Долговечность: '.$minNOWwear.'-'.$maxNOWwear.'/'.$MAXwear.'<br />
+Количество: '.$count.'</td>';
+?>
+         </td>
+        </tr>
+<? endforeach; ?>
+<? else: ?>
+        <tr><td bgcolor="#e2e0e0" align="center">Отдел магазина пуст</td></tr>
+<? endif; ?>
+<? elseif(!empty($_GET['itemid']) && (!empty($_GET['do']) && $_GET['do'] == 2) ): ?>
+<?
+$dat = $db->queryArray("SELECT * FROM ".SQL_PREFIX."comission WHERE (Wear_ON = '0') and (Slot <> '13') and (Slot = '".$_GET['otdel']."') and Id = '".$_GET['itemid']."' ORDER by Cost ASC");
+if(!empty($dat)):
+foreach($dat as $v):
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+?>
+        <tr bgcolor="<?=$bgcolor;?>">
+         <td align="center">
+          <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif" /><br />
+          <a href="comission.php?otdel=<?=$v['Slot'];?>&item_id=<?=$v['Un_Id'];?>&action=buy">Купить</A>
+          <? if($v['Owner'] == $_SESSION['login']): ?> <br /><a href="javascript:if (confirm('Вы уверены, что хотите забрать <?=$v['Thing_Name'];?> и заплатить за это 1 кр?')) window.navigate('?do=zabrat&id=<?=$v['Un_Id'];?>')">Забрать за 1 кр.</A> <? endif; ?>
+         </td>
+         <td valign="top">
+          <a href="#" target="_blank"><?=$v['Thing_Name'];?></a><? if ($v['Clan_need']): ?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['Clan_need'];?>.gif"><? endif; ?><br />
+		  <b>Цена: <?=$v['Cost']; ?> кр.</b> <br />
+		  Долговечность: <?=$v['NOWwear'];?>/<?=$v['MAXwear'];?></font><br />
+	      <br />Требуется минимальное:<br />
+<?
+  if ($v['Level_need']): if ($v['Level_need'] > $player->Level): $v['Level_need'] = '<font color=red><b>'.$v['Level_need'].'</b></font>'; endif; endif;
+  if ($v['Stre_need']):  if ($v['Stre_need'] > $player->Stre): $v['Stre_need'] = '<font color=red><B>'.$v['Stre_need'].'</B></font>'; endif; endif;
+  if ($v['Agil_need']):  if ($v['Agil_need'] > $player->Agil): $v['Agil_need'] = '<font color=red><B>'.$v['Agil_need'].'</B></font>'; endif; endif;
+  if ($v['Intu_need']):  if ($v['Intu_need'] > $player->Intu): $v['Intu_need'] = '<font color=red><B>'.$v['Intu_need'].'</B></font>'; endif; endif;
+  if ($v['Endu_need']):  if ($v['Endu_need'] > $player->Endu): $v['Endu_need'] = '<font color=red><B>'.$v['Endu_need'].'</B></font>'; endif; endif;
+
+  if ($v['Stre_need']): echo '&bull; Сила: '.$v['Stre_need'].'<br />'; endif;
+  if ($v['Agil_need']): echo '&bull; Ловкость: '.$v['Agil_need'].'<br />'; endif;
+  if ($v['Intu_need']): echo '&bull; Интуиция: '.$v['Intu_need'].'<br />'; endif;
+  if ($v['Endu_need']): echo '&bull; Выносливость: '.$v['Endu_need'].'<br />'; endif;
+  if ($v['Level_need']): echo '&bull; Уровень: '.$v['Level_need'].'<br />'; endif;
+
+print '<br />Действует на:<br />';
+
+  if ($v['Level_add']): echo '&bull; Уровень: '.$v['Level_add'].'<br />'; endif;
+  if ($v['MAXdamage']): echo '&bull; Повреждение: '.$v['MINdamage'].' - '.$v['MAXdamage'].'<br />'; endif;
+  if ($v['Armor1']): echo '&bull; Броня головы: '.$v['Armor1'].'<br />'; endif;
+  if ($v['Armor2']): echo '&bull; Броня корпуса: '.$v['Armor2'].'<br />'; endif;
+  if ($v['Armor3']): echo '&bull; Броня пояса: '.$v['Armor3'].'<br />'; endif;
+  if ($v['Armor4']): echo '&bull; Броня ног: '.$v['Armor4'].'<br />'; endif;
+  if ($v['Crit']):   echo '&bull; Вероятность крита: '.$v['Crit'].'%<br />'; endif;
+  if ($v['Uv']):     echo '&bull; Вероятность уворота: '.$v['Uv'].'%<br />'; endif;
+  if ($v['AntiCrit']): echo '&bull; АнтиКрит: '.$v['AntiCrit'].'%<br />'; endif;
+  if ($v['AntiUv']): echo '&bull; АнтиУворот: '.$v['AntiUv'].'%<br />'; endif;
+  if ($v['Stre_add']): echo '&bull; Сила: '.$v['Stre_add'].'<br />'; endif;
+  if ($v['Agil_add']): echo '&bull; Ловкость: '.$v['Agil_add'].'<br />'; endif;
+  if ($v['Intu_add']): echo '&bull; Интуиция: '.$v['Intu_add'].'<br />'; endif;
+  if ($v['Endu_add']): echo '&bull; HP: '.$v['Endu_add'].'<br />'; endif;
+  if ($v['MagicID']):  echo '<br />&bull; <I>Встроена магия</I>: '.$v['MagicID'].'<br />'; endif;
+?>
+         </td>
+        </tr>
+<? endforeach; ?>
+<? else: ?>
+        <tr><td bgcolor="#e2e0e0" align="center">Таких вещей нету в магазине</td></tr>
+<? endif; ?>
+
+
+<? endif; ?>
+<? endif; ?>
+     </table>
+    </td>
+   </tr>
+  </table>
+ </td>
+ <td valign="top" width="280px">
+  <center><b>У вас в наличии: <font color="#339900"><?=$player->Money;?></font> кр.</b></center>
+   <div style="MARGIN-LEFT:15px; MARGIN-TOP: 10px;">
+    <input type="submit" value="Продать вещи" name=sale class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">&nbsp;<input type="submit" value="Забрать вещи" name="zabrat" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+     <br /><br />
+      <a href="?otdel=0">Серьги</a><br />
+      <a href="?otdel=1">Ожерелья</a><br />
+      <a href="?otdel=2">Оружие</a><br />
+      <a href="?otdel=3">Броня</a><br />
+      <a href="?otdel=4">Кольца</a><br />
+      <a href="?otdel=7">Шлемы</a><br />
+      <a href="?otdel=8">Перчатки</a><br />
+      <a href="?otdel=9">Щиты</a><br />
+      <a href="?otdel=10">Сапоги</a><br />
+      <a href="?otdel=11">Свитки/Эликсиры</a><br />
+      <a href="?otdel=15">Другое</a><br />
+   </div>
+  </td>
+ </form>
+</tr>
+</table>

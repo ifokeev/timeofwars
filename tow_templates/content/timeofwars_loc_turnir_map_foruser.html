@@ -1,0 +1,48 @@
+</head>
+<body bgcolor="#f0f0f0">
+<?
+$num = 0;
+if( !empty($rows) ):
+?>
+<table cellpadding="0" cellspacing="0" width="*" height="*" align="center">
+<?
+foreach( $rows as $row ):
+ $cages = split( ';', $row );
+?>
+ <tr>
+<?
+ foreach( $cages as $cage ):
+ $num++;
+ $y = floor( ($num-1)/$n_cages );
+ $x = ($num-1)%$n_cages;
+?>
+  <td width="50px" height="50px" bgcolor="<?=$cage == 0 ? '#f0f0f0' : '#929292';?>" title="<?='x: '.$x.'; y:'.$y;?>" align="center" style="border: 1px solid #c1c1c1;">
+  <small>
+  <?
+  /*
+  if( $map[$num-1] == 1 && $map[$num-1-$n_cages] == 1 ){ echo 'go up<br />'; }
+  if( $map[$num-1] == 1 && $map[$num] == 1 ){    echo 'go right<br />'; }
+  if( $map[$num-1] == 1 && $map[$num-1+$n_cages] == 1 ){  echo 'go down<br />'; }
+  if( $map[$num-1] == 1 && $map[$num-2] == 1 ){  echo 'go left<br />'; }
+  */
+
+  if( $num-1 == $data['coord'] ){ echo '<font color="red">п</font>'; }
+  if( !empty($emptys) ):
+   foreach( $emptys as $empty ):
+    if( $empty['coord'] == $num-1 ){ echo '<font color="blue" title="Т№ру '.$empty['user'].'">@</font>'; }
+   endforeach;
+  endif;
+  ?>
+  </small>
+  </td>
+<?
+ endforeach;
+?>
+ </tr>
+<?
+endforeach;
+?>
+</table>
+<?
+endif;
+?>

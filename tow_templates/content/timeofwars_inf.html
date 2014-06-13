@@ -1,0 +1,389 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/style.css">
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/inf.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/index/1.js" type="text/javascript"></script>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script>function thing_info(thing){window.open('thing.php?thing='+thing);}</script>
+</head>
+<body  bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" bgcolor="#f0f0f0" onContextMenu="return false;">
+ <table style="background-repeat: repeat-x;" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/mbg.gif">
+  <tr>
+   <td width="52px" height="80px" align="left"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/left-menu.gif" width="52px" height="80px" border="0"></td>
+   <td align="center" height="80px">
+    <table cellspacing="0" cellpadding="0" border="0">
+     <tr>
+      <td width="90px" align="center"><a href="http://<?=$db_config[DREAM]['server'];?>/encicl/rules.html" class="menu" target="_new" style="cursor:hand">Законы </a><br /><br /></td>
+      <td width="3px" align="center"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/raz.gif" width="3px" height="30px" /><br /><br /></td>
+      <td width="90px" align="center"><a href="http://<?=$db_config[DREAM]['server'];?>/top5.html" class="menu" target="_new" style="cursor:hand">Top15 </a><br /><br /></td>
+      <td width="3px" align="center"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/raz.gif" width="3px" height="30px" /><br /><br /></td>
+      <td width="90px" align="center"><a href="http://<?=$db_config[DREAM]['server'];?>/forum/" class="menu" target="_new" style="cursor:hand">Форум </a><br /><br /></td>
+      <td width="324px" align="center"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/menu-logo.gif" width="324px" height="80px" /></td>
+      <td width="210px" align="left">
+       <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+         <td width="90px" align="center"></td>
+         <td width="5px" align="center"></td>
+         <form action="inf.php" method="GET">
+         <td width="100px" align="center"><input type="text" name="uname" onBlur="if (value == '') {value='<?=$_GET['uname'];?>'}" onFocus="if (value == '<?=$_GET['uname'];?>') {value = ''}" maxLength="20" value="<?=$_GET['uname'];?>" /><br /><br /></td>
+         <td width="90px" align="center"><input type="submit" value="Найти!" /><br /><br /></td>
+         </form>
+        </tr>
+       </table>
+      </td>
+      <td width="30px" align="center">
+       <br /><br />
+      </td>
+     </tr>
+    </table>
+   </td>
+   <td width="54px" height="80px" align="right"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/right-menu.gif" width="54px" height="80px" border="0" /></td>
+  </tr>
+  <tr>
+   <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/left.gif" style="background-repeat: repeat-y;">&nbsp;</td>
+   <td>
+    <? if(!empty($_var['msg'])): echo '<br /><br /><br /><center>'.$_var['msg'].'</center>'; endif; ?>
+    <? if($_var['show'] === true): ?>
+    <table border="0" width="800px" align="center">
+     <tr>
+      <td valign="top">
+       <table border="0" width="100%">
+        <tr>
+         <td width="280px" valign="top">
+          <table cellpadding="0" cellspacing="0" border="0">
+           <tr height="27px">
+            <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t1.gif"></td>
+            <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t2.gif" width="*">&nbsp;</td>
+            <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t3.gif"></td>
+           </tr>
+           <tr>
+            <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t4.gif"></td>
+            <td align="center" style="BACKGROUND-COLOR: #f0f0f0;">
+             <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $result[0], $result[12], $result[1], $result[16] )?>);</script>
+             <table cellspacing="0" cellpadding="0">
+	          <tr>
+	           <td nowrap="nowrap">
+	            <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="<?=$color1;?>" width="<?=$sz1_1;?>px" height="8px" alt="<?=hplevel;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/hpsilver.gif" width="<?=$sz2_1;?>px" height="8px" alt="<?=hplevel;?>" />:<?=$result[10];?>/<?=$result[11];?></div>
+               </td>
+              </tr>
+	         </table>
+             <table cellpadding="0" cellspacing="0" width="243px">
+              <td>
+               <div style="position:relative;" width="242px" height="290px" border="0">
+                <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/pers_i_s.gif" width="242px" height="290px" border="0">
+                <div width="242px" height="20px" style="position:absolute;left:0px; top:-5px; z-index:1;"></div>
+                <div style="position:absolute; left:95px; top:13px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[7];?>" target="_blank">
+                  <img alt="<?=$Slot_name[7];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[7];?>.gif" width="50px" height="51px" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:17px; top:66px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[2];?>" target="_blank">
+                  <img alt="<?=$Slot_name[2];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[2];?>.gif" width="50px" height="50px" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:170px; top:62px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[9];?>" target="_blank">
+                  <img alt="<?=$Slot_name[9];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[9];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:160px; top:145px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[3];?>" target="_blank">
+                  <img alt="<?=$Slot_name[3];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[3];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:23px; top:210px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/book0.gif" alt="Пустой слот аксесуары" />
+                </div>
+                <div style="position:absolute; left:22px; top:150px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[8];?>" target="_blank">
+                  <img alt="<?=$Slot_name[8];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[8];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:173px; top:220px;z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[10];?>" target="_blank">
+                  <img alt="<?=$Slot_name[10];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[10];?>.gif" width="50px" height="35px" />
+                 </a>
+                </div>
+                <div align="center" style="position:absolute; left:70px; top:69px; width:100px ;height:200px; z-index:2; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/pict/<?=$result[14];?>.gif" width="70px" height="180px" title="<?=$result[0];?>" />
+                </div>
+                <div style="position:absolute; left:27px; top:35px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[1];?>" target="_blank">
+                  <img alt="<?=$Slot_name[1];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[1];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:170px; top:35px; z-index:1;width:50px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[0];?>" target="_blank">
+                  <img alt="<?=$Slot_name[0];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[0];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:90px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[4];?>" target="_blank">
+                  <img alt="<?=$Slot_name[4];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[4];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:113px; top:258px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[5];?>" target="_blank">
+                  <img alt="<?=$Slot_name[5];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[5];?>.gif" />
+                 </a>
+                </div>
+                <div style="position:absolute; left:134px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+                 <a href="http://<?=$db_config[DREAM]['server'];?>/thing.php?thing=<?=$Slot_id[6];?>" target="_blank">
+                  <img alt="<?=$Slot_name[6];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$Slot[6];?>.gif" />
+                 </a>
+                </div>
+               </td>
+              </tr>
+            </table>
+            <?
+             if( $_var['online'] === true ): print 'Персонаж находится в клубе<br />'.$room_name; if (!empty($result[20])): echo '<br />Участвует в <a href="log.php?id='.$result[20].'" target="_blank">поединке</a>'; endif; else:  print 'Персонажа нет в клубе '.$lo_time; endif;
+             if( $_var['molch']  === true ): print '<br />Персонажу запрещено общение<br /><i>Осталось: <b>'.$_var['molch_left'].'</b> часов</i>'.$_var['molk']; endif;
+             if( $_var['travm']  === true ): print '<br /><font class="private">У персонажа травма. Ослаблена '.$_var['mesto'].'<br /><i>Осталось: '.$_var['travm_left'].' часов</i></font>'; endif;
+            ?>
+            <br />
+            <?
+             if ( !empty($_var['st']) ):
+
+             $res = $db->query("SELECT hranitel FROM ".SQL_PREFIX."as_notes WHERE Username = '$result[0]' AND Status = 'shuted' ORDER BY Time DESC");
+             $row = $db->SQL_fetch_row($res);
+
+             echo '<font class="private">Наложено:</font><br /><font class="private">'.$db->SQL_numrows($res).'</font> - молч. (посл. <a href="inf.php?uname='.$row[0].'" target="_blank">'.$row[0].'</a>)<br />';
+
+             $res = $db->query("SELECT hranitel FROM ".SQL_PREFIX."as_notes WHERE Username = '$result[0]' AND Status = 'chaos' ORDER BY Time DESC");
+             $row = $db->SQL_fetch_row($res);
+
+             echo '<font class="private">'.$db->SQL_numrows($res).'</font> - прокл.(посл. <a href="inf.php?uname='.$row[0].'" target="_blank">'.$row[0].'</a>)<br />';
+
+             $res = $db->query("SELECT hranitel FROM ".SQL_PREFIX."as_notes WHERE Username = '$result[0]' AND Status = 'blok' ORDER BY Time DESC");
+             $row = $db->SQL_fetch_row($res);
+
+             echo '<font class="private">'.$db->SQL_numrows($res).'</font> - Блок (посл. <a href="inf.php?uname='.$row[0].'" target="_blank">'.$row[0].'</a>)<br />';
+             echo '<a href="vin.php?uname='.$result[0].'" target="_blank">Досье</a>';
+             echo '<br /><a href="adm.php?uname='.$result[0].'" target="_blank">В админку</a>';
+
+             endif;
+             unset($row, $res);
+
+             $img = @get_headers('http://'.$db_config[DREAM_IMAGES]['server'].'/clan/'.$result[16].'_big.gif');
+             if ( $img[0] == 'HTTP/1.1 200 OK' ): print '<br /><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/clan/'.$result[16].'_big.gif" border="0" />'; endif;
+            ?>
+            <br />
+            <?
+             include_once('classes/Clan/clanInf.php');
+             $clanInfo = new clanInfo();
+             echo $clanInfo->GetCLanInfo($result[16], $result[0]);
+             echo $clanInfo->GetWarClans($result[16]);
+             echo $clanInfo->GetPeaceClans($result[16]);
+             echo $clanInfo->GetAllianceClans($result[16]);
+            ?>
+            <? if (!empty($_SESSION['login']) && ($_SESSION['login'] == 's!.' || $_SESSION['login'] == 'stasx') ): ?>
+            <table>
+            <form action="" method="POST">
+            <input type="hidden" name="action" value="UPDATE_INF_IMG" />
+             <tr>
+	          <td colspan="2">Сменить картинку</td>
+             </tr>
+             <tr>
+	          <td><input type="text" name="id_pict" value="<?=$result[14];?>" style="width:50px;" /></td>
+	          <td><input type="submit" name="chang" value="ok!" style="width:25px;" /></td>
+             </tr>
+             </form>
+            </table>
+            <? endif; ?>
+          </td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t6.gif"></td>
+         </tr>
+         <tr height="27px">
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t7.gif"></td>
+          <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t9.gif"></td>
+         </tr>
+        </table>
+       </td>
+       <td valign="top">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+         <tr height="53px">
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/il.gif"></td>
+          <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ibg.gif" width="*" align="center">
+           <font color="#ffffff"><b>Параметры персонажа:</b></font>
+          </td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ir.gif"></td>
+         </tr>
+         <tr>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t4.gif"></td>
+          <td style="BACKGROUND-COLOR: #f0f0f0;">
+           <table width="100%">
+            <tr>
+             <td width="30%">Сила: </td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[2];?></b> </td>
+             <td width="30%">Ловкость: </td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[3];?></b> </td>
+             <? if ($result[12] > 9): ?>
+             <td width="30%">Интеллект: </td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[6];?></b></td>
+             <? endif; ?>
+            </tr>
+            <tr>
+             <td width="30%">Выносливость: </td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[5];?></b> </td>
+             <td width="30%">Интуиция: </td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[4];?></b> </td>
+            </tr>
+           </table>
+          </td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t6.gif"></td>
+         </tr>
+         <tr height="27px">
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t7.gif"></td>
+          <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t9.gif"></td>
+         </tr>
+        </table>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+         <tr height="53px">
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/il.gif"></td>
+          <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ibg.gif" width="*" align="center">
+           <font color="#ffffff"><b>Характеристика персонажа:</b></font>
+          </td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ir.gif"></td>
+         </tr>
+         <tr>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t4.gif"></td>
+          <td style="BACKGROUND-COLOR: #f0f0f0;">
+           <table width="100%">
+            <tr>
+             <td width="30%">Побед:</td>
+             <td width="10%"><b><?=$result[8];?></b></td>
+             <td width="20%">&nbsp;</td>
+             <td width="30%">Поражений:</td>
+             <td width="10%"><b><?=$result[9];?></b></td>
+            </tr>
+            <tr>
+             <td width="30%">Пол:</td>
+             <td width="10%"><b><? if ($result[15] == 'M'): echo 'Мужской'; else: echo 'Женский'; endif; ?></b></td>
+             <td width="20%">&nbsp;</td>
+             <? if ($result[13] && $_var['clan'] !== true): ?>
+             <td width="30%">Статус:</td>
+             <td width="10%" nowrap="nowrap"><b><?=$result[13];?></b></td>
+             <? endif; ?>
+            </tr>
+            <tr>
+             <td width="30%">Карма:</td>
+             <td width="10%"><?=$_var['karma'].'&nbsp'.$_var['karm'];?></td>
+             <td width="20%"><? if(!empty($_var['err'])): echo '<br /><font color="red"><b>'.$_var['err'].'</b></font>'; endif; unset($_var['err']); ?></td>
+            </tr>
+           </table>
+           <table width="100%">
+           <? if($_var['clan'] === true): ?>
+            <tr>
+             <td width="40%">Клан:</td>
+             <td width="60%"><a href="top5.php?show=<?=$result[16];?>" class="us2" target="_blank"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$result[16];?>.gif" border="0" alt="<?=$name;?>" /><?=$name;?><? if(!empty($result[13])): echo '/'.$result[13]; endif; ?></a></td>
+            </tr>
+           <? endif; ?>
+           <? unset($clan); ?>
+           <? if( !empty($clanInfo->clanRank) ):?>
+            <tr>
+             <td width="40%">Ранг:</td>
+             <td width="60%"><b><?=$clanInfo->clanRank;?></b></td>
+            </tr>
+           <? endif; ?>
+           <? if($_var['brak'] === true): print '<tr> <td width="40%">Личное:</td> <td width="60%">'.($result[15] == 'M' ? 'Женат на' : 'Замужем за').' '.$Text.'</td> </tr>'; endif;  unset($_var['brak']);?>
+            <tr>
+             <td width="40%">Дата рождения:</td>
+             <td width="60%"><b><i><?=$result[17];?></i></b></td>
+            </tr>
+           </table>
+           <? if ( $result[16] == '200' ): $_var['left'] = ($chaos[0] - time ('void')) / 3600; $_var['left'] = round ($_var['left'], 1); print '<br />Наказан(а) по следующей причине:<br /> <font class="private">'.$chaos[1].'</font><br />Истечение срока через <I>'.$_var['left'].'</I> часов<br /> Cсылка на форум:<a href="'.$chaos[2].'" target="_blank">'.$chaos[2].'</a><br />'; endif; ?>
+           <? if ( list($Why, $link) = $db->queryCheck("SELECT Why, link FROM ".SQL_PREFIX."blocked WHERE Username = '$result[0]'") ): print '<br /><a class=private>Персонаж заблокирован, причина: '.$Why.'</a><br />'; if(!empty($link)): echo 'Cсылка на форум:<a href="'.$link.'">'.$link.'</a><br /><br />'; endif; unset($link, $Why); endif; ?>
+           <? if ( !empty($_var['st']) && $_GET['uname'] != 's!.'): if ($result[0] !='s!.'): print '<br />Текущий/последний ip: '.$ip.' <b>(разглашение IP другим игрокам наказуемо вплоть до блокировки персонажа)</b><br /><br />'; endif; if(!empty($a)): print '<font class="private">Мульты с этого ip:</font>'; foreach($a as $v): if ($v['Username'] != $result[0]): print ' <a href=\'inf.php?uname='.$v['Username'].'\' target=\'_blank\'>'.$v['Username'].'</a> ||  '; endif; endforeach; endif; print '<br /><br />Регистрационный e-mail: '.$result[22].'<br />'; print 'Реальная дата рождения: '.$result[24].'<br />'; endif; ?>
+
+           <?
+            if ( list($uron_time, $for) = $db->queryCheck( "SELECT Time, for_time FROM ".SQL_PREFIX."sms_2uron WHERE Username = '".$result[0]."';" ) )
+            {           	    if( time() - $uron_time < $for*3600 )
+           	    {           		    echo '<br /><br /><b><font color="red">Персонаж воспользовался услугой "Двойной урон".<br /> Будет действовать еще '.sprintf("%01.1f", $for*60 - (time() - $uron_time)/60 ).' мин.</font></b><br />';
+           	    }
+           	}
+           	elseif ( list($uron_time, $for) = $db->queryCheck( "SELECT Time, for_time FROM ".SQL_PREFIX."sms_3uron WHERE Username = '".$result[0]."';" ) )
+           	{           		if( time() - $uron_time < $for*3600 )
+           		{           			echo '<br /><br /><b><font color="red">Персонаж воспользовался услугой "Тройной урон".<br /> Будет действовать еще '.sprintf("%01.1f", $for*60 - (time() - $uron_time)/60 ).' мин.</font></b><br />';
+           		}
+           	}
+           ?>
+          </td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t6.gif"></td>
+         </tr>
+         <tr height="27px">
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t7.gif"></td>
+          <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+          <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t9.gif"></td>
+         </tr>
+        </table>
+
+       </td>
+      </tr>
+     </table>
+      <? $i = 0; ?>
+      <? if(!empty($b)): ?>
+<!--- начало --->
+     <table cellpadding="0" cellspacing="0" border="0" width="100%">
+      <tr height="53px">
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/il.gif"></td>
+       <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ibg.gif" width="*" align="center"><font color="#ffffff"><b>Подарки персонажа:</b></font></td>
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ir.gif"></td>
+      </tr>
+      <tr>
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t4.gif"></td>
+       <td style="BACKGROUND-COLOR: #f0f0f0;">
+        <table width="100%">
+         <tr>
+          <td width="30%">
+           <? foreach($b as $v): ?>
+           <? if(!empty($v['presentMSG'])): $v['presentMSG'] = $v['presentMSG'].'<br />';  endif; if(!empty($_SESSION['login']) && $_SESSION['login'] == $_GET['uname']): echo '<a style="cursor: hand;" onclick="if (confirm(\'Внимание!!! Подарок &#34;'.$v['presentName'].'&#34; будет безвозвратно утерян. Вы желаете продолжить?\')) window.navigate(\'?uname='.$_GET['uname'].'&act=del&id='.$v['id'].'\')" title="Удалить подарок">'; endif; echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/gifts/'.$v['presentIMG'].'.gif" width="60px" height="60px" onMouseOver="return overlib(\'<center><b>'.$v['presentName'].'</b><br />'.$v['presentMSG'].'Подарок от '.$v['presentFROM'].'</center>\',CAPTION,\'Информация о подарке\',WIDTH,\'200\');" onMouseOut="return nd();" />'; if(!empty($_SESSION['login']) && $_SESSION['login'] == $_GET['uname']): echo '</a>'; endif; echo '&nbsp'; $i++; ?>
+           <? if($i%10 == 0): echo '<br />'; endif; ?>
+           <? endforeach; ?>
+          </td>
+         </tr>
+        </table>
+       </td>
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t6.gif"></td>
+      </tr>
+      <tr height="27px">
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t7.gif"></td>
+       <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+       <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t9.gif"></td>
+      </tr>
+     </table>
+<? endif; ?>
+    </td>
+   </tr>
+  </table>
+  <table cellpadding="0" cellspacing="0" border="0" width="790px" align="center">
+   <tr height="53px">
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/il.gif"></td>
+    <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ibg.gif" width="*" align="center"><font color="#ffffff"><b>Анкетные данные:</b></font></td>
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/ir.gif"></td>
+   </tr>
+   <tr>
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t4.gif"></td>
+    <td style="BACKGROUND-COLOR: #f0f0f0;">
+     <? if(!empty($result[18])): echo 'Имя: '.$result[18].'<br />'; endif; ?>
+     <? if(!empty($result[23])): print 'Город: '.$result[23].'<br />'; endif; ?>
+     <? if(!empty($result[21])): print 'ICQ: <a href=\'http://wwp.icq.com/scripts/search.dll?to='.$result[21].'\'><img src="http://web.icq.com/whitepages/online?icq='.$result[21].'&img=5" border="0" align="middle" height="18px" width="18px" /> '.$result[21].'</a><br />'; endif; ?>
+     О себе:<br /><br />
+    <?=$result[19];?>
+    </td>
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t6.gif"></td>
+   </tr>
+   <tr height="27px">
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t7.gif"></td>
+    <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+    <td width="25px" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/t9.gif"></td>
+   </tr>
+  </table>
+  <? endif; ?><br /><br /><br />
+ </td>
+ <td background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/right.gif" style="background-repeat: repeat-y; background-position:33px;"></td>
+ </tr>
+ <tr>
+  <td colspan="3" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/mobg.gif" height="35px">&nbsp;</td>
+ </tr>
+</table>

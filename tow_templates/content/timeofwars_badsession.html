@@ -1,0 +1,74 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/inf.css">
+</head>
+<body  bottommargin="0" leftmargin="0" topmargin="0" rightmargin="0" bgcolor="#f0f0f0" onContextMenu="return false;">
+<div align="center">
+ <table cellpadding="0" cellspacing="0" border="0" width="790px">
+  <tr height="53px">
+   <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/il.gif"></td>
+   <td background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/ibg.gif" width="*" align="center"><font color="#ffffff"><b>Ошибка авторизации:</b></font></td>
+   <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/ir.gif"></td>
+  </tr>
+  <tr>
+   <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t4.gif"></td>
+   <td style="BACKGROUND-COLOR: #f0f0f0;" align="center">
+    <form method="post">
+     <input type="hidden" name="act" value="enter" />
+     <table border="0" cellspacing="0" cellpadding="0" align="center" style="width: 350px;">
+	  <tr>
+	   <td width="6px" height="1px"></td>
+	   <td width="1px" height="6px"></td>
+	   <td width="6px" height="1px"></td>
+	  </tr>
+	  <tr>
+	   <td style="width: 100%;" valign="top">
+		<table style="width: 100%; height: 100%;">
+		 <tr>
+		  <td colspan="2" align="center" valign="top" style="padding: 5px 15px 5px 15px;">
+           <br /><? if(!empty($msg)): ?><font color="red"><b><?=$msg;?></b></font><? endif; ?><br />
+           <span>Невозможно получить cookies<br><br></span>
+		  </td>
+		 </tr>
+		 <tr>
+		  <td align="right" valign="middle" style="width: 50%; padding-right: 10px; text-align: right;"><b>Имя:</b></td>
+		  <td valign="middle" style="width: 50%; padding-right: 15px;"><input type="text" name="login_auth" value="" style="TEXT-ALIGN: Center; width: 100%; border: solid 1px; font: 9 px; margin: 0px" /></td>
+		 </tr>
+		 <tr>
+		  <td valign="middle" style="padding-right: 10px; text-align: right;"><b>Пароль:</b></td>
+		  <td valign="middle" style="padding-right: 15px;"><input type="password" name="password" value="" style="TEXT-ALIGN: Center; width: 100%; border: solid 1px; font: 9 px; margin: 0px" /></td>
+		 </tr>
+		 <tr>
+		  <td colspan="2" align="center" valign="middle">
+		   <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+		    <tr>
+			 <td style="width: 10px;"></td>
+			 <td align="right"><input type="submit" value="Войти" style="width: 49%; border: solid 1px; font: 9 px; margin: 0px" /></td>
+     		 <td style="width: 10px;"></td>
+			</tr>
+		   </table>
+		  </td>
+		 </tr>
+		 <tr>
+		  <td colspan="2" align="center" valign="top" style="padding: 5px 15px 5px 15px;">
+			Проверьте настройки браузера или фаерволла.<br /><br />
+			<a href="http://timeofwars.lv/register.php">Регистрация</a>&nbsp;|&nbsp;<a href="http://timeofwars.lv/remind.php">Забыли пароль?</a>
+		  </td>
+		 </tr>
+		</table>
+	   </td>
+	   <td></td>
+	 </tr>
+	 <tr>
+	  <td width="6px" height="1px"></td>
+	  <td width="1px" height="6px"></td>
+	  <td width="6px" height="1px"></td>
+	 </tr>
+    </table>
+   </form>
+  </td>
+  <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t6.gif"></td>
+ </tr>
+ <tr height="27px">
+  <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t7.gif"></td>
+  <td background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t8.gif" width="*">&nbsp;</td>
+  <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t9.gif"></td>
+ </tr>

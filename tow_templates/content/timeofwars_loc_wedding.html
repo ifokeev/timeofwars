@@ -1,0 +1,37 @@
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+ <center>
+  <input type="button" value="Обновить" onClick="window.location.href='wedding.php'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';"> <input type="button" value="Вернуться" onClick="window.location.href='?goto=temple'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" />
+ </center>
+ <center><br />
+  <table cellspacing="10">
+   <tr>
+    <td>
+     <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/wedding.jpg" border="0" />
+    </td>
+    <td valign="top">
+     <b>Сейчас на венчании:</b><br />
+      <? if ( !empty($r) ): ?>
+       <? foreach ($r as $v): ?>
+        <a href="javascript:top.AddToPrivate('<?=$v['Username'];?>', true);">
+         <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/private.gif" BORDER="0" alt="Private">
+        </a>
+        <a href="http://<?=$db_config[DREAM][server];?>/top5.php?show=<?=$v['ClanID'];?>" target="_blank">
+         <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?=$v['ClanID'];?>.gif" width="24" height="15" alt="">
+        </a>
+        <a href="javascript:void(0);" onclick="a_click();">
+         <?=$v['Username'];?>
+        </a>
+        [<?=$v['Level'];?>]
+        <a href="http://<?=$db_config[DREAM][server];?>/inf.php?uname=<?=$v['Username'];?>" target="_blank">
+         <img src=http://<?=$db_config[DREAM_IMAGES][server];?>/inf.gif width="12" height="12" alt="Информация о <?=$v['Username'];?>">
+        </a>
+        <br />
+       <? endforeach; ?>
+      <? endif; ?>
+     <? unset($v); ?>
+    </td>
+   </tr>
+  </table>
+ </center>
+

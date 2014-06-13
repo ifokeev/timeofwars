@@ -1,0 +1,8 @@
+body { background-color: #f0f0f0; }
+table,tr,ul,li,form { margin: 0px; padding:0px; }
+body,td,input,textarea,select { font:12px/15px tahoma,verdana,arial,serif; color:black; }
+table,td { border-spacing:0px; }
+table,img { border:0px solid black; }
+a { text-decoration:none; color:black; }
+a:hover { text-decoration:underline; }
+li { margin-left:15px; }

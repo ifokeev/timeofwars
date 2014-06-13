@@ -1,0 +1,76 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.3.2");
+    google.load("jqueryui", "1.7.2");
+
+    google.setOnLoadCallback(function() {
+    	$.getScript("http://<?=$db_config[DREAM]['other'];?>/js/jquery.alerts.js");
+    	$.getScript("http://<?=$db_config[DREAM]['other'];?>/js/jquery/jquery.timers.js",
+    	function(){    	 $("#timer").everyTime(1000, function(i) {
+       	 $(this).text( $("#timer").html()-1 );
+       	 if( $(this).text() == 0 ){ window.location.href='more.php'; }
+       	 } );
+        }
+    	);
+
+
+    	disable = function()
+    	{    		for( i=1; i<=6; i++)
+    		{    			$( '#button'+i ).attr("disabled", true);
+            }
+        }
+
+
+
+        <? if (rand(0,100000) < 500) { ?>
+    	$('body').load('', { act: 'storm' }, function(){ jAlert( 'Неожиданно налетевший шквал потащил вашу лодку в сторону огромного водоворота. Вы пытались отвернуть в сторону, но сорванная очередным порывом рея обрушилась на вашу голову... Когда вы очнулись, то поняли, что еле живы и находитесь в совершенно неизвестном месте.', 'Алярм O_o' ); disable(); } );
+    	<? } ?>
+
+        <? if( $more['end_move']-time() > 0 || $more['end_fishing']-time() > 0 ){ ?>
+        disable();
+        <? } ?>
+     });
+
+</script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+
+<table border="0" width="60%" height="100%" cellspacing="0" cellpadding="0">
+ <tr>
+  <td align="left">
+  <input type="button" id="button1" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Вернуться" onclick="javascript:window.location.href='?goto=port'" <? if( $more['coords'] != 717 ) echo 'disabled="true"'; ?>>
+  </td>
+  <td align="left"><? if( !empty($msg) ) echo '<font color="red"><b>'.$msg.'</b></font>'; ?></td>
+ </tr>
+</table>
+<br /><br />
+<? if( $more['end_move']-time() > 0 ){ echo 'Еще плыть <b id="timer">'.($more['end_move']-time()).'</b> сек.'; } ?>
+<? if( $more['end_fishing']-time() > 0 ){ echo 'Еще ловить <b id="timer">'.($more['end_fishing']-time()).'</b> сек.'; } ?>
+<table border="0" width="30%" height="100%" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+   <td align="center"><input type="button" id="button2"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вверх" onclick="javascript:window.location.href='?goin=top'" <? if( empty($more['top_id']) ) echo 'disabled="true"'; ?>></td>
+  </tr>
+</table>
+<table border="0" width="30%" height="100%" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+   <td align="center"><input type="button" id="button3"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Влево" onclick="javascript:window.location.href='?goin=left'" <? if( empty($more['left_id']) ) echo 'disabled="true"'; ?>></td>
+   <td width="150px" align="center">куда плыть?</td>
+   <td align="center"><input type="button" id="button4" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вправо" onclick="javascript:window.location.href='?goin=right'" <? if( empty($more['right_id']) ) echo 'disabled="true"'; ?>></td>
+  </tr>
+</table>
+<table border="0" width="30%" height="100%" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+   <td align="center"><input type="button" id="button5" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вниз" onclick="javascript:window.location.href='?goin=bottom'" <? if( empty($more['bottom_id']) ) echo 'disabled="true"'; ?>></td>
+  </tr>
+</table>
+<br />
+<table border="0" width="50%" height="100%" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+   <td align="center"><input type="button" id="button6"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:120px; height:20px;" value="Ловить рыбу" onclick="javascript:window.location.href='?work=1'" <? if( !in_array( $more['coords'], $work ) || $more['coords'] == $more['last_coord_fish'] ) echo 'disabled="true"'; ?>></td>
+  </tr>
+  <tr>
+   <td align="center"><b><?=$more['title'];?></b></td>
+  </tr>
+</table>

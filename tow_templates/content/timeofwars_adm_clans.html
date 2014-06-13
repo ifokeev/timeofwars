@@ -1,0 +1,199 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/dealeradm.css">
+</head>
+<body bgcolor="#f0f0f0">
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<? if(!empty($msgError)): echo '<font color=red><b>'.$msgError.'</b></font>'; endif; ?>
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="newForm">
+<INPUT type="hidden" name="action" value="CREATE_NEW_CLAN">
+<TR  height="20%">
+	<TD class="table-top" align="center">Создать новый клан</TD>
+</TR>
+<TR  height="80%">
+	<TD align="left" width="50%">
+		<TABLE border="0" align="left" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD align="right">ID:</TD>
+			<TD align="left"><INPUT type="text" name="id_clan"  id="newFormIdClan" width="100"></TD>
+		</TR>
+		<TR>
+			<TD align="right">Название:</TD>
+			<TD align="left"><INPUT type="text" name="title"  id="newFormTitle" width="100"></TD>
+		</TR>
+		<TR>
+			<TD align="right">&nbsp;</TD>
+			<TD align="left"><INPUT type="submit" name="create" value="Создать"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR /><BR />
+
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="selForm">
+<INPUT type="hidden" name="action" value="SELECT_EDIT_CLAN">
+<TR  height="20%">
+	<TD class="table-top" align="center">Редактировать клан</TD>
+</TR>
+<TR  height="80%">
+	<TD align="center" width="50%">
+		<TABLE border="0" align="center" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD align="right" nowrap width="40%">
+				<? if( empty($clanList) ):?>
+					Нет кланов
+				<? else: ?>
+					<SELECT name="id_clan" id="selFormIdClan" style="width:100%;">
+					<? foreach( $clanList as $clan ): ?>
+						<OPTION value="<?=$clan['id_clan']?>" <?=($clan['id_clan']==$id_clan ? "selected" : "")?> ><?=$clan['id_clan']." - ".$clan['title']?></OPTION>
+					<? endforeach; ?>
+				</SELECT>
+				<? endif; ?>
+			</TD>
+			<TD align="left"><INPUT type="submit" name="create" value="Редактировать"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR /><BR />
+
+<? if( !empty($clanInfo) ): ?>
+
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="editForm">
+<INPUT type="hidden" name="action" value="UPDATE_CLAN_ADMIN">
+<INPUT type="hidden" name="id_clan" value="<?=$id_clan?>"  id="editFormIdClan">
+<TR  height="20%">
+	<TD class="table-top" align="center">Глава клана</TD>
+</TR>
+<TR  height="80%">
+	<TD align="left" width="50%">
+		<TABLE border="0" align="left" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD align="right">Имя персонажа:</TD>
+			<TD align="left"><INPUT type="text" name="username" value="<?=$clanInfo['Username']?>"  id="editFormUsername" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">&nbsp;</TD>
+			<TD align="left"><INPUT type="submit" name="submit" value="Изменить"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR />
+
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="editForm">
+<INPUT type="hidden" name="action" value="UPLOAD_CLAN_ICON">
+<INPUT type="hidden" name="id_clan" value="<?=$id_clan?>"  id="editFormIdClan">
+<TR  height="20%">
+	<TD class="table-top" align="center">Значок клана</TD>
+</TR>
+<TR  height="80%">
+	<TD align="left" width="50%">
+		<TABLE border="0" align="left" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD align="right">Текущий значок</TD>
+			<TD align="left">Загружаемый значок</TD>
+		</TR>
+		<TR>
+			<TD align="right"><IMG src="<?=$clanIconFile?>" width="24" height="15"></TD>
+			<TD align="left"><INPUT type="file" name="icon" value=""  id="editFormIcon" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">&nbsp;</TD>
+			<TD align="left"><INPUT type="submit" name="submit" value="Изменить"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR />
+
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="editForm">
+<INPUT type="hidden" name="action" value="UPLOAD_RANK_ICON">
+<INPUT type="hidden" name="id_clan" value="<?=$id_clan?>"  id="editFormIdClan">
+<TR  height="20%">
+	<TD class="table-top" align="center">Значки рангов</TD>
+</TR>
+<TR  height="80%">
+	<TD align="left" width="50%">
+		<TABLE border="0" align="left" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD colspan="2" align="right">
+				<? if(!empty($rankIconFiles)) foreach( $rankIconFiles as $rankIconNum => $rankIconFile ): ?>
+					#<?=$rankIconNum?><IMG src="<?=$rankIconFile?>" width="24" height="15" alt="<?=$rankIconNum?>">
+				<? endforeach; ?>
+			</TD>
+		</TR>
+		<TR>
+			<TD align="right">Номер значка</TD>
+			<TD align="left">Загружаемый файл</TD>
+		</TR>
+		<TR>
+			<TD align="right"><INPUT type="text" name="rank" value=""  id="editFormRank" style="width:100%"></TD>
+			<TD align="left"><INPUT type="file" name="icon" value=""  id="editFormIcon" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">&nbsp;</TD>
+			<TD align="left"><INPUT type="submit" name="submit" value="Залить"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR />
+
+<TABLE width="100%" cellspacing="1" bgcolor="#333333">
+<FORM enctype="multipart/form-data" action="clans.php" method="POST" id="editForm">
+<INPUT type="hidden" name="action" value="UPDATE_CLAN_SETUP">
+<INPUT type="hidden" name="id_clan" value="<?=$id_clan?>"  id="editFormIdClan">
+<TR  height="20%">
+	<TD class="table-top" align="center">Настройки клана</TD>
+</TR>
+<TR  height="80%">
+	<TD align="left" width="50%">
+		<TABLE border="0" align="left" bgcolor="#FFFFFF" width="100%" height="100%">
+		<TR>
+			<TD align="right">Название:</TD>
+			<TD align="left"><INPUT type="text" name="title" value="<?=$clanInfo['title']?>"  id="editFormTitle" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">Слоган:</TD>
+			<TD align="left"><INPUT type="text" name="clanSlogan" value="<?=$clanInfo['slogan']?>"  id="editFormSlogan" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">Ссылка:</TD>
+			<TD align="left"><INPUT type="text" name="clanLink" value="<?=$clanInfo['link']?>"  id="editFormLink" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">Реклама:</TD>
+			<TD align="left"><INPUT type="text" name="clanAdvert" value="<?=$clanInfo['advert']?>"  id="editFormAdvert" style="width:100%"></TD>
+		</TR>
+		<TR>
+			<TD align="right">&nbsp;</TD>
+			<TD align="left"><INPUT type="submit" name="submit" value="Изменить"></TD>
+		</TR>
+		</TABLE>
+	</TD>
+</TR>
+</FORM>
+</TABLE>
+
+<BR />
+<? endif; ?>
+</body>
+</html>

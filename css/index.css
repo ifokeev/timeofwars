@@ -1,0 +1,61 @@
+img.aFilter,span.aFilter {
+filter:Alpha(opacity:70, Enabled=1);
+cursor:hand;
+border:none;
+}
+img.aFilters,span.aFilters {
+filter:Alpha(opacity:60, Enabled=1);
+cursor:hand;
+border:none;
+}
+.text,td {FONT-SIZE: 9pt;
+COLOR: #000000;
+FONT-FAMILY: Arial, Helvetica, sans-serif;
+scrollbar-base-color: #DDB947;
+scrollbar-track-color: 986c45;
+scrollbar-3dlight-color:#8C8941 ;
+scrollbar-highlight-color: #F5DEB3;
+scrollbar-face-color: #BC995F;
+scrollbar-shadow-color: #EDC578;
+scrollbar-arrow-color: #444444;
+}
+input.text{background: #A98052;
+border-color: #432D16;
+border-style: solid;
+border-width: 1px;
+filter:Alpha(opacity:60, Enabled=1);
+font-weight: bold;
+}
+select,input.text2{background: #A98052;
+border: solid 1px #432D16;
+font-family: MS Sans Serif;
+font-size: 10px;
+color: #432D16;
+MARGIN-BOTTOM: 2px;
+MARGIN-TOP: 1px;
+filter:Alpha(opacity:60, Enabled=1);
+}
+input.buton{background: #664D31;
+border-color: #432D16;
+border-style: solid;
+border-width: 1px;
+filter:Alpha(opacity:60, Enabled=1);
+font-variant: small-caps;
+font-weight: bold;
+}
+a{
+text-decoration: none;
+color:#432D16;
+font-weight: bold;
+}
+a:hover{
+color:#A98052;
+}
+H3 {
+COLOR: #432D16;
+FONT-FAMILY: Arial;
+FONT-SIZE: 12pt;
+FONT-WEIGHT: bold;
+TEXT-ALIGN: center;
+}
+

@@ -1,0 +1,745 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/main.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+<script type="text/javascript">
+function createXmlHttpRequestObject()
+{
+	var xmlHttp;
+	try
+	{
+		xmlHttp = new XMLHttpRequest();
+	}
+	catch(e)
+	{
+		var XmlHttpVersions = new Array('MSXML2.XMLHTTP.6.0','MSXML2.XMLHTTP.5.0','MSXML2.XMLHTTP.4.0','MSXML2.XMLHTTP.3.0','MSXML2.XMLHTTP','Microsoft.XMLHTTP');
+		for (var i=0; i<XmlHttpVersions.length && !xmlHttp; i++)
+		{
+			try
+			{
+				xmlHttp = new ActiveXObject(XmlHttpVersions[i]);
+			}
+			catch (e) {}
+		}
+	}
+	if(!xmlHttp)
+		alert("Ошибка создания объекта XMLHTTPRequest");
+	else
+		return xmlHttp;
+}
+
+var xmlHttp = createXmlHttpRequestObject();
+var row_id;
+function ref_cancel(id)
+{
+		if(xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+		{
+			xmlHttp.open("GET", "adm.php?ref_off=" + id, true);
+			row_id = id;
+			xmlHttp.onreadystatechange = handleServerResponse;
+			xmlHttp.send(null);
+		}
+		else
+			setTimeout('ref_cancel()', 1000);
+
+}
+
+function ref_ok(id)
+{
+		if(xmlHttp.readyState == 4 || xmlHttp.readyState == 0)
+		{
+			xmlHttp.open("GET", "adm.php?ref_ok=" + id, true);
+			row_id = id;
+			xmlHttp.onreadystatechange = handleServerResponse;
+			xmlHttp.send(null);
+		}
+		else
+			setTimeout('ref_ok()', 1000);
+
+}
+
+function handleServerResponse()
+{
+	if(xmlHttp.readyState == 4)
+	{
+		if(xmlHttp.status == 200)
+		{
+			var myMessage;
+			response = xmlHttp.responseText;
+
+			if(response != '')
+			{
+					document.getElementById("ref"+row_id).innerHTML = response;
+			}
+			else
+			{
+				alert('ошибка');
+
+			}
+
+		}
+		else
+		{
+			alert("Ошибка при обращении к серверу:" + xmlHttp.statusText);
+		}
+	}
+}
+
+function show_elem(id) {
+hide_all();
+document.getElementById(id).style.display = "";
+}
+
+function hide_elem(id) {
+document.getElementById(id).style.display = "none";
+}
+
+function hide_all() {
+<? if( in_array( 'molch', $acclev ) ): ?> hide_elem('molch'); <? endif; ?>
+<? if( in_array( 'molch_off', $acclev ) ): ?> hide_elem('molch_off'); <? endif; ?>
+<? if( in_array( 'chaos', $acclev ) ): ?> hide_elem('chaos'); <? endif; ?>
+<? if( in_array( 'chaos_off', $acclev ) ): ?> hide_elem('chaos_off'); <? endif; ?>
+<? if( in_array( 'blok', $acclev ) ): ?> hide_elem('blok'); <? endif; ?>
+<? if( in_array( 'blok_off', $acclev ) ): ?> hide_elem('blok_off'); <? endif; ?>
+<? if( in_array( 'addclan', $acclev ) ): ?> hide_elem('addclan'); <? endif; ?>
+<? if( in_array( 'battle_off', $acclev ) ): ?> hide_elem('debattle'); <? endif; ?>
+<? if( in_array( 'addrow_ld', $acclev ) ): ?> hide_elem('inf'); <? endif; ?>
+<? if( in_array( 'status', $acclev ) ): ?> hide_elem('newSTATUS'); <? endif; ?>
+<? if( in_array( 'brak_OnOff', $acclev ) ): ?> hide_elem('brak_new'); <? endif; ?>
+<? if( $user == 's!.' || $user == 'Албано' ): ?>  hide_elem('blokIP'); hide_elem('blokIP_off'); hide_elem('new_clan'); hide_elem('pass'); hide_elem('adm_pict'); hide_elem('adm_flower'); hide_elem('referalka');<? endif; ?>
+}
+
+function name_r(razdel){
+document.getElementById("name_raz").innerHTML = razdel;
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0">
+<table width="100%" height="100%" border="1">
+ <tr>
+
+  <td width="30%" height="100%">
+   <table width="100%" height="100%" border="0" align="center">
+<? if( in_array( 'molch', $acclev ) || in_array( 'molch_off', $acclev ) ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Молчанки:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">
+<? if( in_array( 'molch', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('molch');name_r('Молчанки -> наложить молчанку');" value="Наложить (+)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+<? if( in_array( 'molch_off', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('molch_off');name_r('Молчанки -> снять молчанку');" value="Снять (-)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+     </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+<? if( in_array( 'chaos', $acclev ) || in_array( 'chaos_off', $acclev ) ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Проклятия:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">
+<? if( in_array( 'chaos', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('chaos');name_r('Проклятия -> наложить проклятие');" value="Наложить (+)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+<? if( in_array( 'chaos_off', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('chaos_off');name_r('Проклятия -> снять проклятие');" value="Снять (-)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+     </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+<? if( in_array( 'blok', $acclev ) || in_array( 'blok_off', $acclev ) ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Блокировка:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">
+<? if( in_array( 'blok', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('blok');name_r('Блокировка -> блокировать персонажа');" value="Наложить (+)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+<? if( in_array( 'blok_off', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('blok_off');name_r('Блокировка -> снять блок персонажа');" value="Снять (-)" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+     </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+<? if( $user == 's!.' || $user == 'Албано' ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Блокировка IP:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px"><input type="button" onclick="show_elem('blokIP');name_r('Блокировка IP -> добавить адрес');" value="Добавить" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <input type="button" onclick="show_elem('blokIP_off');name_r('Блокировка IP -> удалить адрес(а)');" value="Удалить" style="width:90px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+<? if( in_array( 'addclan', $acclev ) || in_array( 'battle_off', $acclev )  || in_array( 'addrow_ld', $acclev ) || in_array( 'status', $acclev ) || in_array( 'brak_OnOff', $acclev ) ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Прочее:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">
+<? if( in_array( 'addclan', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('addclan');name_r('Прочее -> принять на работу');" value="Принять в ОХ" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+<? endif; ?>
+<? if( in_array( 'battle_off', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('debattle');name_r('Прочее -> завершение боя');" value="Вытащить из боя" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+<? endif; ?>
+<? if( in_array( 'addrow_ld', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('inf');name_r('Прочее -> запись в личном деле');" value="Запись в личном деле" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+<? endif; ?>
+<? if( in_array( 'status', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('newSTATUS');name_r('Прочее -> назначение статуса');" value="Назначить статус" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+<? endif; ?>
+<? if( in_array( 'brak_OnOff', $acclev ) ): ?>
+      <input type="button" onclick="show_elem('brak_new');name_r('Прочее -> бракосочитание');" value="Бракосочитание" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<? endif; ?>
+     </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+<? if( $user == 's!.' || $user == 'Албано' ): ?>
+    <tr>
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">Администраторская:</td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td widht="150px">&nbsp;</td>
+     <td align="center" widht="150px">
+      <input type="button" onclick="show_elem('new_clan');name_r('Администраторская -> назначить новый клан');" value="Назначить клан" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="show_elem('pass');name_r('Администраторская -> сменить пароль персонажа');" value="Сменить пароль" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="window.location.href='dealersadmin.php'" value="Дилерская админка" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="window.location.href='clans.php'" value="Редактирование кланов" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="window.location.href='_checker.php'" value="Редактирование ботов" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="show_elem('adm_pict');name_r('Администраторская -> Новые образы');" value="Новые образы" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="show_elem('adm_flower');name_r('Администраторская -> Новые подарки');" value="Новые подарки" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+      <input type="button" onclick="show_elem('referalka');name_r('Администраторская -> рефералка');" value="Реф. система" style="width:150px;" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+
+     </td>
+     <td widht="150px">&nbsp;</td>
+    </tr>
+<? endif; ?>
+   </table>
+  </td>
+
+  <td width="70%" height="100%" valign="top">
+   <table width="100%" height="30px" border="1" align="center">
+    <tr align="center" valign="top">
+     <td align="center" valign="top" width="100%">Добро пожаловать <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $user, $level, $align, $clanid)?>);</script><br /><font color="green" id="name_raz">Время: <?=date('H:i');?> &nbsp;&nbsp; Дата: <?=date('d.m.y');?></font></td>
+    </tr>
+   </table>
+   <table width="100%" height="100%" border="0" align="center">
+    <tr align="center">
+     <td align="center" height="30px"><? if( !empty($msg) ): echo '<font color="red"><b>'.$msg.'</b></font>'; endif; ?>&nbsp;</td>
+    </tr>
+    <tr align="center">
+     <td align="center" width="100%">
+<? if( in_array( 'molch', $acclev ) ): ?>
+      <table style="display:none" id="molch">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Причина:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="Shut_why" value="" size="30" maxlength="100" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px">Время:</td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">
+         <table align="center">
+          <tr>
+           <td> <input type="radio" id="M15" name="Time" value="0.25" /> </td> <td align="left" nowrap="nowrap"> <label for="M15">15 минут</label> </td>
+          </tr>
+          <tr>
+           <td> <input type="radio" id="M30" name="Time" value="0.5" /> </td> <td align="left" nowrap="nowrap"> <label for="M30">30 минут</label> </td>
+          </tr>
+          <tr>
+           <td> <input type="radio" id="M60" name="Time" value="1" /> </td> <td align="left" nowrap="nowrap"> <label for="M60">60 минут (1 ч.)</label> </td>
+          </tr>
+         </table>
+        </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="right" width="150px">
+         <table align="center">
+          <tr>
+           <td> <input type="radio" id="M120" name="Time" value="2" /> </td> <td align="left" nowrap="nowrap"> <label for="M120">120 минут (2 ч.)</label> </td>
+          </tr>
+          <tr>
+           <td> <input type="radio" id="M300" name="Time" value="5" /> </td> <td align="left" nowrap="nowrap"> <label for="M300">300 минут (5 ч.)</label> </td>
+          </tr>
+          <tr>
+           <td> <input type="radio" id="M1440" name="Time" value="24" /> </td> <td align="left" nowrap="nowrap"> <label for="M1440">1440 минут (24 ч.)</label> </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="shut" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'molch_off', $acclev ) ): ?>
+      <table style="display:none" id="molch_off">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="150px">Введите имя:</td>
+        <td align="center" width="150px"> либо </td>
+        <td align="center" width="150px">Выберите из списка:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"><input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="25" maxlength="20" /></td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><select name="PLLogin1"><option value="" selected="selected">--------------------</option><? if (!empty($b)): ?><? foreach ( $b as $v): ?><? echo '<option value="'.$v['Username'].'">'.$v['Username'].' на '.sprintf("%01.2f", ($v['Time'] - time('void'))/3600).' час(ов)</option>'; ?><? endforeach; ?><? endif; ?></select></td>
+       </tr>
+       <tr>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="shut_off" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="center" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'chaos', $acclev ) ): ?>
+      <table style="display:none" id="chaos">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Причина:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="Comment" value="" size="30" maxlength="100" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">Время:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Ссылка:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="Time" value="" size="30" maxlength="5" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="Link" value="" size="30" maxlength="100" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="Chaos" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'chaos_off', $acclev ) ): ?>
+      <table style="display:none" id="chaos_off">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="150px">Введите имя:</td>
+        <td align="center" width="150px"> либо </td>
+        <td align="center" width="150px">Выберите из списка:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"><input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="25" maxlength="20" /></td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><select name="PLLogin1"><option value="" selected="selected">--------------------</option><? if (!empty($d)): ?><? foreach ( $d as $v): ?><? echo '<option value="'.$v['Username'].'">'.$v['Username'].' на '.sprintf("%01.2f", ($v['FreeTime'] - time('void'))/3600).' час(ов)</option>'; ?><? endforeach; ?><? endif; ?></select></td>
+       </tr>
+       <tr>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="dechaos" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="center" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'blok', $acclev ) ): ?>
+      <table style="display:none" id="blok">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Причина:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="Comment" value="" size="30" maxlength="100" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="block" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'blok_off', $acclev ) ): ?>
+      <table style="display:none" id="blok_off">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="120px"> Имя персонажа: </td>
+        <td align="center" width="100px">&nbsp;</td>
+       </tr>
+       <tr>
+        <td align="center" width="120px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="25" maxlength="20" /> </td>
+        <td align="center" width="100px"> <input type="submit" value="Выполнить" name="deblock" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> </td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'addclan', $acclev ) ): ?>
+     <table style="display:none" id="addclan">
+     <form action="" method="POST">
+      <tr>
+       <td align="left" width="150px">Имя персонажа:</td>
+       <td align="center" width="150px">&nbsp;</td>
+       <td align="left" width="150px">Клан:</td>
+      </tr>
+      <tr>
+       <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+       <td align="center" width="150px">&nbsp;</td>
+       <td align="center" width="150px"><select name="clan"><option value="55"><?=_ADM_stazor;?></option><option value="4"><?=_ADM_hranitel1;?></option><option value="3"><?=_ADM_hranitel2;?></option><option value="2"><?=_ADM_hranitel3;?></option><option value="0"><?=_ADM_yvolit;?></option></select></td>
+      </tr>
+      <tr>
+       <td align="left" width="150px">&nbsp;</td>
+       <td align="center" width="150px">Функции:</td>
+       <td align="right" width="150px">&nbsp;</td>
+      </tr>
+      <tr>
+       <td align="left" width="150px">
+        <table align="center">
+         <tr>
+          <td> <input type="checkbox" id="molch" name="access[]" value="molch" /> </td> <td align="left" nowrap="nowrap"> <label for="molch">Наложить молчанку</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="molch_off" name="access[]" value="molch_off" /> </td> <td align="left" nowrap="nowrap"> <label for="molch_off">Снять молчанку</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="chaos" name="access[]" value="chaos" /> </td> <td align="left" nowrap="nowrap"> <label for="chaos">Наложить проклятие</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="chaos_off" name="access[]" value="chaos_off" /> </td> <td align="left" nowrap="nowrap"> <label for="chaos_off">Снять проклятие</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="blok" name="access[]" value="blok" /> </td> <td align="left" nowrap="nowrap"> <label for="blok">Наложить блок</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="blok_off" name="access[]" value="blok_off" /> </td> <td align="left" nowrap="nowrap"> <label for="blok_off">Снять блок</label> </td>
+         </tr>
+        </table>
+       </td>
+       <td align="center" width="150px">&nbsp;</td>
+       <td align="right" width="150px">
+        <table align="center">
+         <tr>
+          <td> <input type="checkbox" id="addclan" name="access[]" value="addclan" /> </td> <td align="left" nowrap="nowrap"> <label for="addclan">Принять в ОХ</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="battle_off" name="access[]" value="battle_off" /> </td> <td align="left" nowrap="nowrap"> <label for="battle_off">Завершение боя</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="addrow_ld" name="access[]" value="addrow_ld" /> </td> <td align="left" nowrap="nowrap"> <label for="addrow_ld">Запись в личном деле</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="status" name="access[]" value="status" /> </td> <td align="left" nowrap="nowrap"> <label for="status">Назначить статус</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="brak" name="access[]" value="brak_OnOff" /> </td> <td align="left" nowrap="nowrap"> <label for="brak">Бракосочитание</label> </td>
+         </tr>
+         <tr>
+          <td> <input type="checkbox" id="look_LD" name="access[]" value="look_LD" /> </td> <td align="left" nowrap="nowrap"> <label for="look_LD">Право просматривать ЛД</label> </td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+      <tr>
+       <td align="left" width="150px">&nbsp;</td>
+       <td align="center" width="150px"><input type="submit" value="Выполнить" name="userjob" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+       <td align="right" width="150px">&nbsp;</td>
+      </tr>
+     </form>
+     </table>
+<? endif; ?>
+<? if( in_array( 'battle_off', $acclev ) ): ?>
+      <table style="display:none" id="debattle">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="120px"> ID боя: </td>
+        <td align="center" width="100px">&nbsp;</td>
+       </tr>
+       <tr>
+        <td align="center" width="120px"> <input type="text" name="BID" value="" size="25" maxlength="10" /> </td>
+        <td align="center" width="100px"> <input type="submit" value="Выполнить" name="debattle" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> </td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'addrow_ld', $acclev ) ): ?>
+      <table style="display:none" id="inf">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Текст:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="inf_text" value="" size="30" maxlength="100" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="inf" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'status', $acclev ) ): ?>
+      <table style="display:none" id="newSTATUS">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Новый статус:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="NewS" value="" size="30" maxlength="15" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="newstatus" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( in_array( 'brak_OnOff', $acclev ) ): ?>
+      <table style="display:none" id="brak_new">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Супруг:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="text" name="NewSS" value="" size="30" maxlength="20" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="socnewstatus" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+<? endif; ?>
+<? if( $user == 's!.' || $user == 'Албано' ): ?>
+      <table style="display:none; margin: 10px;" id="referalka">
+      <? if( !empty($ref) ):
+         foreach( $ref as $row ): ?>
+       <tr>
+        <td><?=date('j', $row['add_time']).' '.getmonth(date('F', $row['add_time'])).', '.date('Y', $row['add_time']).' г.';?></td>
+        <td>Заявка от персонажа <?=slogin($row['from_user'], $row['from_user_lvl'], $row['from_user_clanid']);?> на деньги с <?=slogin($row['Username'], $row['Level'], $row['ClanID']);?></td>
+        <td id="ref<?=$row['id'];?>"><a href="adm_referal.php?id=<?=$row['un'];?>" target="_blank">логи</a> | <a href="javascript:ref_cancel('<?=$row['id'];?>');">отказать</a> | <a href="javascript:ref_ok('<?=$row['id'];?>');">подтвердить</a></td>
+       </tr>
+      <? endforeach;
+         else:
+      ?>
+       <tr>
+        <td>Заявки отсутствуют.</td>
+       </tr>
+      <?
+        endif;
+      ?>
+      </table>
+
+
+      <table style="display:none" id="blokIP">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="120px"> IP-адрес: </td>
+        <td align="center" width="100px">&nbsp;</td>
+       </tr>
+       <tr>
+        <td align="center" width="120px"> <input type="text" name="PLIp" value="" size="25" maxlength="20" /> </td>
+        <td align="center" width="100px"> <input type="submit" value="Выполнить" name="Banned" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> </td>
+       </tr>
+      </form>
+      </table>
+
+      <table style="display:none" id="blokIP_off">
+      <form action="" method="POST">
+       <tr>
+        <td align="center" width="100px">&nbsp;</td>
+        <td align="left"> IP-адрес: </td>
+        <td align="center" width="100px">&nbsp;</td>
+       </tr>
+       <? if( !empty($c) ): ?>
+       <? foreach( $c as $v ): ?>
+       <tr>
+        <td align="right"> <input type="checkbox" id="M<?=$v['id'];?>" name="ip[]" value="<?=$v['id'];?>" /> </td>
+        <td align="left" nowrap="nowrap"> <label for="M<?=$v['id'];?>"><?=$v['Ip'];?></label> </td>
+       </tr>
+       <? endforeach; ?>
+       <? endif; ?>
+       <tr height="50px">
+        <td align="center" width="100px">&nbsp;</td>
+        <td align="left"> <input type="submit" value="Удалить" name="banip_off" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> </td>
+        <td align="center" width="100px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+
+      <table style="display:none" id="new_clan">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Новый клан:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><select name="NewID"><option value="0">0 - Убрать значек</option><? if (!empty($e)): ?><? foreach ( $e as $v): ?><? echo '<option value="'.$v['id_clan'].'">'.$v['id_clan'].' - '.$v['title'].'</option>'; ?><? endforeach; ?><? endif; ?></select> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="IDchange" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+
+      <table style="display:none" id="pass">
+      <form action="" method="POST">
+       <tr>
+        <td align="left" width="150px">Имя персонажа:</td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="left" width="150px">Новый пароль:</td>
+       </tr>
+       <tr>
+        <td align="center" width="150px"> <input type="text" name="PLLogin" value="<?=(!empty($_GET['uname']) ? $_GET['uname'] : '');?>" size="30" maxlength="20" /> </td>
+        <td align="center" width="150px">&nbsp;</td>
+        <td align="center" width="150px"> <input type="password" name="PLPasswd" value="" size="30" maxlength="20" /> </td>
+       </tr>
+       <tr>
+        <td align="left" width="150px">&nbsp;</td>
+        <td align="center" width="150px"><input type="submit" value="Выполнить" name="IDchange" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        <td align="right" width="150px">&nbsp;</td>
+       </tr>
+      </form>
+      </table>
+
+      <table style="display:none" id="adm_pict">
+      <form action="" method="POST">
+      <? if( !empty($z) ): ?>
+      <? foreach( $z as $v ): ?>
+       <tr>
+        <td align="right" width="30px"> &nbsp; </td>
+        <td align="center" width="50px"> <hr width="70%"> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Картинка: </td>
+        <td align="center" width="300px"> <input type="checkbox" name="pict[]" value="<?=$v['Id'];?>" />  <a href="http://<?=$db_config[DREAM_IMAGES]['server'];?>/pict/<?=$v['Id'];?>.gif" target="_blank"><?=$v['Id'];?>.gif (<?=$v['otdel'];?>)</a> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Цена: </td>
+        <td align="center" width="50px"> <?=$v['price'];?> кр. </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Дата: </td>
+        <td align="center" width="50px"> <?=$v['date'];?> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> &nbsp; </td>
+        <td align="center" width="50px"> <hr width="70%"> <br /> <br /> </td>
+       </tr>
+      <? endforeach; ?>
+       <tr>
+        <td>&nbsp;</td>
+        <td align="center" height="60px">
+         <input type="submit" value="Подтвердить" name="adm_pict_submit" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />&nbsp;&nbsp;&nbsp;<input type="submit" value="Удалить из списка" name="adm_pict_del" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+        </td>
+       </tr>
+      <? else: ?>
+        П У С Т О
+      <? endif; ?>
+      </form>
+      </table>
+
+      <table style="display:none" id="adm_flower">
+      <form action="" method="POST">
+      <? if( !empty($f) ): ?>
+      <? foreach( $f as $v ): ?>
+       <tr>
+        <td align="right" width="30px"> &nbsp; </td>
+        <td align="center" width="50px"> <hr width="70%"> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Картинка: </td>
+        <td align="center" width="300px"> <input type="checkbox" name="pict_fl[]" value="<?=$v['id'];?>" /> <a href="http://<?=$db_config[DREAM_IMAGES]['server'];?>/gifts/<?=$v['presentIMG'];?>.gif" target="_blank"><?=$v['presentNAME'];?>.gif (<?=$v['zamok_number'];?>)</a> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Цена: </td>
+        <td align="center" width="50px"> <?=$v['presentPRICE'];?> кр. </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> Дата: </td>
+        <td align="center" width="50px"> <?=$v['presentDATEPOST'];?> </td>
+       </tr>
+       <tr>
+        <td align="right" width="30px"> &nbsp; </td>
+        <td align="center" width="50px"> <hr width="70%"> <br /> <br /> </td>
+       </tr>
+      <? endforeach; ?>
+       <tr>
+        <td>&nbsp;</td>
+        <td align="center" height="60px">
+         <input type="submit" value="Подтвердить" name="adm_pictfl_submit" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />&nbsp;&nbsp;&nbsp;<input type="submit" value="Удалить из списка" name="adm_pictfl_del" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+        </td>
+       </tr>
+      <? else: ?>
+        П У С Т О
+      <? endif; ?>
+      </form>
+      </table>
+<? endif; ?>
+     </td>
+    </tr>
+   </table>
+  </td>
+
+ </tr>
+</table>

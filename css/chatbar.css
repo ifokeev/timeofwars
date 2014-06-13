@@ -1,0 +1,37 @@
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.txt_pole {
+	font-size: 15px;
+	color: #000000;
+	text-decoration: none;
+	background-color: #F4F1ED;
+	border: 1px double #F5F2EE;
+	padding: 0px;
+}
+
+.txt_position
+{	position: relative;
+	top: -57px; !important;
+	left: 42px;
+	bottom: 0px;
+	right: 0px;
+}
+
+
+.txt
+{
+	position:absolute;
+	filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);
+	width: 56%;
+	top: 0px;
+}
+
+@media all and (min-width: 0px) {
+.txt{ top:5px; }
+}
+-->

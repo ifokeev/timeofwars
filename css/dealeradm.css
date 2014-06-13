@@ -1,0 +1,219 @@
+/*<group=main>*/
+
+body {
+	background-color: #E0E0E0;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+body,td,th,font {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+}
+
+a {
+	font-weight: bold;
+	color: #336699;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #CC0000;
+}
+
+td.table-top {
+	background-color: #999999;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+input {
+	font-size: 10px;
+}
+
+/*</group>*//*<group=top-menu>*/
+
+a.top-menu {
+	color: #333333;
+	text-decoration: none;
+}
+a.top-menu:hover {
+	color: #CC0000;
+}
+
+table.top-menu {
+	background: #333333;
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #000000;
+}
+table.top-window {
+	background: #EEEEEE;
+	border-style: inset;
+	border-width: 1px;
+	border-color: #333333;
+}
+table.top-items {
+	font-weight: bold;
+}
+table.gray-menu {
+	background: #CCCCCC;
+	padding: 3px;
+	border-top: 3px solid #999999;
+	border-bottom: 1px solid #333333;
+}
+td.place_title {
+	font-weight: bold;
+}
+
+/*</group>*//*<group=drop-menu>*/
+
+a.drop-menu:hover {
+	color: #CC0000;
+}
+
+a.drop-menu {
+	text-decoration: none;
+	color: #333333;
+}
+
+div.drop-menu {
+	border: 1px solid #666666;
+	background-color: #CCCCCC;
+	padding: 5px;
+	line-height: 150%;
+	top: 37px;
+	left: 5px;
+	visibility: hidden;
+	z-index: 1;
+	position: absolute;
+}
+
+/*</group>*/
+
+/*<group=chst-bar>*/
+
+table.chat-menu {
+	border-top: 1px solid #333333;
+	background-color: 666666;
+}
+td.chat-menu {
+	color: #CCCCCC;
+	font-weight: bold;
+	width: 1%;
+}
+td.chat-menu-say {
+	width: 100%;
+}
+input.chat-menu-say {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #333333;
+	font-size: 10px;
+}
+
+/*</group>*/
+
+/*<group=drop-chat>*/
+
+div.drop-chat {
+	border: 1px solid #666666;
+	background-color: #DDDDDD;
+	padding: 5px;
+	line-height: 150%;
+	bottom: 26px;
+	left: 5px;
+	visibility: hidden;
+	z-index: 1;
+	position: absolute;
+}
+
+a.drop-chat {
+	text-decoration: none;
+	color: #333333;
+}
+a.drop-chat:hover {
+	color: #CC0000;
+}
+
+/*</group>*/
+
+/*<group=chat>*/
+
+table.chat-list {
+}
+td.chat-list {
+}
+
+table.chat-top {
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	background-color: 6699cc;
+}
+
+/*</group>*/
+
+/*<group=old-chat>*/
+
+.menu {
+	border: 1px solid #666666;
+	background-color: #CCCCCC;
+	padding: 5px;
+	line-height: 150%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	visibility: hidden;
+}
+a.menuItem {
+	display: block;
+	text-decoration: none;
+	color: #333333;
+}
+a.menuItem:hover {
+	color: #CC0000;
+}
+
+.date {
+	font-weight: bold;
+	color: #006600;
+	text-decoration: none;
+	font-family: Courier New, Courier, mono;
+}
+.date2 {
+	font-weight: bold;
+	background-color: #006600;
+	color: #ffffff;
+	text-decoration: none;
+	font-family: Courier New, Courier, mono;
+}
+.sysdate {
+	font-weight: normal;
+	color: #CC0000;
+	text-decoration: none;
+	font-family: Courier New, Courier, mono;
+}
+.private {
+	font-weight: bold;
+	color: #CC0000;
+	background-color: #ffdddd
+}
+
+.mes {
+	color: #336699;
+	font-weight: bold;
+	cursor: hand;
+}
+
+/*</group>*/
+ .b1 {
+	color: #0066CC;
+	font-weight: bold;
+}
+.b2 {
+	color: #990099;
+	font-weight: bold;
+}

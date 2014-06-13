@@ -1,0 +1,128 @@
+<body onload="TRV_param()" bgcolor="#050505" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">
+ <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+   <td colspan="7">
+    <tr>
+     <td rowspan="3">&nbsp;</td>
+     <td height="180px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/top.jpg" width="747px" colspan="4">&nbsp;</td>
+     <td rowspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+     <td height="401px" width="175px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/left.jpg">&nbsp;</td>
+      <td height="401px" width="136px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/menu.jpg">
+       <div style="position:relative;">
+        <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/0.gif" width="135px" height="390px" />
+         <div style="position:absolute; z-index:1; left:0px; top:37px">
+          <? if( empty($_SESSION['login']) ): ?>
+          <form method="POST" action="index.php" name="FORM">
+           <input type="hidden" name="act" value="enter" />
+           <input type="text" name="login_auth" maxLength="25" class="text" style="width:106px; height:14px" onmouseover="imoveri(this)" onmouseout="imouti(this);" onBlur="if (value == '') {value='логин'}" onFocus="if (value == 'логин') {value = ''}" value="логин" /><br />
+           <input type="password" name="password" maxLength="25" class="text" style="width:106px; height:14px" onmouseover="imoveri(this)" onmouseout="imouti(this);" onBlur="if (value == '') {value='пароль'}" onFocus="if (value == 'пароль') {value = ''}" value="пароль" /><br />
+           <input type="submit" value="ok" class="buton" style="width:40px; height:16px" onmouseover="imoveri(this)" onmouseout="imouti(this);" />
+          </form>
+          <? else: ?>
+           <input type="text" maxLength="25" class="text" style="width:106px; height:14px" onmouseover="imoveri(this)" onmouseout="imouti(this);" value="<?=$_SESSION['login'];?>" readonly="readonly" /><br />
+           <input type="text" maxLength="25" class="text" style="width:106px; height:14px" onmouseover="imoveri(this)" onmouseout="imouti(this);" value="***Скрыто***" readonly="readonly" /><br />
+           <input type="button" value="войти" class="buton" onclick="javascript:window.location.href='tow.php'" style="width:50px; height:18px" onmouseover="imoveri(this)" onmouseout="imouti(this);" />&nbsp;&nbsp;
+           <input type="button" value="выйти" onclick="javascript:window.location.href='index.php?exit'" class="buton" style="width:50px; height:18px" onmouseover="imoveri(this)" onmouseout="imouti(this);" />
+          <? endif; ?>
+         </div>
+         <div style="position:absolute; z-index:1; left:0px; top:119px">
+          <a href="http://<?=$db_config[DREAM][server];?>"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/b1.jpg" alt="новости" width="136px" height="20px" class="aFilter" onmouseover="imover(this)" onmouseout="imout(this);" /></a>
+         </div>
+         <div style="position:absolute; z-index:1; left:0px; top:152px">
+          <a href="http://<?=$db_config[DREAM][server];?>/forum/"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/b2.jpg" alt="форум" width="136px" height="20px" class="aFilter" onmouseover="imover(this)" onmouseout="imout(this);" /></a>
+         </div>
+         <div style="position:absolute; z-index:1; left:2px; top:181px">
+          <a href="http://<?=$db_config[DREAM][server];?>/encicl/"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/b3.jpg" alt="Библиотека" width="134px" height="19px" class="aFilter" onmouseover="imover(this)" onmouseout="imout(this);" /></a>
+         </div>
+         <div style="position:absolute; z-index:1; left:0px; top:209px">
+          <a href="http://<?=$db_config[DREAM][server];?>/register.php"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/b4.jpg" alt="Регистрация" width="136px" height="21px" class="aFilter" onmouseover="imover(this)" onmouseout="imout(this);" /></a>
+         </div>
+         <div style="position:absolute; z-index:1; left:0px; top:241px">
+          <a href="http://<?=$db_config[DREAM][server];?>/remind.php"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/b5.jpg" alt="Забыли пароль ?" width="136px" height="21px" class="aFilter" onmouseover="imover(this)" onmouseout="imout(this);" /></a>
+         </div>
+        </div>
+      </td>
+      <td height="401px" width="288px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/news.jpg">
+       <table style="display:none;" cellpadding="0" cellspacing="2" id="tabs" border="0" >
+        <tr>
+         <td id="pos_tab" valign="top" rowspan="3">&nbsp;
+          <div style="position:absolute;" id="trv_box">
+           <?php $Content->display(); ?>
+          </div>
+          <div style="position:absolute;" id="trv_top">
+           <img class="aFilter" border="0" src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/trv_1.gif" width="24px" height="31px" onmouseover="top_text();imoveri(this)" onmouseout="stop(2);imouti(this)" />
+          </div>
+          <div style="position:absolute;" id="trv_bot">
+           <img class="aFilters" border="0" src="http://<?=$db_config[DREAM_IMAGES][server];?>/index/trv_2.gif" width="24px" height="31px" onmouseover="bot_text();imoveri(this)" onmouseout="stop(4);imouti(this)" />
+          </div>
+         </td>
+        </tr>
+       </table>
+      </td>
+      <td height="401px" width="148px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/right.jpg">
+       <tr>
+        <td height="150px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/index/botton.jpg" colspan="4">
+         <tr>
+          <td colspan="7" align="center"><!--Rating@Mail.ru counter-->
+<script language="javascript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer);js=10;//--></script>
+<script language="javascript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled();js=11;//--></script>
+<script language="javascript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height;
+a+='='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;//--></script>
+<script language="javascript1.3" type="text/javascript"><!--
+js=13;//--></script><script language="javascript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=1662053" target="_top">'+
+'<img src="http://dc.c5.b9.a1.top.mail.ru/counter?id=1662053;t=55;js='+js+
+a+';rand='+Math.random()+'" alt="Рейтинг@Mail.ru" border="0" '+
+'height="31" width="88"><\/a>');if(11<js)d.write('<'+'!-- ');//--></script>
+<noscript><a target="_top" href="http://top.mail.ru/jump?from=1662053">
+<img src="http://dc.c5.b9.a1.top.mail.ru/counter?js=na;id=1662053;t=55"
+height="31" width="88" border="0" alt="Рейтинг@Mail.ru"></a></noscript>
+<script language="javascript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>');//--></script>
+<!--// Rating@Mail.ru counter--><!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='http://counter.yadro.ru/hit?t21.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров за 24"+
+" часа, посетителей за 24 часа и за сегодня' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><!--/LiveInternet-->
+<!--Rating@Mail.ru counter-->
+<script language="javascript" type="text/javascript"><!--
+d=document;var a='';a+=';r='+escape(d.referrer);js=10;//--></script>
+<script language="javascript1.1" type="text/javascript"><!--
+a+=';j='+navigator.javaEnabled();js=11;//--></script>
+<script language="javascript1.2" type="text/javascript"><!--
+s=screen;a+=';s='+s.width+'*'+s.height;
+a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;//--></script>
+<script language="javascript1.3" type="text/javascript"><!--
+js=13;//--></script><script language="javascript" type="text/javascript"><!--
+d.write('<a href="http://top.mail.ru/jump?from=1732440" target="_top">'+
+'<img src="http://df.c6.ba.a1.top.mail.ru/counter?id=1732440;t=55;js='+js+
+a+';rand='+Math.random()+'" alt="Рейтинг@Mail.ru" border="0" '+
+'height="31" width="88"><\/a>');if(11<js)d.write('<'+'!-- ');//--></script>
+<noscript><a target="_top" href="http://top.mail.ru/jump?from=1732440">
+<img src="http://df.c6.ba.a1.top.mail.ru/counter?js=na;id=1732440;t=55"
+height="31" width="88" border="0" alt="Рейтинг@Mail.ru"></a></noscript>
+<script language="javascript" type="text/javascript"><!--
+if(11<js)d.write('--'+'>');//--></script>
+<!--// Rating@Mail.ru counter-->
+
+</td>
+         </tr>
+        </td>
+       </tr>
+      </td>
+      </td>
+     </tr>
+    </td>
+   </tr>
+  </table>

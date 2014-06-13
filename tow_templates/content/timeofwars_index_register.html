@@ -1,0 +1,207 @@
+<form method="POST" onsubmit="return validate()" action="register.php" name="reg">
+ <table border="0" cellspacing="0" cellpadding="0" style="padding-left:5px; padding-right:5px; padding-top:2px; padding-bottom:2px">
+  <tr>
+   <td colspan="4" id="reg_err" name="reg_err" align="center" width="288px">
+    <b><font color="#dd3333"><? if( !empty($err['all']) ): echo $err['all']; endif; ?></font></b>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Имя персонажа <b style='COLOR: Red'>*</b>
+   </td>
+   <td width="162px">
+    <input type="text" class="text2" name="login" size="19" value="" onmouseover="imoveri(this)" onmouseout="imouti(this);" onblur="check_correct('login',1);" onkeyup="check_correct('login',0);"  onchange="check_correct('login',0);" maxLength="15" />
+   </td>
+   <td width="16px">
+    <img id="login_i" name="login_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" id="login_err" name="login_err" width="288px">
+    <font color="#dd3333"><? if( !empty($err['login']) ): echo $err['login']; endif; ?></font>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Пароль <b style='COLOR: Red'>*</b>
+    <img style="CURSOR: hand" onclick="genpass();" alt="Создать случайный пароль" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/dice.gif" />
+   </td>
+   <td width="162px">
+    <input name="password" size="19" class="text2"  value="" onmouseover="imoveri(this)" onmouseout="imouti(this);" onblur="check_correct('password',1);" onkeyup="check_correct('password',0);" onchange="check_correct('password',1);" type="password" maxLength="32" />
+   </td>
+   <td width="16px">
+    <img id="password_i" name="password_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" id="password_err" name="password_err" width="288px">
+    <font color="#dd3333"></font>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Пароль повторно <b style='COLOR: Red'>*</b>
+   </td>
+   <td width="162px">
+    <input name="password2" size="19" class="text2"  value="" onmouseover="imoveri(this)" onmouseout="imouti(this);" onblur="check_correct('password2',1);" onkeyup="check_correct('password2',0);" onchange="check_correct('password2',1);" type="password" maxLength="32" />
+   </td>
+   <td width="16px">
+    <img id="password2_i" name="password2_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+   <td>
+    &nbsp;
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" id="password2_err" name="password2_err" width="288px">
+    <font color="#dd3333"></font>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Ваш e-mail <b style='COLOR: Red'>*</b>
+   </td>
+   <td width="162px">
+    <input type="text" name="email" size="19" class="text2"  value="" onmouseover="imoveri(this)" onmouseout="imouti(this);" onblur="check_correct('email',1);" onkeyup="check_correct('email',0);" onchange="check_correct('email',0);" maxLength="40" />
+   </td>
+   <td width="16px">
+    <img id="email_i" name="email_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" id="email_err" name="email_err" width="288px">
+    <font color="#dd3333"><? if( !empty($err['mail']) ): echo $err['mail']; endif; ?></font>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Реальное имя <b style='COLOR: Red'>*</b>
+   </td>
+   <td width="162px">
+    <input type="text" name="u_name" size="19" class="text2"  value="" onmouseover="imoveri(this)" onmouseout="imouti(this);" onblur="check_correct('u_name',1);" onkeyup="check_correct('u_name',0);" onchange="check_correct('u_name',0);" maxLength="15" />
+   </td>
+   <td width="16px">
+    <img id="u_name_i" name="u_name_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+  </tr>
+  <tr>
+   <td colspan="4" id="u_name_err" name="u_name_err" width="288px">
+    <font color="#dd3333"></font>
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" width="118px">
+    Дата рождения <b style='COLOR: Red'>*</b>
+   </td>
+   <td width="200px">
+    <select style="width:110px;" name="day" onkeyup="check_correct('day',0);" onchange="check_correct('day',1);" onblue="check_correct('day',1);" />
+	 <option value="0" selected="selected">-</option>
+	 <option value="1">01</option>
+	 <option value="2">02</option>
+	 <option value="3">03</option>
+	 <option value="4">04</option>
+	 <option value="5">05</option>
+	 <option value="6">06</option>
+	 <option value="7">07</option>
+	 <option value="8">08</option>
+	 <option value="9">09</option>
+	 <option value="10">10</option>
+	 <option value="11">11</option>
+	 <option value="12">12</option>
+	 <option value="13">13</option>
+	 <option value="14">14</option>
+	 <option value="15">15</option>
+	 <option value="16">16</option>
+	 <option value="17">17</option>
+	 <option value="18">18</option>
+	 <option value="19">19</option>
+	 <option value="20">20</option>
+	 <option value="21">21</option>
+	 <option value="22">22</option>
+	 <option value="23">23</option>
+	 <option value="24">24</option>
+	 <option value="25">25</option>
+	 <option value="26">26</option>
+	 <option value="27">27</option>
+	 <option value="28">28</option>
+	 <option value="29">29</option>
+	 <option value="30">30</option>
+	 <option value="31">31</option>
+	</select><br />
+    <select style="width:110px;" name="month" onkeyup="check_correct('month',0);" onchange="check_correct('month',1);" onblue="check_correct('month',1);">
+     <option value="0" selected="selected">-</option>
+     <option value="1">Январь</option>
+     <option value="2">Февраль</option>
+     <option value="3" >Март</option>
+     <option value="4">Апреля</option>
+     <option value="5">Мая</option>
+     <option value="6">Июня</option>
+     <option value="7">Июля</option>
+     <option value="8">Августа</option>
+     <option value="9">Сентября</option>
+     <option value="10">Октября</option>
+     <option value="11">Ноября</option>
+     <option value="12">Декабря</option>
+    </select><br />
+    <select style="width:110px;" name="year" onkeyup="check_correct('year',0);" onchange="check_correct('year',1);" onblue="check_correct('year',1);">
+     <option value="0" selected="selected">-</option>
+     <option value="2000" >2000</option><option value="1999" >1999</option><option value="1998" >1998</option><option value="1997" >1997</option><option value="1996" >1996</option><option value="1995" >1995</option><option value="1994" >1994</option><option value="1993" >1993</option><option value="1992" >1992</option><option value="1991" >1991</option><option value="1990" >1990</option><option value="1989" >1989</option><option value="1988" >1988</option><option value="1987" >1987</option><option value="1986" >1986</option><option value="1985" >1985</option><option value="1984" >1984</option><option value="1983" >1983</option><option value="1982" >1982</option><option value="1981" >1981</option><option value="1980" >1980</option><option value="1979" >1979</option><option value="1978" >1978</option>
+     <option value="1977" >1977</option><option value="1976" >1976</option><option value="1975" >1975</option><option value="1974" >1974</option><option value="1973" >1973</option><option value="1972" >1972</option><option value="1971" >1971</option><option value="1970" >1970</option><option value="1969" >1969</option><option value="1968" >1968</option><option value="1967" >1967</option><option value="1966" >1966</option><option value="1965" >1965</option><option value="1964" >1964</option><option value="1963" >1963</option><option value="1962" >1962</option><option value="1961" >1961</option><option value="1960" >1960</option><option value="1959" >1959</option><option value="1958" >1958</option><option value="1957" >1957</option><option value="1956" >1956</option>
+     <option value="1955" >1955</option><option value="1954" >1954</option><option value="1953" >1953</option><option value="1952" >1952</option><option value="1951" >1951</option><option value="1950" >1950</option>
+    </select>
+   </td>
+   <td width="16px">
+    <img id="d_ro_i" name="d_ro_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+   </td>
+   <td>
+    &nbsp;
+   </td>
+  </tr>
+  <tr>
+   <td nowrap="nowrap" colspan="4" id="d_ro_err" name="d_ro_err" width="288px">
+    <font color="#dd3333"></font>
+   </td>
+  </tr>
+  <tr>
+  <td nowrap="nowrap" width="118px">
+   Ваш пол  <b style='COLOR: Red'>*</b>
+  </td>
+  <td width="162px">
+   <select style="width:110px;" name="sex" style="width: 160px;" onmouseover="imoveri(this)" onmouseout="imouti(this);" onkeyup="check_correct('sex',0);" onchange="check_correct('sex',1);" onblue="check_correct('sex',1);">
+	<option value="n" selected="selected">Выберите</option>
+	<option value="1" >- Мужской</option>
+	<option value="2" >- Женский</option>
+   </select>
+  </td>
+  <td width="16px">
+   <img id="sex_i" name="sex_i" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/markfalse.gif" style="display: none;" />
+  </td>
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+ <tr>
+  <td nowrap="nowrap" colspan="4" id="sex_err" name="sex_err" width="288px">
+   <font color="#dd3333"></font>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap="nowrap" colspan="4">
+   <input type="checkbox" name="law" value="1" /> Я обязуюсь соблюдать <a href="http://<?=$db_config[DREAM]['server'];?>/encicl/rules.html" target="_blank">законы</a>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap="nowrap" colspan="4" id="law_err" name="law_err" width="288px">
+   <font color="#dd3333"></font>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap="nowrap" width="296px" colspan="3" align="center">
+   <input type="submit" value="Регистрация" name="register" class="buton" onmouseover="imoveri(this)" onmouseout="imouti(this);" />
+  </td>
+  <td>
+   &nbsp;
+  </td>
+  </tr>
+ </table>
+</form>

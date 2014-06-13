@@ -1,0 +1,168 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/dealeradm.css">
+</head>
+<body bgcolor="#DDDDCC">
+<TABLE width="80%" align="center" cellpadding="7" border="0">
+<? if(!empty($msgError)): echo '<center><font color=red><b>'.$msgError.'</b></font></center>'; endif; ?>
+<TR>
+	<TD width="1%" nowrap valign="top" align="left" bgcolor="Black">
+		<TABLE width="100%" align="center" cellpadding="2" cellspacing="1" border="0" bgcolor="White">
+		<TR>
+			<TD class="table-top">Имя персонажа</TD>
+			<TD class="table-top">Евро</TD>
+			<TD class="table-top">Кредиты</TD>
+			<TD class="table-top">Несуществует</TD>
+		</TR>
+
+		<? $i=0; if( !empty($euroAccounts) ) foreach( $euroAccounts as $euroAccount ): $i++; ?>
+		<TR bgcolor="<?=( $i % 2 ? "#CCCCCC" : "#EEEEEE")?>">
+			<TD><?=$euroAccount['Username']?></TD>
+			<TD><?=sprintf( "%.2f", $euroAccount['Euro'] )?></TD>
+			<TD><?=sprintf( "%.2f", $euroAccount['Money'] )?></TD>
+			<TD><b style="color:red;"><?=($euroAccount['isDead'] == "DEAD" ? "Несуществует" : "")?></TD>
+		</TR>
+		<? endforeach; ?>
+
+		</TABLE>
+	</TD>
+		<TD width="1%" nowrap valign="top" align="left" bgcolor="Black">
+		<TABLE width="100%" align="center" cellpadding="2" cellspacing="1" border="0" bgcolor="White">
+		<TR>
+			<TD class="table-top">Имя персонажа</TD>
+			<TD class="table-top">Что</TD>
+			<TD class="table-top">Сколько</TD>
+			<TD class="table-top">Кем</TD>
+		</TR>
+
+		<? $i=0; if( !empty($dealerlog) ) foreach( $dealerlog as $v ): $i++; ?>
+		<TR bgcolor="<?=( $i % 2 ? "#CCCCCC" : "#EEEEEE")?>">
+			<TD><?=$v['UsernameTo'];?></TD>
+			<TD><?=($v['action'] == 'MODIFY_USER_EURO' ? 'Евро' : 'кр.');?></TD>
+			<TD><?=sprintf( "%.2f", $v['Money'] )?></TD>
+			<TD><b style="color:red;"><?=$v['Dealername'];?></TD>
+		</TR>
+		<? endforeach; ?>
+
+		</TABLE>
+	</TD>
+	<TD valign="top" align="right" bgcolor="White">
+		<TABLE width="100%" align="center" cellpadding="2" cellspacing="1" border="0" bgcolor="#EEEEEE">
+		<FORM action="<?=$_SERVER['PHP_SELF']?>" method="POST" >
+		<INPUT type="hidden" name="action" value="MODIFY_USER_EURO">
+		<TR>
+			<TD colspan="4" align="center" class="table-top">Евро. Изменение баланса</TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Имя персонажа:</TD>
+			<TD ><INPUT type="text" name="usernameTo" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Изменить на :</TD>
+			<TD ><INPUT type="text" name="euro" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD ></TD>
+			<TD ><INPUT type="submit" name="submit" value="Изменить"></TD>
+			<TD ></TD>
+		</TR>
+		</FORM>
+
+
+
+		<FORM action="<?=$_SERVER['PHP_SELF']?>" method="POST" >
+		<INPUT type="hidden" name="action" value="TRANSFER_USERS_EURO">
+		<TR>
+			<TD colspan="4" align="center" class="table-top">Евро. Перевод со счета на счет</TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >От персонажа:</TD>
+			<TD ><INPUT type="text" name="usernameFrom" value="<?=$username?>" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >К персонажу:</TD>
+			<TD ><INPUT type="text" name="usernameTo" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Перевести :</TD>
+			<TD ><INPUT type="text" name="euro" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD ></TD>
+			<TD ><INPUT type="submit" name="submit" value="Перевести"></TD>
+			<TD ></TD>
+		</TR>
+		</FORM>
+
+
+		<FORM action="<?=$_SERVER['PHP_SELF']?>" method="POST" >
+		<INPUT type="hidden" name="action" value="MODIFY_USER_MONEY">
+		<TR>
+			<TD colspan="4" align="center" class="table-top">Кредиты. Изменение баланса</TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Имя персонажа:</TD>
+			<TD ><INPUT type="text" name="usernameTo" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Изменить на :</TD>
+			<TD ><INPUT type="text" name="money" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD ></TD>
+			<TD ><INPUT type="submit" name="submit" value="Изменить"></TD>
+			<TD ></TD>
+		</TR>
+		</FORM>
+
+
+
+		<FORM action="<?=$_SERVER['PHP_SELF']?>" method="POST" >
+		<INPUT type="hidden" name="action" value="TRANSFER_USERS_MONEY">
+		<TR>
+			<TD colspan="4" align="center" class="table-top">Кредиты. Перевод со счета на счет</TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >От персонажа:</TD>
+			<TD ><INPUT type="text" name="usernameFrom" value="<?=$username?>" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >К персонажу:</TD>
+			<TD ><INPUT type="text" name="usernameTo" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD >Перевести :</TD>
+			<TD ><INPUT type="text" name="money" value="" /></TD>
+			<TD ></TD>
+		</TR>
+		<TR>
+			<TD ></TD>
+			<TD ></TD>
+			<TD ><INPUT type="submit" name="submit" value="Перевести"></TD>
+			<TD ></TD>
+		</TR>
+		</FORM>
+		</TABLE>
+	</TD>
+</TR>
+</TABLE>

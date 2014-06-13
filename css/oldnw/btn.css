@@ -1,0 +1,11 @@
+input[type="button"], input[type="submit"]
+{
+	BACKGROUND:#F0F2EC;
+	color:#000000; FONT-SIZE: 8pt; BORDER-RIGHT: #808080 1pt solid; BORDER-TOP: #808080 1pt solid; BORDER-LEFT: #808080 1pt solid; BORDER-BOTTOM: #808080 1pt solid;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover
+{
+	BACKGROUND:#AFCDEE;
+
+}

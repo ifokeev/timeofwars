@@ -1,0 +1,528 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/inv.js" type="text/javascript"></script>
+   <script type="text/javascript">function ostmoney(){var MoneyOst=Number(document.getElementById('MonTrans').value);var EndMon=document.getElementById('EndMon');var sumMon=(<?=$player->Money;?>-MoneyOst);sumMon=Math.floor(sumMon*100);sumMon=sumMon/100;if(sumMon>0){EndMon.innerHTML='остается '+sumMon;document.getElementById('TRANSGO').disabled=false}else if(sumMon==0){EndMon.innerHTML='остается 0 кр.';document.getElementById('TRANSGO').disabled=false}else{document.getElementById('TRANSGO').disabled=true;EndMon.innerHTML='недостаточно кр'}}<? if( !empty($_GET['mode']) && $_GET['mode'] == 2 ): ?>function isNum(n){n=(n)?n:event;var charCode=(n.charCode)?n.charCode:((n.keyCode)?n.keyCode:((n.which)?n.which:0));if(charCode>31&&(charCode<48||charCode>57)){alert("Писать следует только цифры !");return false}return true}function statshow(){var StreAdd=Number(document.getElementById('StreAdd').value);var AgilAdd=Number(document.getElementById('AgilAdd').value);var IntuAdd=Number(document.getElementById('IntuAdd').value);var EnduAdd=Number(document.getElementById('EnduAdd').value);var IntlAdd=Number(document.getElementById('IntlAdd').value);var UpsEnd=document.getElementById('UpsEnd');if(StreAdd<1){var StreAdd=0};if(AgilAdd<1){var AgilAdd=0};if(IntuAdd<1){var IntuAdd=0};if(EnduAdd<1){var EnduAdd=0};if(IntlAdd<1){var IntlAdd=0};document.getElementById('sumStre').innerHTML=Math.floor(StreAdd+<?=$player->Stre;?>);document.getElementById('sumAgil').innerHTML=Math.floor(AgilAdd+<?=$player->Agil;?>);document.getElementById('sumIntu').innerHTML=Math.floor(IntuAdd+<?=$player->Intu;?>);document.getElementById('sumEndu').innerHTML=Math.floor(EnduAdd+<?=$player->Endu;?>);document.getElementById('sumIntl').innerHTML=Math.floor(IntlAdd+<?=$player->Intl;?>);Ups=Math.floor(<?=$player->Ups;?>-(StreAdd+AgilAdd+IntuAdd+EnduAdd+IntlAdd));if(Ups==0){UpsEnd.innerHTML='Все распределены';document.getElementById('statsup').disabled=false}else if(Ups>0){UpsEnd.innerHTML='Возможных увеличений '+Ups+'';document.getElementById('statsup').disabled=false}else{document.getElementById('statsup').disabled=true;Ups=Ups*-1;UpsEnd.innerHTML='Превышение на '+Ups}}<? endif; ?></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0" onload="setHP(<?=$player->HPnow;?>, <?=$player->HPall;?>);<? if( !empty($_GET['mode']) && $_GET['mode'] == 2 ): ?>statshow();<? endif; ?>">
+<table width="100%">
+ <tr valign="top">
+  <td align="left">
+   <table align="center">
+    <tr>
+     <td align="center">
+      <script>dlogin(<?=sprintf('"%s", %d, %d, %d', $player->username, $player->Level, $player->Align, $player->clanid)?>);</script>
+       <table cellspacing="0" cellpadding="0">
+        <tr>
+         <td nowrap="nowrap">
+          <div id="HP">
+           <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP1" id="HP1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP2" id="HP2">:</div>
+          </div>
+         </td>
+        </tr>
+       </table>
+       <table cellpadding="0" cellspacing="0" width="243px">
+        <tr>
+         <td>
+          <div style="position:relative;" width="242px" height="290px" border="0">
+           <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/pers_i_s.gif" alt="" width="242px" height="290px" border="0">
+            <div width="242px" height="20px" style="position:absolute;left:0px; top:-5px; z-index:1;"></div>
+             <div style="position:absolute; left:95px; top:13px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][7] != 'empt7'): print '<a href="inv.php?wear_down='.$item['Slot'][7].'">'; $temp7 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][7];?>.gif" width="50px" height="51px" title="<?=@$temp7;?> <?=$item['Slot_name'][7];?>" />
+              <? if ($item['Slot'][7] != 'empt7'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:17px; top:66px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][2] != 'empt2'): print '<a href="inv.php?wear_down='.$item['Slot'][2].'">'; $temp2 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][2];?>.gif" width="50px" height="50px" title="<?=@$temp2;?> <?=$item['Slot_name'][2];?>" />
+              <? if ($item['Slot'][2] != 'empt2'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:170px; top:62px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][9] != 'empt9'): print '<a href="inv.php?wear_down='.$item['Slot'][9].'">'; $temp9 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][9];?>.gif" title="<?=@$temp9;?> <?=$item['Slot_name'][9];?>" />
+              <? if ($item['Slot'][9] != 'empt9'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:160px; top:145px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][3] != 'empt3'): print '<a href="inv.php?wear_down='.$item['Slot'][3].'">'; $temp3 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][3];?>.gif" title="<?=@$temp3;?> <?=$item['Slot_name'][3];?>" />
+              <? if ($item['Slot'][3] != 'empt3'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:23px; top:210px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/book0.gif" title="Пустой слот аксесуары" />
+             </div>
+             <div style="position:absolute; left:22px; top:150px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][8] != 'empt8'): print '<a href="inv.php?wear_down='.$item['Slot'][8].'">'; $temp8 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][8];?>.gif" title="<?=@$temp8;?> <?=$item['Slot_name'][8];?>" />
+              <? if ($item['Slot'][8] != 'empt8'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:173px; top:220px;z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][10] != 'empt10'): print '<a href="inv.php?wear_down='.$item['Slot'][10].'">'; $temp10 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][10];?>.gif" width="50px" height="35px" title="<?=@$temp10;?> <?=$item['Slot_name'][10];?>" />
+              <? if ($item['Slot'][10] != 'empt10'): print '</a>'; endif; ?>
+             </div>
+             <div align="center" style="position:absolute; left:70px; top:69px; width:100px; height:200px; z-index:2; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/<?=$player->id_picture;?>.gif" width="70px" height="180px" title="<?=$player->username;?>" />
+             </div>
+             <div style="position:absolute; left:27px; top:35px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][1] != 'empt1'): print '<a href="inv.php?wear_down='.$item['Slot'][1].'">'; $temp1 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][1];?>.gif" title="<?=@$temp1;?> <?=$item['Slot_name'][1];?>" />
+              <? if ($item['Slot'][1] != 'empt1'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:170px; top:35px; z-index:1;width:50px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][0] != 'empt0'): print '<a href="inv.php?wear_down='.$item['Slot'][0].'">'; $temp0 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][0];?>.gif" title="<?=@$temp0;?> <?=$item['Slot_name'][0];?>" />
+              <? if ($item['Slot'][0] != 'empt0'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:90px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][4] != 'empt4'): print '<a href="inv.php?wear_down='.$item['Slot'][4].'&ring_slot=4">'; $temp4 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][4];?>.gif" title="<?=@$temp4;?> <?=$item['Slot_name'][4];?>" />
+              <? if ($item['Slot'][4] != 'empt4'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:113px; top:258px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][5] != 'empt5'): print '<a href="inv.php?wear_down='.$item['Slot'][5].'&ring_slot=5">'; $temp5 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][5];?>.gif" title="<?=@$temp5;?> <?=$item['Slot_name'][5];?>" />
+              <? if ($item['Slot'][5] != 'empt5'): print '</a>'; endif; ?>
+             </div>
+             <div style="position:absolute; left:134px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+              <? if ($item['Slot'][6] != 'empt6'): print '<a href="inv.php?wear_down='.$item['Slot'][6].'&ring_slot=6">'; $temp6 = 'Снять '; endif; ?>
+               <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$item['Slot'][6];?>.gif" title="<?=@$temp6;?> <?=$item['Slot_name'][6];?>" />
+              <? if ($item['Slot'][6] != 'empt6'): print '</a>'; endif; ?>
+             </div>
+            </div>
+           </td>
+          </tr>
+         </table>
+        </tr>
+         <? if($player->Ups > 0): ?>
+         <? if(empty($_GET['mode']) || $_GET['mode'] == 1): ?>
+        <tr>
+         <td>
+          <table width="100%">
+           <tr>
+            <td bgcolor="#D5D5D5" align="center" colspan="4">
+             <img alt="Настройте характеристики персонажа" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/stat_free.gif">
+            </td>
+           </tr>
+           <tr align="center">
+            <td title="Переключиться в расширенный режим" colspan="4">
+             <a href="?mode=2"><small>расширенный режим</small></a>
+            </td>
+           </tr>
+           <tr align="right">
+            <td align="left">
+             Сила:
+            </td>
+            <td title="Свои">
+             <?=($player->Stre-$sum['Stre_add']);?> +
+            </td>
+            <td title="От вещей">
+             <?=$sum['Stre_add'];?> =
+            </td>
+            <td>
+             <b><?=$player->Stre;?></b> <a href="?stats_up=Stre&mode=1">[+1]</a>
+            </td>
+           </tr>
+           <tr align="right">
+            <td align="left">
+             Ловкость:
+            </td>
+            <td title="Свои">
+             <?=($player->Agil-$sum['Agil_add']);?> +
+            </td>
+            <td title="От вещей">
+             <?=$sum['Agil_add'];?> =
+            </td>
+            <td>
+             <b><?=$player->Agil;?></b> <a href="?stats_up=Agil&mode=1">[+1]</a>
+            </td>
+           </tr>
+           <tr align="right">
+            <td align="left">
+             Интуиция:
+            </td>
+            <td title="Свои">
+             <?=($player->Intu-$sum['Intu_add']);?> +
+            </td>
+            <td title="От вещей">
+             <?=$sum['Intu_add'];?> =
+            </td>
+            <td>
+             <b><?=$player->Intu;?></b> <a href="?stats_up=Intu&mode=1">[+1]</a>
+            </td>
+           </tr>
+           <tr align="right" valign="middle">
+            <td align="left">
+             Выносливость:
+            </td>
+            <td title="Свои">
+             <?=$player->Endu;?> (+
+            </td>
+            <td title="чиcтого HP">
+             <small><font color="Green"><?=$sum['Endu_add'];?></font></small>) =
+            </td>
+            <td>
+             <b><?=$player->Endu;?></b> <a href="?stats_up=Endu&mode=1">[+1]</a>
+            </td>
+           </tr>
+           <tr align="right">
+            <td align="left">
+             Интеллект:
+            </td>
+            <td title="Свои">
+             <?=$player->Intl;?> +
+            </td>
+            <td title="От вещей">
+             0 =
+            </td>
+            <td>
+             <b><?=$player->Intl;?></b> <a href="?stats_up=Intl&mode=1">[+1]</a>
+            </td>
+           </tr>
+           <tr>
+            <td colspan="4" align="center">
+             <font color="Green">Возможных увеличений: <?=$player->Ups;?></font>
+            </td>
+           </tr>
+          </table>
+         </td>
+        </tr>
+<? elseif($_GET['mode'] == 2): ?>
+	    <tr>
+	     <td>
+	      <table width="100%">
+           <tr>
+            <td bgcolor="#D5D5D5" align="center" colspan="6">
+             <img alt="Настройте характеристики персонажа" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/stat_free.gif" />
+            </td>
+           </tr>
+           <tr align="center">
+            <td title="Переключиться в простой режим" colspan="6">
+             <a href="?mode=1"><small>простой режим</small></a>
+            </td>
+           </tr>
+		   <tr align="right">
+		    <form method="POST">
+			 <td align="left">
+			  Сила:
+			 </td>
+			 <td title="Свои">
+			  <?=($player->Stre-$sum['Stre_add']);?> +
+			 </td>
+			 <td title="От вещей">
+			  <?=$sum['Stre_add'];?> =
+			 </td>
+			 <td title="Сейчас">
+			  <b><?=$player->Stre;?></b>
+			 </td>
+			 <td title="Прибавляем">
+			  + <input size="3" maxlength="3" onkeypress="return isNum(event)" onchange="statshow()" id="StreAdd" type="text" name="Stre" value="" /> =
+			 </td>
+			 <td title="Получится">
+			  <b id="sumStre"></b>
+		     </td>
+		   </tr>
+		   <tr align="right">
+		    <td align="left">
+		     Ловкость:
+		    </td>
+		    <td title="Свои">
+		     <?=($player->Agil-$sum['Agil_add']);?> +
+		    </td>
+		    <td title="От вещей">
+		     <?=$sum['Agil_add'];?> =
+		    </td>
+		    <td title="Сейчас">
+		     <b><?=$player->Agil;?></b>
+		    </td>
+		    <td title="Прибавляем">
+		     + <input size="3"  maxlength="3" onkeypress="return isNum(event)" onchange="statshow()" id="AgilAdd" type="text" name="Agil" value="" /> =
+		    </td>
+		    <td title="Получится">
+		     <b id="sumAgil"></b>
+		    </td>
+		   </tr>
+		   <tr align="right">
+		    <td align="left">
+		     Интуиция:
+		    </td>
+		    <td title="Свои">
+		     <?=($player->Intu-$sum['Intu_add']);?> +
+		    </td>
+		    <td title="От вещей">
+		     <?=$sum['Intu_add'];?> =
+		    </td>
+		    <td title="Сейчас">
+		     <b><?=$player->Intu;?></b>
+		    </td>
+		    <td title="Прибавляем">
+		     + <input size="3" maxlength="3" onkeypress="return isNum(event)" onchange="statshow()" id="IntuAdd" type="text" name="Intu" value="" /> =
+		    </td>
+		    <td title="Получится">
+		     <b id="sumIntu"></b>
+		    </td>
+		   </tr>
+		   <tr align="right">
+		    <td align="left">
+		     Выносливость:
+		    </td>
+		    <td title="Свои">
+		     <?=$player->Endu;?> (+
+		    </td>
+		    <td title="чиcтого HP">
+		     <small><font color="Green"><?=$sum['Endu_add'];?></font></small>) =
+		    </td>
+		    <td title="Сейчас">
+		     <b><?=$player->Endu;?></b>
+		    </td>
+		    <td title="Прибавляем">
+		     + <input size="3" maxlength="3" onkeypress="return isNum(event)" onchange="statshow()" id="EnduAdd" type="text" name="Endu" value="" /> =
+		    </td>
+		    <td title="Получится">
+		     <b id="sumEndu"></b>
+		    </td>
+		   </tr>
+		   <tr align="right">
+		    <td align="left">
+		     Интеллект:
+		    </td>
+		    <td title="Свои">
+		     <?=$player->Intl;?> +
+		    </td>
+		    <td title="От вещей">
+		     0 =
+		    </td>
+		    <td title="Сейчас">
+		     <b><?=$player->Intl;?></b>
+		    </td>
+		    <td title="Прибавляем">
+		     + <input size="3" maxlength="3" onkeypress="return isNum(event)" onchange="statshow()" type="text" id="IntlAdd" name="Intl" value="" /> =
+		    </td>
+		    <td title="Получится">
+		     <b id="sumIntl"></b>
+		    </td>
+		   </tr>
+		   <tr>
+		    <td colspan="6" id="UpsEnd" align="center"></td>
+		   </tr>
+		   <tr>
+		    <td colspan="6" align="center">
+		     <input type="submit" name="stats_up" id="statsup" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+		    </td>
+		   </tr>
+          </table>
+         </td>
+        </tr>
+        <script>statshow();</script>
+       <? endif; ?>
+       <? else: ?>
+		 <tr>
+		  <td>
+		   <table width="100%">
+            <tr>
+             <td bgcolor="#D5D5D5" align="center" colspan="4">
+              Характеристики персонажа
+             </td>
+            </tr>
+            <tr align="center">
+             <td colspan="4">
+              <small>свои + добавленные вещами</small>
+             </td>
+            </tr>
+            <tr align="right">
+             <td align="left">
+              Сила:
+             </td>
+             <td title="Свои">
+              <?=($player->Stre-$sum['Stre_add']);?> +
+             </td>
+             <td title="От вещей">
+              <?=$sum['Stre_add'];?> =
+             </td>
+             <td>
+              <b><?=$player->Stre;?></b>
+             </td>
+            </tr>
+            <tr align="right">
+             <td align="left">
+              Ловкость:
+             </td>
+             <td title="Свои">
+              <?=($player->Agil-$sum['Agil_add']);?> +
+             </td>
+             <td title="От вещей">
+              <?=$sum['Agil_add'];?> =
+             </td>
+             <td>
+              <b><?=$player->Agil;?></b>
+             </td>
+            </tr>
+            <tr align="right">
+             <td align="left">
+              Интуиция:
+             </td>
+             <td title="Свои">
+              <?=($player->Intu-$sum['Intu_add']);?> +
+             </td>
+             <td title="От вещей">
+              <?=$sum['Intu_add'];?> =
+             </td>
+             <td>
+              <b><?=$player->Intu;?></b>
+             </td>
+            </tr>
+            <tr align="right" valign="middle">
+             <td align="left">
+              Выносливость:
+             </td>
+             <td title="Свои">
+              <?=$player->Endu;?> (+
+             </td>
+             <td title="чиcтого HP">
+              <small><font color="Green"><?=$sum['Endu_add'];?></font></small>) =
+             </td>
+             <td>
+              <b><?=$player->Endu;?></b>
+             </td>
+            </tr>
+            <tr align="right">
+             <td align="left">
+              Интеллект:
+             </td>
+             <td title="Свои">
+              <?=$player->Intl;?> +
+             </td>
+             <td title="От вещей">
+              0 =
+             </td>
+             <td>
+              <b><?=$player->Intl;?></b>
+             </td>
+            </tr>
+           </table>
+          </td>
+         </tr>
+         <? endif; ?>
+        <tr>
+         <td>
+	      <table width="100%">
+           <tr>
+            <td bgcolor="#D5D5D5" align="center" colspan="2">Боевые модификаторы от вещей</td>
+           </tr>
+           <tr>
+            <td>Крит:</td>
+            <td align="right"><?=$sum['Crit'];?></td>
+           </tr>
+           <tr>
+            <td>АнтиКрит:</td>
+            <td align="right"><?=$sum['ACrit'];?></td>
+           </tr>
+           <tr>
+            <td>Уворот:</td>
+            <td align="right"><?=$sum['Uvorot'];?></td>
+           </tr>
+           <tr>
+            <td>АнтиУворот:</td>
+            <td align="right"><?=$sum['AUvorot'];?></td>
+           </tr>
+           <tr>
+            <td>Удар:</td>
+            <td align="right">от <?=$sum['SumMINdamage'];?> до <?=$sum['SumMAXdamage'];?></td>
+           </tr>
+           <tr>
+            <td>Броня:</td>
+            <td align="right"><?=$sum['Armor1'];?> / <?=$sum['Armor2'];?> / <?=$sum['Armor3'];?> / <?=$sum['Armor4'];?></td>
+           </tr>
+           <tr>
+            <td bgcolor="#D5D5D5" align="center" colspan="2">Игровые характеристики</td>
+           </tr>
+           <tr>
+            <td>Опыт:</td>
+            <td align="right"><?=$player->Expa.' ('.$next_exp.')'; ?></td>
+           </tr>
+           <tr>
+            <td>Уровень:</td>
+            <td align="right"><?=$player->Level;?></td>
+           </tr>
+           <tr>
+            <td>Побед:</td>
+            <td align="right"><?=$player->Win;?></td>
+           </tr>
+           <tr>
+            <td>Поражений:</td>
+            <td align="right"><?=$player->Lost;?></td>
+           </tr>
+           <tr>
+            <td>Деньги:</td>
+            <td align="right"><?=sprintf ("%.2f", $player->Money);?></td>
+           </tr>
+           <tr>
+            <td colspan="2" align="center">
+             <small>До достижения нового уровня<br />осталось <?=($next_exp-$player->Expa);?> единиц опыта
+            </td>
+           </tr>
+          </table>
+         </td>
+        </tr>
+	   </table>
+	  </td>
+      <td align="right">
+	   <table>
+	    <tr>
+	     <td align="right">
+	      &nbsp;<? if(empty($player->id_picture)): ?><input type="button" style="width:115px;" value="Образ" onClick="window.location.href='pict.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />&nbsp;<? endif; ?>
+	      <input type="button" style="width:115px;" value="Настройки" onClick="window.location.href='anketa.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />&nbsp;
+	      <input type="button" style="width:115px;" value="Вернуться" onClick="window.location.href='<?=$player->Room;?>.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />&nbsp;
+	     </td>
+	    </tr>
+	    <tr>
+	     <td align="center">
+	      <? if(!empty($err)): echo '<center><font color="red"><b>'.$err.'</b></font></center>'; endif; ?>
+	     </td>
+	    </tr>
+		<tr>
+		 <td align="center">
+          <table width="600px" bgcolor="#999999">
+           <tr>
+            <td>
+	         <table>
+	          <tr align="center">
+	           <td width="25%" bgcolor=<?=($part == 1 ? 'A5A5A5' : 'd4d2d2' )?>><a href="?part=1">Снаряжение</a></td>
+	           <td width="25%" bgcolor=<?=($part == 2 ? 'A5A5A5' : 'd4d2d2' )?>><a href="?part=2">Магия</a></td>
+	           <td width="25%" bgcolor=<?=($part == 3 ? 'A5A5A5' : 'd4d2d2' )?>><a href="?part=3">Прочее</a></td>
+	           <td width="25%" bgcolor=<?=($part == 4 ? 'A5A5A5' : 'd4d2d2' )?>><a href="?part=4">Рюкзак</a></td>
+	           <td nowrap="nowrap">
+	            <a href="?view=2&part=<?=$part;?>"><? if($view == 2): ?><img title="Краткая информация" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/short2.gif"><? else: ?><img title="Краткая информация" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/short.gif"><? endif; ?></a><a href="?view=1&part=<?=$part;?>"><? if($view == 1): ?><img title="Полная информация" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/full1.gif"><? else: ?><img title="Полная информация" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/full.gif"><? endif; ?></a><a href="?part="><img title="Спрятать вещи" src="http://<?=$db_config[DREAM_IMAGES][server];?>/adm/clear.gif"></a>
+	           </td>
+	          </tr>
+	         </table>
+            </td>
+          </tr>
+          <tr>
+           <td>
+	        <table width="100%" bgcolor="#999999">
+             <? if(empty($part)): ?>
+             <tr>
+              <td align="center">
+                <small>выберите раздел для просмотра</small>
+              </td>
+             </tr>
+            </table>
+             <? else: ?>
+              <? if(!empty($part) && $part == 1): ?>
+               <? include_once('includes/inv/parts/part_1.php'); ?>
+              <? elseif (!empty($part) && $part == 2 ): ?>
+               <? include_once('includes/inv/parts/part_2.php'); ?>
+              <? elseif(!empty($part) && $part == 3): ?>
+               <? include_once('includes/inv/parts/part_3.php'); ?>
+              <? elseif(!empty($part) && $part == 4): ?>
+               <? include_once('includes/inv/parts/part_4.php'); ?>
+              <? endif; ?>
+             <? endif; ?>
+          </table>
+         </td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+	</table>
+   </td>
+  </tr>
+ </table>

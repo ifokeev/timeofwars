@@ -1,0 +1,50 @@
+<script>
+function inverse(id)
+{
+  elem=document.getElementById(id);
+  if (elem.style.display=="none")
+  {
+    elem.style.display="";
+  }
+  else
+  {
+    elem.style.display="none";
+  }
+}
+</script>
+<style>
+body
+{	FONT-SIZE: 13pt; FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif
+}
+small
+{	FONT-SIZE: 8pt;
+}
+img
+{
+	border: 0;
+}
+</style>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0">
+<table width="700px" height="100%" border="0" cellspacing="0" cellpadding="0">
+<?
+if( !empty($msg) ):
+echo $msg;
+endif;
+?>
+ <tr>
+  <td><a href="?act=wear_tree" style="cursor:hand" title="Повесить все свои игрушки на ёлку"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu4.jpg" /></a></td>
+ </tr>
+ <tr>
+  <td><a onClick="inverse('menu2')" style="cursor:hand"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu5.jpg" /></a></td>
+ </tr>
+ <tr id="menu2" style="background:#ccffff;padding:30px;text-align:center;display:none">
+  <td style="padding-top:15px"><form method="POST">Вставить <input type="text" value="" maxlength="3" name="how_much"> штук <input type="submit" value="Да!" name="give_vetki" /> <small> и сделать нашу ёлочку пышнее.</small></form></td>
+ </tr>
+ <tr>
+  <td><a onClick="inverse('menu3')" style="cursor:hand"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/menu/menu6.jpg" /></a></td>
+ </tr>
+ <tr id="menu3" style="background:#ffcccc;padding:30px;text-align:center;display:none">
+  <td style="padding-top:15px"><form method="POST">Положить под ёлочку персонажу <input type="text" value="" maxlength="20" name="user"><br /> <small>(оставить пустым, если вы добрый саморетянен и хотите подарить вещь неизвестному)</small><br /> вещь <select name="thing"><?if( !empty($dat) ): foreach($dat as $dat): ?><option value="<?=$dat['Un_Id'];?>"><?=$dat['Thing_Name'];?></option><? endforeach; else: ?><option value="">Пусто</option><? endif; ?></select><br /><br />комментарий к подарку <textarea name="comment" rows="3" cols="15"></textarea><br /><input type="submit" name="thing_ok" value="Положить" /></form></td>
+ </tr>
+</table>

@@ -1,0 +1,134 @@
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.3.2");
+
+    google.setOnLoadCallback(function() {
+      loadpage = function( p )
+      {
+          $.getJSON('ajax/turnir.php', { act: 'dataload', page: p }, function(data){ if( data != 'time' ) { $('#left').html( data.left ); $('#right').html( data.right ); $('#content').html( data.content ); } } );
+      }
+
+      turnir_go = function( id, turn_stavka )
+      { $("#do_stavka").slideToggle("slow");      	$.getJSON('ajax/turnir.php', { act: 'go', turnir: id, stavka: turn_stavka }, function(data){  if( data.err ){ $('#msg').html(data.err).show('slow'); } else {  if( data != 'time' ) { $('#left').html( data.left ); $('#right').html( data.right ); $('#content').html( data.content );  } } } );
+      }
+
+       $("#OK").click(function () {
+          $("#zayavka").hide("slow");          $.getJSON('ajax/turnir.php', { act: 'new_zayavka', stavka: $('#stavka').val(), next_stavka: $('#next_stavka').val(), users: $('#users').val(), wait: $('#wait option:selected').val() }, function(data){  if( data.err ){ $('#msg').html(data.err).show('slow'); } else { $('#msg').html(data.msg).show('slow'); $('#left').html( data.left ); $('#right').html( data.right ); $('#content').html( data.content ); } } );
+       });
+       	var t;
+       timer = function()
+       {       	if (lefttime > 0)
+       	{       		t = setTimeout( "timer()", 1000 );
+       		lefttime--;
+       	}
+       	else
+       	{       		window.location.reload();
+       	}
+
+       	var lefttime_div = parseInt(lefttime/60);
+       	var lefttime_mod = lefttime - lefttime_div*60;
+
+       	lefttime_str = "&nbsp;До начала&nbsp;<b>";
+
+       	if (lefttime_div < 10) lefttime_str = lefttime_str + "0";
+       	lefttime_str = lefttime_str + lefttime_div + ":";
+       	if (lefttime_mod < 10) lefttime_str = lefttime_str + "0";
+       	lefttime_str = lefttime_str + lefttime_mod + "&nbsp;&nbsp;";
+       	el_timer = document.getElementById("timer");
+       	if (el_timer) el_timer.innerHTML = lefttime_str + '</b>';
+       }
+
+
+       <? if( $un_w == '1' ): ?>
+       $('#msg').html('Чтобы принять участие в турнире, необходимо <a href="#" onclick="top.frames[\'TOP\'].location.href=\'?undress=all\';">снять все вещи.</a> Ну или <a href="#" onclick="top.frames[\'TOP\'].location.href=\'?goto=land\';">вернуться.</a>' ).show('slow');
+       <? else: ?>
+
+       $("#goturnir").click(function () {
+    	$("#zayavka").slideToggle("slow");
+       });
+
+       loadpage(1);
+       <? endif; ?>
+
+       <? if( !empty($err) ): ?>
+       $('#msg').html( '<?=$err;?>' ).show('slow');
+       <? endif; ?>
+
+
+    });
+
+   </script>
+</head>
+<body bgcolor="#f0f0f0">
+
+<table cellpadding="0" cellspacing="0" width="40%" height="50px" align="center" valign="top">
+ <tr>
+<? if( $un_w != '1' ): ?>
+  <td><a href="javascript:;" id="goturnir">Создать турнир</a></td>
+<? if( empty($slot_th) ): ?>
+  <td><a href="#" onclick="top.frames['TOP'].location.href='?goto=land';">Вернуться</a></td>
+<? endif; ?>
+  <td><a href="javascript:loadpage(1);">Обновить</a></td>
+<? endif; ?>
+<? if( !empty( $slot_th ) && empty( $turnir_id ) ): ?>
+  <td><a href="?complect=load">Одеть комплект</a></td>
+<? endif; ?>
+ </tr>
+</table>
+<div id="msg" style="display:none" align="center" valign="top"> </div>
+<div id="zayavka" style="display:none">
+<table cellpadding="0" cellspacing="0" width="20%" align="center" valign="top">
+      <tr>
+	    <td>Минимальная ставка</td><td> <input type="text" id="stavka" value="" maxlength="5" style="width:30px" /> кр.</td>
+	  </tr>
+	  <tr>
+	    <td>Следующий шаг</td><td> <input type="text" id="next_stavka" value="" maxlength="3" style="width:30px" /> % </td>
+	  </tr>
+	  <tr>
+	    <td>Всего участников</td><td> <input type="text" id="users" value="" maxlength="3" style="width:30px" /> </td>
+	  </tr>
+	  <tr>
+	    <td>До начала</td><td> <select id="wait" style="width:60px;"><option selected value="1">1 мин</option><option value="3">3 мин</option><option value="5">5 мин</option><option value="15">15 мин</option></select>  </td>
+	  </tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="20%" align="center" valign="top">
+      <tr>
+       <td align="center"><input type="button" value="Добавить" id="OK" style="width:80px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+      </tr>
+</table>
+</div>
+
+<div id="do_stavka" style="display:none">
+
+<table cellpadding="0" cellspacing="0" width="20%" align="center" valign="top">
+      <tr>
+       <td align="center"><div id="info">&nbsp;</div></td>
+      </tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="20%" align="center" valign="top">
+      <tr>
+	    <td>Ваша ставка</td><td> <input type="text" id="stavka2" value="" maxlength="5" style="width:30px" /> кр.</td>
+	  </tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="20%" align="center" valign="top">
+      <tr>
+       <input type="hidden" id="turnir_id" value="" />
+       <td align="center"><input type="button" value="Добавить" id="OK2" onclick="turnir_go( $('#turnir_id').val(), $('#stavka2').val() )" style="width:80px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+      </tr>
+</table>
+</div>
+
+<br /><br />
+<table width="80%" align="center" valign="top">
+ <tr>
+  <td width="33%" align="left" id="left">&nbsp;</td>
+  <td width="33%" align="center"><h4>Турниры</h4></td>
+  <td width="33%" align="right" id="right">&nbsp;</td>
+ </tr>
+</table>
+
+
+<div id="content" align="center" valign="top">&nbsp;</div>
+
+

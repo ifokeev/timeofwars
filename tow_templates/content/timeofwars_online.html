@@ -1,0 +1,38 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/online.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/JsHttpRequest.js"></script>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script type="text/javascript" language="JavaScript">
+   function doLoad() {
+   var req = new JsHttpRequest();
+   req.onreadystatechange = function() {
+   if (req.readyState == 4) {
+
+   document.getElementById('result').innerHTML = req.responseText;
+
+   top.frames['info'].document.getElementById('room').innerHTML = '<center><small><b>'+req.responseJS.txt+'</b></small></center>';
+   }
+   }
+
+   req.open(null, '../ajax/onlineload.php', true);
+   req.send(null);
+
+   setTimeout("doLoad()", 10000);
+   }
+   </script>
+</head>
+<body topmargin="0" rightmargin="5" leftmargin="20" onload="doLoad();" bgcolor="#ffffff">
+
+ <table cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
+  <tr>
+   <td nowrap="nowrap">
+    <div id="result"> </div>
+<!--Rating@Mail.ru counter-->
+<a target="_blank" href="http://top.mail.ru/jump?from=1732440">
+<img src="http://df.c6.ba.a1.top.mail.ru/counter?id=1732440;t=84"
+border="0" height="18" width="88" alt="Рейтинг@Mail.ru"></a>
+<!--// Rating@Mail.ru counter-->
+
+
+   </td>
+  </tr>
+ </table>

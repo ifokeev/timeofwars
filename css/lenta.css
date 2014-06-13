@@ -1,0 +1,40 @@
+img {
+ border: 0px;
+}
+
+#lentaAbsLeft {
+ position: absolute;
+ top: 0px;
+ left: 0px;
+}
+
+#lentaAbsRight {
+ position: absolute;
+ top: 0px;
+ right: 0px;
+}
+
+#lentaScrLeft {
+ position: fixed;
+ left: 0px;
+ top: 0px;
+ width: 120px;
+//position: absolute;
+top: expression(
+ parseInt(document.body.scrollTop, 10) + "px"
+);
+}
+
+#lentaScrRight {
+ position: fixed;
+ right: 0px;
+ top: 0px;
+ width: 120px;
+//position: absolute;
+top: expression(
+ parseInt(document.body.scrollTop, 10) + "px"
+);
+}
+
+.iePNG, IMG { filter:expression(fixPNG(this)); } 
+.iePNG A { position: relative; }

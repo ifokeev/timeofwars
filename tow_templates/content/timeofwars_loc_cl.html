@@ -1,0 +1,438 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.3.2");
+    google.load("jqueryui", "1.7.2");
+
+    google.setOnLoadCallback(function() {    	$.getScript("http://<?=$db_config[DREAM]['other'];?>/js/jquery.alerts.js");
+
+        add_msg = function( msg, arr_disable, id )
+        {        	if( msg )
+        	{        		$( '#msg' + id ).html( msg );
+            }
+
+            if( arr_disable.constructor == Array )
+            {            	$.each(arr_disable, function(key, val) { $( '#'+val ).attr("disabled", true); });
+            }
+            else
+            {            	$( arr_disable ).hide();
+            }
+         }
+
+         checkboxes = function(id){
+
+         var result = new Array();
+         $("input[name=perm"+id+"]:checked").each(function(id) {
+         	result.push(this.value);
+         });
+
+
+         return result;
+         }
+
+
+         append_row = function(name, id){
+         if( !$("#content tr").size() )
+         $("#content").append('<tr bgcolor="#D4D2D2" id="first"><td width="100px"> Название </td><td width="40px"> Заявки </td><td width="60px"> Оружейка </td><td width="60px"> Отношения </td><td width="60px"> Ранги </td><td width="60px"> Члены клана</td><td width="60px"> Setup </td><td width="60px"> Казна </td><td width="150px"> Действие </td></tr>');
+
+         $("#content").append('<tr bgcolor="#E2E0E0" id="rank'+id+'"><td width="100px"> '+name+' </td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="request" /> </td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="weapon" /> </td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="align" /> </td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="rank" /> </td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="members" /></td><td width="60px"> <input type="checkbox" name="perm'+id+'" value="setup" /> </td> <td width="60px"> <input type="checkbox" name="perm'+id+'" value="kazna" /> </td> <td width="150px"> <input type="button" onclick="$.post(\'ajax/cl.php\', { page: \'rank\', act: \'update\', rank: \''+id+'\', \'result[]\': checkboxes(\''+id+'\') }, function(data){ $(\'#msg\').html( data ); } );" value="Сохранить" class="oo" onmouseover="this.className = \'on\';" onmouseout="this.className = \'oo\';" /> или <input type="button" class="oo" onmouseover="this.className = \'on\';" onmouseout="this.className = \'oo\';" onclick="$.post(\'ajax/cl.php\', { page: \'rank\', act: \'del\', rank: \''+id+'\' }, function(data){ if( data == \'time\' ){ jAlert(\'Запросы можно выполнять раз в 10 секунд\', \'Сообщение\'); } else { add_msg(data, \'#rank'+id+'\' ); } } );"  value="[ X ]" /> </td></tr>');
+         }
+
+         update = function(id)
+         {         	$('#data').load('ajax/cl.php', {page: 'weapons', act: 'dataload', slot: id });
+         }
+    });
+
+   </script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0" <?=$requestPage == 'align' && $rules == true ? 'onload="$(\'#body\').load(\'ajax/cl.php\', {page: \'align\'})"' : ''; ?>>
+
+<? if( !empty($ClanID) ): ?>
+
+<div align="right">
+<input type="button" value="Вернуться" onClick="window.location.href='?goto=pl'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+</div>
+
+<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#a5a5a5">
+<tr align="center">
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'request' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=request">Заявки на вступление </a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'weapons' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=weapons">Оружейная</a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'align' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=align">Военное положение </a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'rank' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=rank">Ранги</a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'members' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=members">Члены клана </a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'setup' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=setup">Остальное</a></td>
+	<td width="15%" nowrap="nowrap" bgcolor="<?=($requestPage == 'history' ? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=history">История</a></td>
+</tr>
+</table>
+
+
+
+<?
+if( !empty($requestPage) && $requestPage == 'history' ):
+if( $rules == true ):
+?>
+
+<table width="100%" border="0" cellpadding="2" cellspacing="2" align="left" valign="top">
+ <tr>
+ <td align="left">
+ <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'history', act: 'dataload', slot: 1 });">Члены :-)</a>&nbsp;|&nbsp;
+ <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'history', act: 'dataload', slot: 2 });">оружейка</a>&nbsp;|&nbsp;
+ <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'history', act: 'dataload', slot: 3 });">казна</a>&nbsp;|&nbsp;
+ <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'history', act: 'dataload', slot: 4 });">военное положение</a>&nbsp; &nbsp;
+ </td>
+ </tr>
+</table>
+
+<div style="clear: both"></div>
+
+<div style="width:100%;text-align:center ;" align="left" id="data">&nbsp;</div>
+
+<div style="clear: both"></div><br /><br />
+
+
+<? else: ?>
+<div align="center"><br />Недостаточно прав<br /></div>
+<? endif; ?>
+
+<? endif; ?>
+
+<?
+//////////заявки
+if( !empty($requestPage) && $requestPage == 'request' ):
+if( $rules == true ):
+if( !empty($demands) ):
+?>
+<table width="80%" border="1" cellpadding="10" cellspacing="5" align="center">
+<?
+foreach( $demands as $user ):
+?>
+ <tr id="id<?=$user['Id'];?>">
+  <td width="150px"><? if( !empty( $user['ClanID'] ) ): ?> <a href="top5.php?show=<?=$user['ClanID'];?>"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$user['ClanID'];?>.gif" /></a> <? endif; ?><a href="javascript:top.AddToPrivate('<?=$user['Username'];?>', true)"><?=$user['Username'];?></a> [<?=$user['Level'];?>] <a href="inf.php?uname=<?=$user['Username'];?>" target="_blank"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/inf.gif" width="12px" height="12px" title="info <?=$user['Username'];?>" /></a></td>
+  <td width="200px" id="msg<?=$user['Id'];?>"><?=empty($user['text']) ? '[комментарий отсутствует]' : $user['text'];?></td>
+  <td width="200px"><input type="button" onclick="$.post('ajax/cl.php', { page: 'request', act: 'add', uname: '<?=$user['Username'];?>' }, function(data){ add_msg(data, ['add','del'], '<?=$user['Id'];?>' ); } );" value="Принять за <?=empty($user['join_price']) ? 0 : $user['join_price'];?> кр." id="add" /> или <input type="button" onclick="$.post('ajax/cl.php', { page: 'request', act: 'del', uname: '<?=$user['Username'];?>' }, function(data){ add_msg(data, '#id<?=$user['Id'];?>', 0 ); } );" value="[ X ]" title="Удалить" id="del" /> </td>
+ </tr>
+<?
+endforeach;
+?>
+</table>
+<?
+else:
+?>
+<div align="center"><br />Заявок не обнаружено<br /></div>
+<?
+endif;
+
+else:
+?>
+<div align="center"><br />Недостаточно прав<br /></div>
+<?
+endif;
+endif;
+//////////конец заявок
+?>
+
+<?
+if( !empty($requestPage) && $requestPage == 'align' ):
+?>
+<div id="body" align="center"><? if( $rules != true ): ?><br />Недостаточно прав<br /><? endif; ?></div>
+<?
+endif;
+?>
+
+
+<?
+if( !empty($requestPage) && $requestPage == 'rank' ):
+if( $rules != true ):
+?>
+<div align="center"><br />Недостаточно прав<br /></div>
+<?
+else:
+?>
+<table width="100%" border="0" style="border:#E2E0E0 solid 5px" cellpadding="0" cellspacing="0" align="center" id="content">
+<?
+if( !empty($rankall) ):
+?>
+  <tr bgcolor="#D4D2D2">
+  <td width="100px"> Название </td>
+  <td width="60px"> Заявки </td>
+  <td width="60px"> Оружейка </td>
+  <td width="60px"> Отношения </td>
+  <td width="60px"> Ранги </td>
+  <td width="60px"> Члены клана</td>
+  <td width="60px"> Setup </td>
+  <td width="60px"> Казна </td>
+  <td width="150px"> Действие </td>
+ </tr>
+<?
+foreach( $rankall as $rank ):
+$perm = split( ',', $rank['perms'] );
+?>
+ <tr bgcolor="#E2E0E0" id="rank<?=$rank['id_rank'];?>">
+  <td width="100px"> <? if( !empty( $rank['icon'] ) ): ?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/rank/<?=$rank['icon'];?>.gif" width="24px" height="15px" alt="" /><?endif;?><?=$rank['rank_name'];?> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="request" <?if( in_array( 'request', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="weapon" <?if( in_array( 'weapon', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="align" <?if( in_array( 'align', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="rank" <?if( in_array( 'rank', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="members" <?if( in_array( 'members', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="setup" <?if( in_array( 'setup', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="60px"> <input type="checkbox" name="perm<?=$rank['id_rank'];?>" value="kazna" <?if( in_array( 'kazna', $perm ) ) echo 'checked'; ?> /> </td>
+  <td width="150px"> <input type="button" onclick="$.post('ajax/cl.php', { page: 'rank', act: 'update', rank: '<?=$rank['id_rank'];?>', 'result[]': checkboxes('<?=$rank['id_rank'];?>') }, function(data){ $('#msg').html( data ); } );" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';"/> или <input type="button" onclick="$.post('ajax/cl.php', { page: 'rank', act: 'del', rank: '<?=$rank['id_rank'];?>' }, function(data){ if( data == 'time' ){ jAlert('Запросы можно выполнять раз в 10 секунд', 'Сообщение'); } else { add_msg(data, '#rank<?=$rank['id_rank'];?>' ); } } );"  value="[ X ]"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';"  /> </td>
+ </tr>
+<?
+endforeach;
+endif;
+?>
+</table><br /><br />
+<div id="msg" align="center">&nbsp;</div><br /><br /><br />
+<div align="center"> <input type="text" id="rankname" value="" /> <input type="button" onclick="$.post('ajax/cl.php', { page: 'rank', act: 'new', rank: $('#rankname').val() }, function(data){ if( data == 'err' ){ jAlert( 'Укажите корректный ранг', 'Сообщение' ); } else if( data == 'time' ){ jAlert('Запросы можно выполнять раз в 10 секунд', 'Сообщение'); } else {append_row( $('#rankname').val(), data ); }  } );" value="Создать новый"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></div>
+<?
+
+endif;
+endif;
+?>
+
+
+<?
+if( !empty($requestPage) && $requestPage == 'members' ):
+if( !empty($members) ):
+?>
+<table width="100%" border="0" cellpadding="2" cellspacing="2" align="center">
+<?
+foreach( $members as $user ):
+?>
+ <tr bgcolor="#E2E0E0" id="id<?=$user['Id'];?>">
+  <td width="20px"><input type="checkbox" name="username" value="<?=$user['Username'];?>" /></td>
+  <td width="150px" align="left"><? if( !empty( $user['ClanID'] ) ): ?> <a href="top5.php?show=<?=$user['ClanID'];?>"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$user['ClanID'];?>.gif" /></a> <? endif; ?><a href="javascript:top.AddToPrivate('<?=$user['Username'];?>', true)"><?=$user['Username'];?></a> [<?=$user['Level'];?>] <a href="inf.php?uname=<?=$user['Username'];?>" target="_blank"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/inf.gif" width="12px" height="12px" title="info <?=$user['Username'];?>" /></a> <? if( $username == $user['Username'] ){ if( !empty($goout) && in_multi_array($username, $goout) ){ ?><input type="button" value="Удалить заявку" onclick="$.post('ajax/cl.php', { page: 'members', act: 'delgo', uname: '<?=$user['Username'];?>' }, function(data){ $('#msg').html(data); } );" /><? }else{ ?><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" value="Уйти из клана" onclick="$.post('ajax/cl.php', { page: 'members', act: 'addgo', uname: '<?=$user['Username'];?>' }, function(data){ $('#msg').html(data); } );" /><? } }?></td>
+  <td width="50px"><?=!empty($user['isonline']) ? '<font color="green"><b>Online</b></font>' : 'Offline'; ?></td>
+  <? if( !empty($rankall) ): ?>
+  <td width="200px">
+  <? if( $rules == true ): ?>
+  <select id="rank<?=$user['Id'];?>">
+    <option disabled>Ранг персонажа</option>
+    <? foreach( $rankall as $rank ): ?>
+    <option value="<?=$rank['id_rank'];?>" <? if($rank['id_rank'] == $user['id_rank']) echo 'selected'; ?>><?=$rank['rank_name'];?></option>
+    <? endforeach; ?>
+    <option value="0" <? if( empty($user['id_rank']) ) echo 'selected'; ?>>нет ранга</option>
+  </select>&nbsp;&nbsp;&nbsp;
+  <input type="button" value="OK" onclick="$.post('ajax/cl.php', { page: 'members', act: 'update', uname: '<?=$user['Username'];?>', rank: $('#rank<?=$user['Id'];?> option:selected').val() }, function(data){ $('#rankmsg<?=$user['Id'];?>').html(data); } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+  &nbsp;<b id="rankmsg<?=$user['Id'];?>" align="left"></b>
+  <? else: echo '<b>'.$user['rank_name'].'</b>'; endif; ?>
+  </td>
+  <? endif; ?>
+
+  <? if( $rules == true ): ?>
+  <td width="100px">
+  <input type="button" value="Выгнать за <?=$leftp;?> кр." onclick="$.post('ajax/cl.php', { page: 'members', act: 'del', left: '<?=$leftp;?>', uname: '<?=$user['Username'];?>' }, function(data){ $('#msg').html(data); $('#id<?=$user['Id'];?>').empty(); } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+  </td>
+  <td width="100px">
+    <select id="tax<?=$user['Id'];?>">
+     <option disabled>Налог с уровня</option>
+     <option value="0" <? if($user['tax'] == 0) echo 'selected'; ?>>0%</option>
+     <option value="10" <? if($user['tax'] == 10) echo 'selected'; ?>>10%</option>
+     <option value="20" <? if($user['tax'] == 20) echo 'selected'; ?>>20%</option>
+     <option value="30" <? if($user['tax'] == 30) echo 'selected'; ?>>30%</option>
+     <option value="40" <? if($user['tax'] == 40) echo 'selected'; ?>>40%</option>
+     <option value="50" <? if($user['tax'] == 50) echo 'selected'; ?>>50%</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    <input type="button" value="OK" onclick="$.post('ajax/cl.php', { page: 'members', act: 'update_tax', uname: '<?=$user['Username'];?>', tax: $('#tax<?=$user['Id'];?> option:selected').val() }, function(data){ if( data == 'time' ){ jAlert( 'Запросы можно выполнять раз в 5 секунд', 'Сообщение' ); } else { $('#rankmsg<?=$user['Id'];?>').html(data); } } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+  </td>
+  <? endif; ?>
+
+ </tr>
+<?
+endforeach;
+?>
+</table><br />
+
+<input type="text" size="40" MAXLENGTH="50" id="clanmsg" /> <input type="button" value="Отправить сообщение выделенным" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" onclick="$.post('ajax/cl.php', { page: 'members', act: 'clanmsg', msg: $('#clanmsg').val(),  'uname[]': function(){ var result = new Array();$('input[name=username]:checked').each(function(id) {result.push(this.value);}); return result; } }, function(data){ $('#msg').html(data); } );" /> или <input type="button" value="Отправить сообщение всем" onclick="$.post('ajax/cl.php', { page: 'members', act: 'clanmsg', msg: $('#clanmsg').val(), 'uname[]': 'all' }, function(data){ $('#msg').html(data); } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+
+<div id="msg"></div><br /><br />
+
+<?
+if( $rules == true ):
+if( !empty($goout) ):
+foreach( $goout as $user ):
+?>
+<div align="left" id="del<?=$user['Id'];?>">
+<a class="date"><?=$user['addtime'];?></a> <?=$user['Username'];?> хочет выйти из клана | <a href="#" title="выгнать" onclick="$.post('ajax/cl.php', { page: 'members', act: 'del', left: '5', uname: '<?=$user['Username'];?>' }, function(data){ $('#msg').html(data); $('#id<?=$user['Id'];?>').empty(); $('#del<?=$user['Id'];?>').empty(); } );">пусть валит</a> | <a href="#" title="удалить" onclick="$.post('ajax/cl.php', { page: 'members', act: 'delgo', uname: '<?=$user['Username'];?>' }, function(data){ $('#msg').html(data); $('#del<?=$user['Id'];?>').empty(); } );">ненене!</a><br />
+</div>
+<?
+endforeach;
+endif;
+endif;
+
+endif;
+endif;
+?>
+
+
+<?
+if( !empty($requestPage) && $requestPage == 'setup' ):
+?><br /><br />
+<table width="50%" border="0" cellpadding="2" cellspacing="2" align="left">
+<tr>
+ <td width="200px">Ссылка на клановый сайт: </td>
+ <td align="left"><input type="text" value="<? if(!empty($info['link'])) echo $info['link']; ?>" id="link" size="40" MAXLENGTH="50" /></td>
+</tr>
+<tr>
+ <td width="200px">Девиз клана: </td>
+ <td align="left"><input type="text" value="<? if(!empty($info['slogan'])) echo $info['slogan']; ?>" id="slogan" size="40" MAXLENGTH="50" /></td>
+</tr>
+<tr>
+ <td width="200px">Реклама: </td>
+ <td align="left"><input type="text" value="<? if(!empty($info['advert'])) echo $info['advert']; ?>" id="reklama" size="40" MAXLENGTH="50" /></td>
+</tr>
+<? if( $setup == true ): ?>
+<tr>
+ <td id="msg">&nbsp;</td>
+ <td align="left"><input type="button" value="Сохранить" onclick="$.post('ajax/cl.php', { page: 'setup', act: 'update', link: $('#link').val(), slogan: $('#slogan').val(), reklama: $('#reklama').val() }, function(data){ $('#msg').html(data); } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+</tr>
+<? endif; ?>
+</table>
+
+
+<table width="35%" border="0" cellpadding="2" cellspacing="2" align="left">
+<tr>
+ <td width="200px">В клановой казне: </td>
+ <td align="left"><b id="kazna"><?=$money;?></b> кр.</td>
+</tr>
+<tr>
+ <td width="200px">Хотите вложить? </td>
+ <td align="left"><input type="text" value="" id="add_money" size="20" MAXLENGTH="6" /></td>
+ <td align="left"><input type="button" value="Да!" onclick="$.post('ajax/cl.php', { page: 'kazna', act: 'addmoney', money: $('#add_money').val() }, function(data){ if( data == 'err' ){ $('#demand').html('Некорректная сумма'); } else { $('#kazna').html(data);  $('#demand').html($('#add_money').val() + ' кр. внесены в казну'); } } );" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+</tr>
+<tr>
+ <td width="200px">Подать заявку на помощь? </td>
+ <td align="left"><input type="text" value="" id="add_demand" size="20" MAXLENGTH="6" /> кр.</td>
+ <td align="left"><input type="button" value="Да!" onclick="$.post('ajax/cl.php', { page: 'kazna', act: 'add_demand', money: $('#add_demand').val() }, function(data){ $('#demand').html(data); } );"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+</tr>
+<tr>
+ <td id="demand">&nbsp;</td>
+ <td>&nbsp;<br /><br /></td>
+</tr>
+<?
+$i=1;
+if( !empty($m_demand) ):
+foreach( $m_demand as $user ):
+?>
+<tr id="id<?=$i;?>">
+ <td><a class="date"><?=$user['addtime'];?></a> <?=$user['Username'];?> хочет взять из казны <?=$user['howmuch'];?> кр.</td>
+ <td><a href="#" onclick="$.post('ajax/cl.php', { page: 'kazna', act: 'give_money', uname: '<?=$user['Username'];?>' }, function(data){ if( data == 'err' ){ $('#demand').html('Такой суммы нет в казне'); } else if( data == 'err2' ) { $('#demand').html('Нельзя выдать сумму самому себе'); } else { $('#kazna').html(data);  $('#demand').html('Сумма выдана персонажу'); $('#id<?=$i;?>').empty(); } } );" >отбашлять</a> | <a href="#" onclick="$.post('ajax/cl.php', { page: 'kazna', act: 'del_demand', uname: '<?=$user['Username'];?>' }, function(data){ $('#demand').html(data); $('#id<?=$i;?>').empty(); } );">ненене!</a></td>
+</tr>
+<?
+$i++;
+endforeach;
+endif;
+?>
+
+</table>
+
+<?
+endif;
+?>
+
+<?
+if( !empty($requestPage) && $requestPage == 'weapons' ):
+?>
+<table width="100%" border="0" cellpadding="2" cellspacing="2" align="left" valign="top">
+ <tr>
+ <td align="left">
+ <a href="#" onclick="update('');">Все</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(0);">Серьги</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(1);">Ожерелья</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(2);">Оружие</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(3);">Броня</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(4);">Кольца</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(7);">Шлемы</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(8);">Перчатки</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(9);">Щиты</a>&nbsp;|&nbsp;
+ <a href="#" onclick="update(10);">Обувь</a>
+ </td>
+ <td align="right"><a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'weapons', act: 'mythings'});">Вернуть</a> <? if( $rules == true ): ?>| <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'weapons', act: 'addthings'});">Добавить вещи</a> | <a href="#" onclick="$('#data').load('ajax/cl.php', {page: 'weapons', act: 'izyat'});">Изъять</a><? endif; ?></td>
+ </tr>
+</table>
+
+<div style="clear: both"></div>
+
+<div style="width:60%;text-align:center ;" align="left" id="data">&nbsp;</div>
+
+<div style="clear: both"></div><br /><br />
+<table width="100%" border="0" cellpadding="2" cellspacing="2" align="left" valign="bottom">
+<div style="position:relative;text-align:left;">
+<?
+if( !empty($u_demands) ):
+foreach( $u_demands as $dem ):
+if( $dem['status'] == null ):
+?>
+<li>Ваша заявка на вещь <a href="thing.php?thing=<?=$dem['id_item'];?>" target="_blank"><?=$dem['id_item'];?></a> ожидает проверки.</li>
+<?
+else:
+?>
+<li>Ваша заявка на вещь <a href="thing.php?thing=<?=$dem['id_item'];?>" target="_blank"><?=$dem['id_item'];?></a> <?=$dem['status'] == 'ACCEPT' ? '<b><font color="green">подтверждена.</font></b> <a href="#" onclick="$.post(\'ajax/cl.php\', { page: \'weapons_demands\', act: \'get_item\', item: \''.$dem['id_item'].'\' }, function(data){ jAlert(data, \'Сообщение\'); } );">Забрать!</a> ' : '<b><font color="red">отклонена.</font></b>';?>
+<?
+endif;
+endforeach;
+endif;
+?>
+<br /><br /><br /><br />
+
+<? if( $rules == true ): ?>
+<? if( !empty($alldemands) ): ?>
+<? foreach( $alldemands as $dem ): ?>
+<li><a class="date"><?=date('d.m.Y H:i', $dem['addTime']);?></a> <b><?=$dem['Username'];?></b> нуждается в <small><a href="thing.php?thing=<?=$dem['id_item'];?>" target="_blank"><?=$dem['Thing_Name'];?>.</a></small><br /><a href="#" onclick="$.post('ajax/cl.php', { page: 'weapons_demands', act: 'accept_demand', item: '<?=$dem['id_item'];?>', uname: '<?=$dem['Username'];?>' }, function(data){ jAlert(data, 'Сообщение'); } );">Ок</a> | <a href="#" onclick="$.post('ajax/cl.php', { page: 'weapons_demands', act: 'reject_demand', item: '<?=$dem['id_item'];?>', uname: '<?=$dem['Username'];?>' }, function(data){ jAlert(data, 'Сообщение'); } );">Отказать</a>&nbsp;<? if($dem['status'] == 'ACCEPT'): echo '| <font color="green">Подтверждена</font>'; elseif($dem['status'] == 'REJECT'): '| <font color="red">Отвергнута</font>'; endif; ?></li><br />
+
+<? endforeach; ?>
+<? else: ?>
+Заявок на получение вещей не обнаружено
+<? endif; ?>
+<? endif; ?>
+
+</div>
+<?
+endif;
+?>
+
+
+<? else: ?>
+<br />
+<div id="content">
+<? if( empty($mydemand) ): ?>
+<div style="text-align:center;"><b>Здесь вы можете подать заявку в любой из нижеперечисленных кланов</b><br />или  <input type="button" onclick="window.location.href='?goto=pl'" value="Вернуться на площадь" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></div>
+<table border="0" cellpadding="2" cellspacing="2" bgcolor="#D3D1D1" width="98%" align="center">
+ <tr align="center" bgcolor="#D4D2D2">
+  <td>Клан</td>
+  <td>Девиз</td>
+  <td>Реклама</td>
+  <td>Сайт</td>
+  <td>Ваша информация</td>
+ </tr>
+ <?
+ if(!empty($clanList)):
+ foreach( $clanList as $clan ):
+ ?>
+ <tr align="center"  bgcolor="#E2E0E0">
+  <td align="left"><a href="top5.php?show=<?=$clan['id_clan']?>" target="_blank"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?=$clan['id_clan']?>.gif"></a><b><?=$clan['title']?></b></td>
+  <td><?=$clan['slogan']?></td>
+  <td><?=$clan['advert']?></td>
+  <td><?=empty($clan['link']) ? 'Нет' : '<a href="'.$clan['link'].'" target="_blank">тут</a>';?></td>
+  <td><input type="text" id="demand_text" value="" /></td>
+  <td><input type="button" onclick="$.post('ajax/cl.php', { page: 'clan_demand', act: 'new', id_clan: '<?=$clan['id_clan']?>', text: $('#demand_text').val() }, function(data){ jAlert(data, 'Сообщение'); $('#content').load('cl.php'); } );" value="Подать" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+ </tr>
+ <?
+ endforeach;
+ endif;
+ ?>
+</table>
+<? else: ?>
+<center>
+Вы уже подали заявку в клан, но вы можете отозвать ее<br />
+<input type="button" onclick="$.post('ajax/cl.php', { page: 'clan_demand', act: 'del' }, function(data){ jAlert(data, 'Сообщение'); $('#content').load('cl.php'); } );" value="Отозвать заявку" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+Вы можете ускорить вступление, если обратитесь к главе клана <a target="_blank" href="inf.php?uname=<?=$mydemand['name']?>"><?=$mydemand['name']?></a>. <br />
+<input type="button" onclick="window.location.href='?goto=pl'" value="Вернуться на площадь" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+</center>
+<? endif; ?>
+</div>
+
+<? endif; ?>

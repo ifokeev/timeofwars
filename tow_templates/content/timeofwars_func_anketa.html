@@ -1,0 +1,247 @@
+<script>
+function inverse(id)
+{
+  elem=document.getElementById(id);
+  if (elem.style.display=="none")
+  {
+    elem.style.display="";
+  }
+  else
+  {
+    elem.style.display="none";
+  }
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0">
+ <center>
+  <font color="red"><b><?=$err;?></b></font>
+   <table width="90%" border="1" cellpadding="0" cellspacing="0">
+    <tr>
+     <td align="center"<?=($r == 1 ? ' bgcolor=#999999' : '' )?>><a href="javascript:top.frames['TOP'].location.href = '?r=1'"><?=_ANKET_header1;?></a></td>
+     <td align="center"<?=($r == 2 ? ' bgcolor=#999999' : '' )?>><a href="javascript:top.frames['TOP'].location.href = '?r=2'"><?=_ANKET_header2;?></a></td>
+     <td align="center"<?=($r == 5 ? ' bgcolor=#999999' : '' )?>><a href="javascript:top.frames['TOP'].location.href = '?r=5'"><?=_ANKET_header5;?></a></td>
+     <td align="center"<?=($r == 3 ? ' bgcolor=#999999' : '' )?>><a href="javascript:top.frames['TOP'].location.href = '?r=3'"><?=_ANKET_header3;?></a></td>
+     <td align="center"<?=($r == 4 ? ' bgcolor=#999999' : '' )?>><a href="javascript:top.frames['TOP'].location.href = '?r=4'"><?=_ANKET_header4;?></a></td>
+     <td align="center"><a href="javascript:top.frames['TOP'].location.href = 'inv.php'"><?=_ANKET_header6;?></a></td>
+    </tr>
+    <tr>
+     <td colspan="7" align="center"><br />
+<?
+switch($r):
+case '';
+echo 'Выберите раздел';
+break;
+case 1;
+?>
+      <h4><?=_ANKET_R1title;?></h4><br />
+       <table>
+        <form method="POST">
+          <tr><td><?=_ANKET_R1RealName;?></td><td><input type="text" name="new_RealName" size="20" maxlength="30" value="<?=$RealName;?>"></td></tr>
+          <tr><td><?=_ANKET_R1ICQ;?></td><td><input type="text" name="new_ICQ" size="20" maxlength="15" value="<?=$ICQ;?>">&nbsp;</td></tr>
+          <tr><td><?=_ANKET_R1Town;?></td><td><input type="text" name="new_town" size="20" maxlength="15" value="<?=$town;?>">&nbsp;</td></tr>
+       </table>
+<?=_ANKET_R1Body;?><br />
+        <textarea name="new_Info" cols="130" rows="12"><?=$Info;?></textarea><br>
+        <input type="submit" value="<?=_button_change;?>" name="change"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+        <input type="button" value="<?=_GOOUT;?>" onClick="window.location.href='inv.php'"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';"></form>
+        <a href="?r=1&h=1"><?=_ANKET_support;?></a>
+<? if(!empty($r) && $r == 1 && $h == 1): ?>
+        <br />
+        <b>При написании дополнительной информации разрешается использовать (латинскими буквами):</b>
+        <table>
+         <tr><td>Формат записи: [начало оформления] текст [/окончание оформления]</td></tr>
+         <tr><td>Также можно совмещать любые стили например [color=Red] <font color="Red">красный и </font> [b] <font color="Red"><b>жирный</b></font> [/b] [/]</td></tr>
+         <tr><td><li>[b] <b>жирный текст</b> [/b] (аналогично тегу &lt;b&gt;)</td></tr>
+         <tr><td><li>[i] <i>наклонный текст</i> [/i] (аналогично тегу &lt;i&gt;)</td></tr>
+         <tr><td><li>[u] <u>подчеркнутый текст</u> [/u] (аналогично тегу &lt;u&gt;)</td></tr>
+         <tr><td><li> <b>Цветной текст</b></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Red] <font color="Red">красный</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Green] <font color="Green">зеленый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Yellow] <font color="Yellow">желтый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Cyan] <font color="Cyan">голубой</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Purple] <font color="Purple">фиолетовый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Aqua] <font color="Aqua">морская волна</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Fuchsia] <font color="Fuchsia">розовый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Lime] <font color="Lime">лайм</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=Maroon] <font color="Maroon">коричневый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td>&nbsp;&nbsp;&nbsp;[color=White] <font color="White">белый</font> [/] (аналогично тегу &lt;font color="указать цвет"&gt;)<br></td></tr>
+         <tr><td><li>[t] Выровнять по центру [/t]  (аналогично тегу &lt;center&gt;)</td></tr>
+         <tr><td><li>[sm] Мелкий шрифт [/sm]  (аналогично тегу &lt;small&gt;)</td></tr>
+         <tr><td><li>[+1] Крупный шрифт [/]  (аналогично тегу &lt;font size="+1"&gt;)</td></tr>
+         <tr><td><li>[+2] Самый крупный шрифт [/]  (аналогично тегу &lt;font size="+2"&gt;)</td></tr>
+         <tr><td><li>[q] Бегущий текст [/q]  (аналогично тегу &lt;marquee&gt;)</td></tr>
+<?
+endif;
+
+break;
+case 2;
+?>
+       <h4><?=_ANKET_R2title;?></h4>
+        <br />
+<?
+if( !empty($friends) ):
+    echo '<b>'._ANKET_R2FRIENDS.'</b>';
+	foreach( $friends as $query ):?>
+      <table>
+       <tr>
+        <form method="POST">
+          <td>
+           <?=slogin($query['Username'], $query['Level'], $query['ClanID']); ?>
+          <input type="submit" name="delfriend" title="<?=sprintf(_ANKET_R2FRIENDStitle, $query['Username']);?>" value="x"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+          <input type="hidden" name="persName" value="<?=$query['Username'];?>">
+         </td>
+        </form>
+       </tr>
+      </table>
+
+<?
+	endforeach;
+
+else:
+    echo '<b>'._ANKET_R2NoFRIENDS.'</b>';
+endif;
+?>
+<br>
+<?
+
+if( !empty($enemies) ):
+    echo '<b>'._ANKET_R2EMPTYS.'</b>';
+
+	foreach( $enemies as $query ):
+?>
+      <table>
+       <tr>
+        <form method="POST">
+          <td>
+           <?=slogin($query['Username'], $query['Level'], $query['ClanID']); ?>
+          <input type="submit" name="delfriend" title="<?=sprintf(_ANKET_R2FRIENDStitle, $query['Username']);?>" value="x"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+          <input type="hidden" name="persName" value="<?=$query['Username'];?>">
+         </td>
+        </form>
+       </tr>
+      </table>
+
+<?
+	endforeach;
+
+else:
+    echo '<b>'._ANKET_R2NoEMPTYS.'</b>';
+endif;
+?>
+<br />
+<?
+echo _ANKET_R2but;
+
+if( !empty($f_cnt) )
+  echo sprintf(_ANKET_R2numFRIENDS, $f_cnt);
+else
+  echo _ANKET_R2NonumFRIENDS;
+
+
+if( !empty($e_cnt) )
+  echo sprintf(_ANKET_R2numEMPTYS, $e_cnt);
+else
+  echo _ANKET_R2NonumEMPTYS;
+
+?>
+     <br />
+      <form method="POST">
+       <?=_ANKET_add;?><br />
+       <?=_ANKET_nameuser;?> <input type="text" name="persName" value=""> - <?=_ANKET_thisis;?> <select name="enfrType"><option value="f"><?=_ANKET_friend;?></option><option value="e"><?=_ANKET_empty;?></option>></select>,
+       <?=_ANKET_reson;?> <input type="text" name="enfrReason" size="40" maxlength="64" value="">
+       <input type="submit" name="enefriend" value="<?=_button_add;?>"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+      </form>
+<?
+break;
+case 3;
+?>
+    <h4><?=_ANKET_P3title;?></h4><br />
+      <table>
+       <form method="POST">
+        <tr><td><?=_ANKET_P3oldPass;?></td><td><input type="password" name="old_pass_user" size="20" maxlength="30" value=""></td></tr>
+        <tr><td><?=_ANKET_P3NewPass;?></td><td><input type="password" name="new_pass_first" size="20" maxlength="30" value="">&nbsp;</td></tr>
+        <tr><td><?=_ANKET_again;?></td><td><input type="password" name="new_pass_second" size="20" maxlength="30" value="">&nbsp;</td></tr>
+      </table>
+      <br />
+       <input type="submit" value="<?=_button_change;?>" name="change_pass"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+       <input type="button" value="<?=_GOOUT;?>" onClick="window.location.href='inv.php'"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';"></form>
+<?
+break;
+case 4;
+?>
+   <h4><?=_ANKET_P4title;?></h4><br />
+      <table>
+       <form method="POST">
+        <tr><td><?=_ANKET_P4oldMail;?></td><td><input type="text" name="old_email_user" size="20" maxlength="30" value=""></td></tr>
+        <tr><td><?=_ANKET_P4newMail;?></td><td><input type="text" name="new_email_first" size="20" maxlength="30" value="">&nbsp;</td></tr>
+        <tr><td><?=_ANKET_again;?></td><td><input type="text" name="new_email_second" size="20" maxlength="30" value="">&nbsp;</td></tr>
+      </table>
+      <br />
+       <input type="submit" value="<?=_button_change;?>" name="change_emailuser"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';">
+       <input type="button" value="<?=_GOOUT;?>" onClick="window.location.href='inv.php'"  class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';"></form>
+<?
+break;
+
+
+
+case 5;
+?>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+<? if( !empty($referals) ): ?>
+ <tr>
+  <td>[Когда]</td> <td>[кто]</td> <td>[провел боёв]</td> <td>[набрал опыта]</td> <td>[пришел с]</td> <td>[получите euro]</td> <td>[проверен?]</td> <td>[подать заявку]</td>
+ </tr>
+<? foreach( $referals as $user ): ?>
+<?
+switch( $user['status'] )
+{	case 'none': $title = 'не проверена.'; break;
+	case 'inprogress': $title = 'в ожидании проверки.'; break;
+	case 'good': $title = 'Заявка подтверждена. Деньги выплачены'; break;
+	case 'bad': $title = 'Заявка отклонена. Дело отправлено хранителям.'; break;
+}
+?>
+ <tr>
+  <td><a href="#<?=$user['un'];?>"></a><?=date('j', $user['add_time']).' '.getmonth(date('F', $user['add_time'])).', '.date('Y', $user['add_time']).' г.';?></td> <td><?=slogin($user['Username'], $user['Level'], $user['ClanID']);?></td> <td><?=$user['sum_b'];?></td> <td><?=$user['Expa'];?></td> <td><?=(!empty($user['http_referer']) ? $user['http_referer'] : 'tow.su' );?></td> <td><?=$user['Level'] >= 10 ? ($user['Level']*0.1) : 0;?></td> <td><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/adm/<?=$user['status'];?>.gif" title="<?=$title;?>" /></td> <td><?=($user['status'] == 'inprogress' ? 'ожидает' : '<a href="?r=5&page='.$p.'&zayavka='.$user['un'].'#'.$user['un'].'">отправить</a>');?></td>
+ </tr>
+<?
+   endforeach;
+?>
+</table>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="padding-top: 50px;">
+ <tr>
+  <td>Страницы: <?=$out;?></td>
+ </tr>
+<?
+else:
+?>
+<tr><td>У вас нет рефералов.</td></tr>
+<?
+endif;
+?>
+<tr><td><br /><a href="javascript:inverse('info')">пояснялка</a></td></tr>
+</table>
+<div id="info" style="display:none"><br />
+<p>Здесь представлен список персонажей, зарегистрировавшихся по вашей реферальной ссылке ( <a href="http://<?=$db_config[DREAM]['server'];?>/register.php?join=<?=$user_id;?>" target="_blank">http://<?=$db_config[DREAM]['server'];?>/register.php?join=<?=$user_id;?></a> )</p>
+<p>За каждого из них, получившего уровень >= 10, вы получите Euro суммой (уровень персонажа*0.1).</p>
+<p>Дабы получить ваши законные деньги, вам следует отправить заявку администрации проекта. После рассмотрения будет вынесено решение.</p>
+<p>Получить деньги с <strong>1 персонажа</strong> можно только <strong>1 раз.</strong></p>
+<p><small>Не стоит прокачивать мультов, ибо всё отслеживается. Ранее зарегистрированные персонажи в список сверху добавлены не будут.</small></p>
+<p><small>Особо хитрые узрят наказание в виде проклятия персонажа (или того хуже - блока) и получат пожизненный ярлык обманщика.</small></p>
+<p><small>Распростроняя свою реф. ссылку, вы соглашаетесь со всякими действиями администрации и признаете власть великого брррррр</small></p>
+</div>
+<br />
+<?
+break;
+
+
+
+
+
+
+default:
+
+endswitch;
+?>
+</td></tr>
+</table>

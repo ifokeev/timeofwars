@@ -1,0 +1,122 @@
+<div style="clear:both"></div>
+<? if( !empty($magic) ):  $i = 0; ?>
+<div class="table_do_attack">
+<table border="0" cellspacing="0" cellpadding="0" align="center" valign="top">
+ <tr>
+<?
+foreach( $magic as $v ):
+
+echo '<td align="left">';
+
+   switch( $v['MagicID'] ):
+
+     case 'note':
+       echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'Что говорим?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+     break;
+
+     case 'Fireball':
+       echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'На кого используем?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+     break;
+
+     case 'Ледяной удар':
+       echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'На кого используем?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+     break;
+
+     case 'Подчинение':
+       echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'Кого подчиняем?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+     break;
+
+     case 'Воскрешение':
+       echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'Кого воскрешаем?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+     break;
+
+     default:
+      if ( strpos($v['MagicID'], 'екарь') ):
+        echo '<a href="JavaScript:alert_msg(\'target\', \''.$v['Un_Id'].'\', \'Кого лечим?\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+      else:
+        echo '<a href="javascript:do_magic('.$v['Un_Id'].', \'\')"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['Id'].'.gif" alt="'.$v['MagicID'].' (Долговечность: '.$v['NOWwear'].'/'.$v['MAXwear'].')" /></a>';
+      endif;
+     break;
+
+
+   endswitch;
+
+$i++;
+
+ if( $i%7 == 0 ) echo '</td></tr><tr>';
+endforeach;
+?>
+ </tr>
+</table>
+</div>
+<div style="clear:both"></div>
+<br /><br />
+<? endif; ?>
+
+
+
+<? if( $out['Slot_id'][2] != 'empt2' && $out['Slot_id'][11] != 'empt11' ): ?>
+<table border="0" cellspacing="0" cellpadding="0" class="attack_table" id="table_kick">
+ <tr>
+  <td><input type="radio" id="A1_1" name="kick2" value="1" /><input type="radio" id="A1" name="kick1" value="1" /></td><td align="left"><label for="A1">Удар в голову</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A2_1" name="kick2" value="2" /><input type="radio" id="A2" name="kick1" value="2" /></td><td align="left"><label for="A2">Удар в корпус</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A3_1" name="kick2" value="3" /><input type="radio" id="A3" name="kick1" value="3" /></td><td align="left"><label for="A3">Удар в пояс</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A4_1" name="kick2" value="4" /><input type="radio" id="A4" name="kick1" value="4" /></td><td align="left"><label for="A4">Удар в ноги</label></td>
+ </tr>
+</table>
+<? else: ?>
+<table border="0" cellspacing="0" cellpadding="0" class="attack_table" id="table_kick">
+ <tr>
+  <td><input type="radio" id="A1" name="kick1" value="1" /></td><td align="left"><label for="A1">Удар в голову</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A2" name="kick1" value="2" /></td><td align="left"><label for="A2">Удар в корпус</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A3" name="kick1" value="3" /></td><td align="left"><label for="A3">Удар в пояс</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="A4" name="kick1" value="4" /></td><td align="left"><label for="A4">Удар в ноги</label></td>
+ </tr>
+</table>
+<? endif; ?>
+
+<? if( !empty($out['Slot_id'][9]) ): ?>
+<table border="0" cellspacing="0" cellpadding="0" class="attack_table" id="table_block">
+ <tr>
+  <td><input type="checkbox" id="B5" name="block1" value="5" /></td><td align="left"><label for="B1">блок головы</label></td>
+ </tr>
+ <tr>
+  <td><input type="checkbox" id="B6" name="block1" value="6" /></td><td align="left"><label for="B2">блок корпуса</label></td>
+ </tr>
+ <tr>
+  <td><input type="checkbox" id="B7" name="block1" value="7" /></td><td align="left"><label for="B3">блок пояса</label></td>
+ </tr>
+ <tr>
+  <td><input type="checkbox" id="B8" name="block1" value="8" /></td><td align="left"><label for="B4">блок ног</label></td>
+ </tr>
+</table>
+<? else: ?>
+<table border="0" cellspacing="0" cellpadding="0" class="attack_table" id="table_block">
+ <tr>
+  <td><input type="radio" id="B1" name="block1" value="1" /></td><td align="left"><label for="B1">блок головы и корпуса</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="B2" name="block1" value="2" /></td><td align="left"><label for="B2">блок корпуса и пояса</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="B3" name="block1" value="3" /></td><td align="left"><label for="B3">блок пояса и ног</label></td>
+ </tr>
+ <tr>
+  <td><input type="radio" id="B4" name="block1" value="4" /></td><td align="left"><label for="B4">блок ног и головы</label></td>
+ </tr>
+</table>
+<? endif; ?>
+<div class="attack_button"><input type="button" id="attack" value="Атаковать" class="btn btn-m" /></div>
+

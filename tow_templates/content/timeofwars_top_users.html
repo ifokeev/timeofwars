@@ -1,0 +1,249 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/forum.css" rel="stylesheet">
+   <style>img {BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px}</style>
+</head>
+<body style="margin:0;" background="http://<?=$db_config[DREAM_IMAGES][server];?>/bg.jpg"><br />
+<table class="g" align="center" border="0" cellpadding="4" cellspacing="1" width="800px">
+ <tbody>
+  <tr class="bg6">
+   <td style="background-repeat: no-repeat;" align="right" background="http://<?=$db_config[DREAM_IMAGES][server];?>/forum/logom_ru.jpg" height="93px" width="600px"><a href="http://<?=$db_config[DREAM][server];?>/top5.html"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/forum/logo_raiting.gif" border="0" height="50px" width="398px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+ </tbody>
+</table>
+<table width="800px" cellspacing="1" cellpadding="3" border="0" align="center" class="el">
+ <tr>
+  <td>
+   &gt;&gt;&nbsp;&nbsp;<A class=norm href="encicl/index.html">Cодержание</A>
+   &nbsp;&nbsp;-&gt; <a class=norm href="top5.html">Рейтинг Time Of Wars</a>
+  </td>
+ </tr>
+</table>
+<table class="g" cellspacing="1" cellpadding="25" border="0" align="center" width="800px">
+
+
+ <tr class="bg6 medium">
+  <td height="28px" colspan="6" valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Разница win &#151; lost</font></tr>
+<? if( !empty($WLD) ): ?>
+<? foreach( $WLD as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+
+   </table>
+
+  </td>
+
+  <td height="28px" colspan="6" valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Сумма win + lost</font></tr>
+<? if( !empty($WLS) ): ?>
+<? foreach( $WLS as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Отношение win / lost</font></tr>
+<? if( !empty($WLP) ): ?>
+<? foreach( $WLP as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+ </tr>
+
+<!--------------- 2 row --->
+
+ <tr class="bg6 medium">
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Сумма статов</font></tr>
+<? if( !empty($stSUM) ): ?>
+<? foreach( $stSUM as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Респект игроков</font></tr>
+<? if( !empty($karmaPlus) ): ?>
+<? foreach( $karmaPlus as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Дизреспект игроков</font></tr>
+<? if( !empty($karmaMinus) ): ?>
+<? foreach( $karmaMinus as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+ </tr>
+
+
+<!---------- 3 row ------->
+
+ <tr class="bg6 medium">
+  <td height="28px" colspan="6" valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Кузнецы</font></tr>
+<? if( !empty($smith) ): ?>
+<? foreach( $smith as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Шахтёры</font></tr>
+<? if( !empty($mines) ): ?>
+<? foreach( $mines as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Казино</font></tr>
+<? if( !empty($casino) ): ?>
+<? foreach( $casino as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+ </tr>
+
+
+
+
+<!----- 4 row --------->
+ <tr class="bg6 medium">
+  <td height="28px" colspan="6" valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Вставил веток</font></tr>
+<? if( !empty($vetki) ): ?>
+<? foreach( $vetki as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Повесил игрушек</font></tr>
+<? if( !empty($toys) ): ?>
+<? foreach( $toys as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+
+
+  <td height="28px" colspan="6"  valign="top">
+
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr><font size="+1">Ждет подарков</font></tr>
+<? if( !empty($presents) ): ?>
+<? foreach( $presents as $num => $v ): ?>
+		 <tr><td> &nbsp; <b><?=$num+1;?>.</b> &nbsp; <?=slogin($v['Username'], $v['Level'], $v['id_clan'] );?> </td></tr>
+<? endforeach; ?>
+<? else: ?>
+         <tr><td> Топ не сформирован. </td></tr>
+<? endif; ?>
+   </table>
+
+  </td>
+
+ </tr>
+
+
+
+</table><br />
+ <table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+   <td align="center">
+	<div align="right">
+	 <!--Rating@Mail.ru COUNTER-->
+	 <!--/COUNTER-->
+    </div>
+   </td>
+   <td align="center" class="small">
+	&nbsp;&nbsp;&nbsp;
+	&copy; Copyright © 2010. Все права защищены www.tow.vanya.cc
+   </td>
+  </tr>
+ </table><br />

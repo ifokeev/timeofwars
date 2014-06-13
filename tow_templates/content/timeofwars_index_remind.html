@@ -1,0 +1,20 @@
+   <form method="POST">
+    <table cellspacing="0" cellpadding="0" border="0" align="center">
+     <tr>
+      <td align="center" valign="top">
+       <table>
+        <tr>
+         <td>Ваш логин:</td>
+         <td><input type="text" class="text" style="TEXT-ALIGN: Center" onBlur="if (value == '') {value='Логин'}" onFocus="if (value == 'Логин') {value =''}" value="Логин" size="20" maxlength="30"  name="login" onmouseover="imoveri(this)" onmouseout="imouti(this);" /></td><br />
+        </tr>
+        <tr>
+         <td>Ваш e-mail:</td>
+         <td><input type=text class="text" size="20" maxlength="30" style='TEXT-ALIGN: Center' onBlur="if (value == '') {value='E-mail'}" onFocus="if (value == 'E-mail') {value =''}" value="E-mail" name="email" onmouseover="imoveri(this)" onmouseout="imouti(this);" /></td><br />
+        </tr>
+       </table>
+       <input type="submit" value="Выслать пароль" class="buton" title="Выслать пароль на E-mail адрес" onmouseover="imoveri(this)" onmouseout="imouti(this);" />
+      </td>
+     </tr>
+     <? if( !empty($err) ): echo '<tr><td height="15"></td></tr><tr><td align="center"><font color="red"><b>'.$err.'</b></font></td></tr>'; endif; ?>
+    </table>
+   </form>

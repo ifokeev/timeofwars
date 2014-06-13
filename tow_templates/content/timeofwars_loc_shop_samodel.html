@@ -1,0 +1,68 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/JsHttpRequest.js"></script>
+<script type="text/javascript" language="JavaScript">
+function doLoad(value) {
+var req = new JsHttpRequest();
+req.onreadystatechange = function() {
+if (req.readyState == 4) {
+document.getElementById('otd').innerHTML    = req.responseJS.otdname;
+document.getElementById('result').innerHTML = req.responseText;
+}
+}
+
+req.open('POST', 'ajax/shopsamodel.php', true);
+req.send( { q: value } );
+}
+
+
+showcom = function(value){
+var req = new JsHttpRequest();
+req.onreadystatechange = function() {
+if (req.readyState == 4) {
+document.getElementById('result').innerHTML = req.responseText;
+}
+}
+
+req.open('POST', 'ajax/shopsamodel.php', true);
+req.send( { user: value } );
+}
+</script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0" onload="doLoad('<?=( !empty($otdel) ? $otdel : '1' );?>');">
+<h3><?=_HANDMADE_title;?></h3>
+   <div align="center">
+    <input type="button" value="<?=_SHOP_sell;?>" onClick="window.location.href='handmadesale.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    <input type="button" value="Купить вещи" onClick="window.location.href='handmade.php?otdel=<?=$otdel;?>'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    <input type="button" onclick="javascript:window.location.href='?goto=land'" value="<?=_GOOUT;?>" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    </div>
+<font color="red"><b><?=$err;?></b></font><br />
+ <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+   <td valign="top" align="left">
+    <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#A5A5A5">
+     <tr>
+	  <td align="center">
+	   <b><b id="otd">Оружие</b></b>
+	  </td>
+     </tr>
+     <tr>
+      <td>
+       <div id="result"> </div>
+      </td>
+     </tr>
+    </table>
+   </td>
+   <td valign="top" width="280px">
+    <center>
+    <strong>
+     <?=sprintf(_howmany, '<font color="#339900">'.sprintf ("%.2f", $Money).'</font>', 'кр.');?></b><br />
+    </strong>
+    </center>
+    <div style="MARGIN-LEFT:15px; MARGIN-TOP: 10px;background-color:#d2d0d0;padding:1">
+     <center><b><?=_SHOP_otdel;?></b></center>
+    </div>
+     <a href="javascript:doLoad('1')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel1;?></a><br />
+     <a href="javascript:doLoad('2')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel2;?></a><br />
+     <a href="javascript:doLoad('3')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel3;?></a><br />
+   </td>
+  </tr>
+ </table>

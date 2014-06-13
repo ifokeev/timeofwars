@@ -1,0 +1,203 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.3.2");
+
+    google.setOnLoadCallback(function() {
+
+       var timer_time;
+
+
+        go_timer = function()
+        {        	if( $('#timer').length )
+        	{        		if( timer_time != undefined )
+        		{
+        			if( timer_time > 0 )
+        			{
+        				$('#timer').html( timer_time );
+        				$("#timer_go").show('slow');        				timer_time--;
+                        setTimeout( function() { go_timer() }, 1000 );
+
+                	}
+
+                 	else
+	        	 		window.location.href='turnir_map.php';
+
+                 }
+
+            }
+
+
+        }
+
+        disable = function()
+    	{
+    		for( i=2; i<=5; i++)
+    		{
+    			$( '#button'+i ).attr("disabled", true);
+            }
+        }
+
+      go_to = function( direction )
+      {      	$.post( 'turnir_map.php', { goin: direction }, function(data){  timer_time = data; $("#timer_go").show('slow'); go_timer(); disable(); } );
+      }
+
+      take_this = function( id )
+      {
+      	$.post( 'turnir_map.php', { dataload: 'take_this', thing_id: id }, function(data){ $('#thigs').html( data ); } );
+      }
+
+      interfere = function( id )
+      {      	$('#battle_id').html( id );
+      	$("#interfere_tbl").show("slow");
+      }
+
+
+      $("#uslugi").click(function ()
+      {      	$("#sms_info").slideToggle("slow");
+      }
+      );
+
+         <? if( !empty( $data->end_move ) && $data->end_move - time() > 0 ): ?>
+
+          timer_time = <?=( $data->end_move-time() );?>;
+          go_timer();
+        <? endif; ?>
+
+      setInterval(function() { $.post( 'turnir_map.php', { dataload: 'things' }, function(data){ $('#thigs').html(data); } );  }, 2000);
+      setInterval(function() { $.post( 'turnir_map.php', { dataload: 'emptys' }, function(data){ $('#enemies').html(data); } );  }, 5000);
+      setInterval(function() { $.post( 'turnir_map.php', { dataload: 'battles' }, function(data){ $('#battles').html(data); } );  }, 7000);
+      setInterval(function() { $.post( 'turnir_map.php', { dataload: 'test_turnir' }, function(data){ if( data == 'go' ){ window.location.href='turnir.php?rand='+Math.random();  } } );  }, 10000);
+
+
+
+
+    });
+
+   </script>
+</head>
+<body bgcolor="#f0f0f0">
+
+<table cellpadding="0" cellspacing="0" width="75%" height="100%" align="center">
+ <tr>
+  <td valign="middle" align="center">
+      <div style="display:none" id="timer_go">Еще передвигаться <b id="timer">&nbsp;</b>&nbsp;секунд.</div>
+
+   <table border="0" bgcolor="#000000" cellspacing="1" cellpadding="0">
+    <tr>
+     <td bgcolor="#c6c6c6" align="center" style="font-size:11px;width:210px;height:18px" height="18px">Вещи в локации</td>
+    </tr>
+    <tr>
+     <td bgcolor="#e8e7db" style="font-size:12px;;width:210px;height:132px;padding-left:4px;padding-right:4px; " valign="top" id="thigs">&nbsp;<br />&nbsp;
+       Ищу...
+     </td>
+    </tr>
+   </table>
+
+  </td>
+  <td align="center" valign="top">
+    <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/turnir/<?=$img;?>.gif" /></td>
+  </td>
+
+  <td valign="middle" align="center">
+   <table border="0" bgcolor="#000000" cellspacing="1" cellpadding="0">
+    <tr>
+     <td bgcolor="#c6c6c6" align="center" style="font-size:11px;width:210px;height:18px" height="18px">Персонажи в локации</td>
+    </tr>
+    <tr>
+     <td bgcolor="#e8e7db" style="font-size:12px;;width:210px;height:132px" valign="top" id="enemies">
+     <?
+     if( !empty($emptys) ):
+      foreach( $emptys as $empt ):
+       echo dlogin( $empt['user'], $empt['Level'], $empt['Align'], $empt['ClanID'] ); if( empty($empt['BattleID']) ){ echo '<a href="?gobattle='.$empt['user'].'"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/turnir/boy.gif" width="12px" height="12px" /></a>'; } echo '<br />';
+      endforeach;
+     else:
+     ?>
+     &nbsp;<br />&nbsp; Пусто
+     <?endif;?>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top" align="center">
+   <table border="0" bgcolor="#000000" cellspacing="1" cellpadding="0">
+    <tr>
+     <td bgcolor="#c6c6c6" align="center" style="font-size:11px;width:210px;height:18px" height="18px">Поединки в локации</td>
+    </tr>
+    <tr>
+     <td bgcolor="#e8e7db" style="font-size:12px;;width:210px;height:132px" valign="top" id="battles">
+      <?
+      if( !empty($battles) ):
+       foreach( $battles as $btl ):
+          $cnt = count(split( ';', $btl['team1'] ))-1 + count(split( ';', $btl['team2'] ))-1;
+      ?>
+       <a href="log.php?id=<?=$btl['Id'];?>" target="_blank"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/bullet_green.png" /></a><a href="javascript:interfere(<?=$btl['id'];?>);">ID: <?=$btl['id'];?> (<?=okon4($cnt, array('участник', 'участника', 'участников'));?>)</a>
+      <?
+       endforeach;
+      else:
+      ?>
+      &nbsp;<br />&nbsp; Пусто
+      <?
+      endif;
+      ?>
+     </td>
+    </tr>
+   </table>
+  </td>
+  <td align="center">
+   <table border="0" width="30%" height="30px" cellspacing="0" cellpadding="0" align="center" valign="top" style="margin:0">
+     <tr>
+      <td align="center"><input type="button" id="button2"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вверх" onclick="javascript:go_to('top');" <? if( $data->go_array['up'] != true ) echo 'disabled="true"'; ?>></td>
+     </tr>
+   </table>
+   <table border="0" width="30%" height="30px" cellspacing="0" cellpadding="0" align="center" valign="top" style="margin:0">
+     <tr>
+      <td align="center"><input type="button" id="button3"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Влево" onclick="javascript:go_to('left');" <? if( $data->go_array['left'] != true ) echo 'disabled="true"'; ?>></td>
+      <td width="150px" align="center"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hero1.gif" /></td>
+      <td align="center"><input type="button" id="button4" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вправо" onclick="javascript:go_to('right');" <? if( $data->go_array['right'] != true ) echo 'disabled="true"'; ?>></td>
+     </tr>
+   </table>
+   <table border="0" width="100%" height="30px" cellspacing="0" cellpadding="0" align="center" valign="top" style="margin:0">
+     <tr>
+      <td align="center"><input type="button" id="button5" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:100px; height:20px;" value="Вниз" onclick="javascript:go_to('bottom');" <? if( $data->go_array['down'] != true ) echo 'disabled="true"'; ?>></td>
+     </tr>
+     <tr>
+      <td align="center"><b> <?='x:'.$x.'; y:'.$y;?> </b> <br /> <a href="turnir_log.php?id=<?=$data->turnir_id;?>" target="_blank">Лог турнира</a> <? if(!empty($turnir_end) && $turnir_end <= 1) echo '<br /><small>Подождите 10 секунд, чтобы турнир закончился.</small>'; ?> </td>
+     </tr>
+   </table>
+ </td>
+  <td valign="top" align="center">
+   <? if( !empty($data->sms) ): ?>
+    <div style="font-size:11px;">Быстрое перемещение еще <?=date( 'i', $data->sms-time() );?> мин.</div>
+   <? endif; ?>
+   <table border="1" cellspacing="0" cellpadding="0">
+    <tr>
+     <td bgcolor="#c6c6c6" align="center" style="font-size:11px;width:210px;height:18px;cursor:hand;" id="uslugi">Дополнительные услуги</td>
+    </tr>
+    <tr style="display:none;" id="sms_info">
+     <td bgcolor="#e8e7db" style="font-size:12px;width:210px; height:132px;border:0;padding-left:4px;padding-right:4px;text-align:left;" valign="top">
+      <small>
+       <a href="sms_info.php" target="_blank">Здесь</a> вы можете посмотреть поддерживаемых операторов и стоимость смс.<br /><b>Перемещение за 1 сек.</b><br />
+       <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/ru.gif" /> <b>8055</b> на 5 мин; код: <b>+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/ua.gif" /> <b>3151</b> на 30 мин; код: <b>dx+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/kz.gif" /> <b>4161</b> на 30 мин; код: <b>dx+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/ee.gif" /> <b>1302</b> на 5 мин; код: <b>dx+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/lt.gif" /> <b>1624</b> на 30 мин; код: <b>dx+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/lv.gif" /> <b>1824</b> на 30 мин; код: <b>dx+1go+<?=$uid;?></b><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/rd/de.gif" /> <b>82300</b> на 1 час; код: <b>dx+1go+<?=$uid;?></b><br />
+      </small>
+     </td>
+    </tr>
+   </table>
+   <div><a href="javascript:;" onclick="window.open('../turnir_user_map.php', 'ADM', 'height=280px, width=800px, location=no, menubar=yes, status=no, toolbar=no, scrollbars=yes')">Карта</a></div>
+   <div id="interfere_tbl" style="display:none">
+   <center>Вмешаться в бой №<b id="battle_id"> </b></center>
+   <li><label for="t1">Вмешаться за команду 1</label> <input type="radio" name="team" id="t1" value="1" /></li>
+   <li><label for="t2">Вмешаться за команду 2</label> <input type="radio" name="team" id="t2" value="2" /></li>
+   <center><input type="button" onclick="$.post('turnir_map.php', { dataload: 'to_interfere', turnir_id: '<?=$data->turnir_id;?>', turnir: $('#battle_id').html(), team: $(':input[name=team]:checked').val() }, function(data){if( data == 'err' ){ alert( 'Поединок уже кончился.' ); } else { window.location.reload(); } } );" value=" Go "  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';"/> или <input type="button" value="Закрыть" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" onclick="$('#interfere_tbl').hide('slow');" /></center>
+   </div>
+  </td>
+ </tr>

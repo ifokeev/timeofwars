@@ -1,0 +1,202 @@
+.playerinfo
+{
+	 position:relative;
+	 background: #fff url('http://admin.dnlab.ru/images/slots/char_window.jpg') no-repeat;
+	 width: 235px;
+	 height: 325px;
+	 z-index:1;
+}
+.player
+{
+	text-align:center;
+
+}
+.hpsilver
+{
+	position:relative;
+	width:160px;
+	height:11px;
+	float:left;
+
+}
+.hp
+{
+	top:18px;
+	left:32px;
+
+
+}
+.value
+{
+	position:absolute;
+	top:-1px;
+	left:70px;
+	color:#fff;
+	font-size: 6pt;
+
+
+}
+.mana
+{
+	top:22px;
+	left:32px;
+
+
+
+}
+.visible
+{
+	position:absolute;
+	top:-1px;
+	left:4px;
+
+
+}
+.slots
+{
+	position:absolute;
+	z-index:-1;
+}
+#slot7
+{
+	top:81px;
+	left:43px;
+	width: 60px;
+	height: 60px;
+
+}
+#slot2
+{
+	width: 60px;
+	height: 60px;
+	top:167px;
+	left:112px;
+
+
+}
+#slot3
+{
+	width: 60px;
+	height: 60px;
+	top:190px;
+	left:43px;
+
+
+}
+#slot4
+{
+	width: 20px;
+	height: 20px;
+	top:110px;
+	left:110px;
+
+
+}
+#slot5
+{
+	width: 20px;
+	height: 20px;
+	top:110px;
+	left:131px;
+
+
+}
+#slot6
+{
+	width: 20px;
+	height: 20px;
+	top:110px;
+	left:151px;
+
+
+}
+#slot8
+{
+	width: 60px;
+	height: 40px;
+	top:145px;
+	left:43px;
+
+
+}
+#slot1
+{
+	width: 60px;
+	height: 20px;
+	top:137px;
+	left:111px;
+
+
+}
+#slot9
+{
+	width: 60px;
+	height: 60px;
+	top:235px;
+	left:112px;
+
+
+}
+#slot10
+{
+	width: 60px;
+	height: 40px;
+	top:255px;
+	left:42px;
+
+
+}
+#slot0
+{
+	width: 40px;
+	height: 20px;
+	top:81px;
+	left:121px;
+
+
+}
+.player_pict_bg
+{
+	background-image: url('http://admin.dnlab.ru/images/slots/pict_bg.gif');
+	background-repeat: no-repeat;
+	position:absolute;
+	top:78px;
+	left:32px;
+	z-index:0;
+	width:152px;
+	height:220px;
+}
+.player_pict
+{
+	position:absolute;
+	top:85px;
+	left:70px;
+	z-index:0;
+
+}
+
+.btn1
+{
+	background-image: url('../images/slots/buttons/pers.png');
+	background-repeat: no-repeat;
+	position:absolute;
+	top:80px;
+	left:202px;
+	z-index:5;
+	width:24px;
+	height:84px;
+
+
+}
+.btn2
+{
+	background-image: url('../images/slots/buttons/inv.png');
+	background-repeat: no-repeat;
+	position:absolute;
+	top:190px;
+	left:202px;
+	z-index:5;
+	width:24px;
+	height:84px;
+
+}

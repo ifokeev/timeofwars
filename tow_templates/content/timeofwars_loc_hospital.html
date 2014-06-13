@@ -1,0 +1,75 @@
+   <style>body, td, ol, ul, li , p { FONT-SIZE: 10px; FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif; FONT-WEIGHT: normal; COLOR: #000000; }</style>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js" type="text/javascript"></script>
+</HEAD>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td valign="top">
+    <b>Госпиталь города Желаний</b> [<a href="javascript:return false;" onclick="window.open('/live.html', 'help', 'height=300,width=500,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes')">Описание</a>]<br />Приемный зал<br />
+    <center><font color="red"><b><?=$msg;?></b></font><br /><br />
+     <table width="100%" cellspacing="0" cellpadding="0">
+      <table cellpadding="0" cellspacing="0" width="100%" height="100%">
+       <tr>
+        <td align="center" valign="top">
+         <table cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr height="53px">
+           <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/il.gif"></td>
+            <td background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/ibg.gif" width="*">
+             <b><font color="#ffffff"><center>-=Комнаты госпиталя=-</center></font></b>
+            </td>
+            <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/ir.gif"></td>
+           </tr>
+           <tr>
+            <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t4.gif"></td>
+            <td align="center">
+             <table border="0" width="100%">
+              <tr>
+               <td valign="top" bgcolor="#F7F7F7">
+                <table width="100%" cellspacing="0" cellpadding="0" align="center" border="0" bordercolor="#2f0501">
+                 <? if ( !empty($r) ): ?>
+                  <? foreach ($r as $v): ?>
+                   <tr>
+                    <td align="center">
+                     Комната <b>№<?=$v['Id'];?></b>
+                    </td>
+                    <td align="center">
+                     Кол-во коек: <?=$v['Capacity'];?>
+                    </td>
+                    <td align="center">
+                     <? if(empty($v['Founder'])): ?>
+                      <input type="button" value="Купить за <?=$v['Cost'];?> кр." onclick="window.location.href='?buyroomid=<?=$v['Id'];?>'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" style="width:115px;" />
+                     <? else: ?>
+                      <input type="button" value="Войти" onclick="window.location.href='?goroomid=<?=$v['Id'];?>'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" style="width:115px;" />
+                     <? endif; ?>
+                    </td>
+                   <? if( !empty($v['Name']) ): ?>
+                    <td align="center">
+                     Табличка на двери: <?=$v['Name'];?>
+                    </td>
+                   <? endif; ?>
+                  </tr>
+                 <? endforeach; ?>
+                <? endif; ?>
+               </table>
+              </table>
+             </td>
+             <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t6.gif"></td>
+            </tr>
+            <tr height="27px">
+             <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t7.gif"></td>
+             <td background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t8.gif" width="*" >&nbsp;</td>
+             <td width="25px" background="http://<?=$db_config[DREAM_IMAGES][server];?>/frames/_main/t9.gif"></td>
+            </tr>
+           </table>
+          </table>
+        <td align="right" valign="top">
+         <input type="button" value="Вернуться" onclick="window.location.href='?goto=pl'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" /><br />
+         <input type="button" value="Осмотреться" onClick="window.location.href='hospital.php'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" /><br />
+         Доступно <font color="green"><b><?=$Money;?></b></font> кр. <br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/buildings/hospital.jpg" border="0" width="289" height="217" />
+        </td>
+       </tr>
+      </table>
+    </td>
+   </tr>
+ </table>

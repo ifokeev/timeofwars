@@ -1,0 +1,140 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/forum.css" rel="stylesheet">
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/datapicker.css" rel="stylesheet">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+    google.load("jquery", "1.3.2");
+
+    google.setOnLoadCallback(function() {
+    loadtop = function( date )
+    {
+    	$('#topload').load('ajax/loadtop.php', { act: 'loadbydate', 'date': date }  );
+    }
+
+    $.getScript("http://<?=$db_config[DREAM]['other'];?>/js/ui.datepicker.js",
+    function()
+    {
+    	   $('#selectdate').attachDatepicker(
+    	   {
+    	   	dateFormat: 'yy-mm-dd',
+    	   	changeYear: false,
+    	   	rangeSelect: false,
+    	   	yearRange: '2009:2010',
+    	   	firstDay: 1,
+    	    onSelect: function(dateText, inst) { loadtop(dateText); }
+    	   });
+    }
+
+    );
+
+
+    });
+
+   </script>
+   <style>img {BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px}</style>
+</head>
+<body style="margin:0;" background="http://<?=$db_config[DREAM_IMAGES][server];?>/bg.jpg"><br />
+<table class="g" align="center" border="0" cellpadding="4" cellspacing="1" width="800px">
+ <tbody>
+  <tr class="bg6">
+   <td style="background-repeat: no-repeat;" align="right" background="http://<?=$db_config[DREAM_IMAGES][server];?>/forum/logom_ru.jpg" height="93px" width="600px"><a href="http://<?=$db_config[DREAM][server];?>/top5.html"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/forum/logo_raiting.gif" border="0" height="50px" width="398px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+ </tbody>
+</table>
+<table width="800px" cellspacing="1" cellpadding="3" border="0" align="center" class="el">
+ <tr>
+  <td>
+   &gt;&gt;&nbsp;&nbsp;<A class=norm href="encicl/index.html">Cодержание</A>
+   &nbsp;&nbsp;-&gt; <a class=norm href="top5.html">Рейтинг Time Of Wars</a>
+  </td>
+ </tr>
+</table>
+<table class="g" cellspacing="1" cellpadding="25" border="0" align="center" width="800px">
+ <tr class="bg6 medium">
+  <td height="28px" colspan="6">
+   <table width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+     <td>
+<?
+if(!empty($_GET['show'])):
+if(!empty($clanInfo)):
+?>
+	  <h3><?=$clanInfo['title']?></h3>
+	  <table border="1" bordercolor="#ffffff" width="100%" height="100%">
+	   <tr>
+	    <td>Место</td>
+	    <td>Игрок</td>
+	    <td>Побед</td>
+	    <td>Поражений</td>
+	   </tr>
+<? if(!empty($clanUserList)) foreach( $clanUserList as $num => $v ): ?>
+	   <tr>
+	    <td><?=$num+1;?></td>
+	    <td><script>dlogin(<?=sprintf( "'%s', %d, %d, %d", $v['Username'], $v['Level'], $v['Align'], $v['id_clan'] )?>);</script></td>
+	    <td><?=$v['Won']?></td>
+	    <td><?=$v['Lost']?></td>
+	   </tr>
+<? endforeach; ?>
+	  </table>
+<? else: ?>
+      <b>Такого клана не существует</b>
+<? endif; ?>
+<? else: ?>
+
+
+<? if(!empty($list)):?>
+<input type="text" id="selectdate" value="Выбрать дату" />
+      <a name="OB"></a>
+	   <table width="100%" cellspacing="0" cellpadding="0">
+	    <tr>
+		 <td width="20%" align="center">Клан</td>
+		 <td width="20%" align="center">Количество игроков</td>
+		 <td width="20%" align="center">Сумма уровней</td>
+		 <td width="20%" align="center">Максимальный уровень</td>
+		 <td width="20%" align="center">Средний уровень</td>
+	    </tr>
+<? foreach( $list as $v ): ?>
+	    <tr>
+		 <td width="20%" align="center"><a href="?show=<?=$v['id_clan']?>"><img src="<?=$iconWeb.'/'.$v['id_clan']?>.gif" /><?=$v['title']?></a></td>
+		 <td width="20%" align="center"><?=$v['cnt']?></td>
+		 <td width="20%" align="center"><?=$v['sLevel']?></td>
+		 <td width="20%" align="center"><?=$v['mLevel']?></td>
+		 <td width="20%" align="center"><?=$v['aLevel']?></td>
+	    </tr>
+<? endforeach; ?>
+       </table>
+       <h3> Рейтинг кланов по дням.</h3>
+       <table width="100%" cellspacing="0" cellpadding="0" id="topload">
+       <?if( !empty($toplist) ): ?>
+       <? foreach( $toplist as $k => $v ): ?>
+        <tr>
+         <td><?=($k+1);?>. <a href="http://<?=$db_config[DREAM]['server'];?>/top5.php?show=<?=$v['id_clan'];?>"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['id_clan'];?>.gif" /> <?=$v['title'];?> </a> заработали <strong><?=round($v['sumdmg']/2);?></strong> опыта. </td>
+        </tr>
+       <? endforeach; ?>
+       <? else: ?>
+        <tr><td>Топ еще не сформирован.</td></tr>
+       <? endif;?>
+       </table>
+<? endif; ?><br />
+
+<? endif; ?>
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table><br />
+ <table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+   <td align="center">
+	<div align="right">
+	 <!--Rating@Mail.ru COUNTER-->
+	 <!--/COUNTER-->
+    </div>
+   </td>
+   <td align="center" class="small">
+	&nbsp;&nbsp;&nbsp;
+	&copy; Copyright © 2010. Все права защищены www.tow.vanya.cc
+   </td>
+  </tr>
+ </table><br />

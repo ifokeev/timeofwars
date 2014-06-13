@@ -1,0 +1,32 @@
+.rc {
+    background: #f0f0f0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+}
+.rc-top,
+.rc-top div,
+.rc-bot,
+.rc-bot div {
+    height: 9px;
+    line-height: 0;
+    background: url(http://<?=$db_config[DREAM_IMAGES][server];?>/rx7.gif) no-repeat left top;
+}
+
+.rc-bot {background-position: left -9px;}
+.rc-top div {background-position: right -18px;}
+.rc-bot div {background-position: right -27px;}
+
+.rc-top,
+.rc-bot {
+    position: relative;
+    z-index: 2;
+}
+
+.rc-content {
+    position: relative;
+    margin: -9px 0;
+    z-index: 1;
+}

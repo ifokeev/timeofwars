@@ -1,0 +1,25 @@
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/lib/prototype.js"></script>
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/lib/scriptaculous.js?load=effects"></script>
+
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/modalbox.js"></script>
+   <link rel="stylesheet" href="http://<?=$db_config[DREAM]['other'];?>/css/modalbox.css" type="text/css" />
+</head>
+<body bgColor="#f0f0f0" leftMargin="5" topMargin="5" marginheight="5" marginwidth="5">
+<b>Ваш опыт: <?=$exp;?> (<?=GetSmithLevel();?> уровень); Следующий уровень: <?=$newexp;?></b>
+<table cellpadding="0" cellspacing="0" width="100%" height="100%" align="center" valign="top">
+ <tr>
+  <td> <?=$table_price;?> </td>
+  <td>
+   <table cellpadding="0" cellspacing="0" width="300px" height="100%" align="left">
+    <tr>
+<? $i = 0; foreach( $thing_tpl as $k => $v ): $i++; ?>
+<? $img = ($v["level"] > GetSmithLevel() ? '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['image'].'_0.gif" title="'.$v['name'].' недоступно" />' : '<a href="#" onclick="Modalbox.show(\'ajax/_smith.php\', {title: \'Создать вещь '.$v['name'].'\', method: \'get\', params: { smith_id: \''.$k.'\' },  width: 400});"><img src="http://'.$db_config[DREAM_IMAGES]['server'].'/'.$v['image'].'.gif" title="'.$v['name'].'" /></a>'); ?>
+    <td align="center"><?=$img;?><br /><br /></td>
+    <?=$i%3==0 ? '</tr><tr>' : '';?>
+<? endforeach; ?>
+    </tr>
+   </table>
+  </td>
+   <td align="left"> <?=$table_metalls;?> <br /> <br /> <?=$rudsTable;?><br /> <input type="button" value="Вернуться в шахту" onclick="javascript:window.location.href='?goto=mines'" style="width:200px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />  </td>
+ </tr>
+</table>

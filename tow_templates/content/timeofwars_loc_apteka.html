@@ -1,0 +1,169 @@
+<script>
+function buy(unid) {
+if ((unid != null) && (unid != '')) {
+var num = prompt('Сколько хотите купить?', '');
+if ((num != null) && (num != '')) {
+window.location.href='?buy_grass='+unid+'&num='+num+'';
+}}}
+
+function sell(unid) {
+if ((unid != null) && (unid != '')) {
+var num = prompt('Сколько хотите продать?', '');
+if ((num != null) && (num != '')) {
+window.location.href='?sell_grass='+unid+'&num='+num+'';
+}}}
+</script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td><h3>Аптека</h3></td>
+   <td align="right"><input type="button" onclick="javascript:window.location.href='?goto=pl'" value="<?=_GOOUT;?>" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';"></td>
+  </tr>
+ </table>
+    <font color="red"><b><?=$err;?></b></font><br />
+ <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+   <form method="POST" action="apteka.php">
+   <td valign="top" align="left">
+    <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#A5A5A5">
+     <tr>
+	  <td align="center"><b><?=$otn;?></b></td>
+     </tr>
+     <tr>
+      <td>
+       <table width="100%" cellspacing="1" cellpadding="2" bgcolor="#A5A5A5">
+<?
+if (!empty($sale)):
+
+if ( !empty($a) ):
+
+foreach ( $a as $v):
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+
+if ($v['Level_need']) { if ($v['Level_need'] > $player->Level) { $v['Level_need'] = '<font color=red><b>'.$v['Level_need'].'</b></font>'; }  }
+if ($v['Stre_need']) { if ($v['Stre_need'] > $player->Stre) { $v['Stre_need'] = '<font color=red><b>'.$v['Stre_need'].'</b></font>'; } }
+if ($v['Agil_need']) { if ($v['Agil_need'] > $player->Agil) { $v['Agil_need'] = '<font color=red><b>'.$v['Agil_need'].'</b></font>'; } }
+if ($v['Intu_need']) { if ($v['Intu_need'] > $player->Intu) { $v['Intu_need'] = '<font color=red><b>'.$v['Intu_need'].'</b></font>'; } }
+if ($v['Endu_need']) { if ($v['Endu_need'] > $player->Endu) { $v['Endu_need'] = '<font color=red><b>'.$v['Endu_need'].'</b></font>'; } }
+if ($v['Stre_need']) { $v['Stre_need']  = sprintf(_forthings_sila, $v['Stre_need']); } else {  $v['Stre_need'] = false; }
+if ($v['Agil_need']) { $v['Agil_need']  = sprintf(_forthings_lovkost,  $v['Agil_need']); } else { $v['Agil_need'] = false; }
+if ($v['Intu_need']) { $v['Intu_need']  = sprintf(_forthings_inta, $v['Intu_need']); } else { $v['Intu_need'] = false; }
+if ($v['Endu_need']) { $v['Endu_need']  = sprintf(_forthings_ENDUneed, $v['Endu_need']); } else { $v['Endu_need'] = false; }
+if ($v['Level_need']){ $v['Level_need'] = sprintf(_forthings_level, $v['Level_need']); } else { $v['Level_need'] = false; }
+if ($v['Level_add']) { $v['Level_add']  = sprintf(_forthings_level, $v['Level_add']); } else { $v['Level_add'] = false; }
+if ($v['MAXdamage']) { $v['MAXdamage']  = sprintf(_forthings_ALLdmg, $v['MINdamage'], $v['MAXdamage']); } else { $v['MAXdamage'] = false; }
+if ($v['Armor1']) {    $v['Armor1']     = sprintf(_forthings_arm1, $v['Armor1']); } else { $v['Armor1'] = false; }
+if ($v['Armor2']) {    $v['Armor2']     = sprintf(_forthings_arm2, $v['Armor2']); } else { $v['Armor2'] = false; }
+if ($v['Armor3']) {    $v['Armor3']     = sprintf(_forthings_arm3, $v['Armor3']); } else { $v['Armor3'] = false; }
+if ($v['Armor4']) {    $v['Armor4']     = sprintf(_forthings_arm4, $v['Armor4']); } else { $v['Armor4'] = false; }
+if ($v['Crit']) {      $v['Crit']       = sprintf(_forthings_сrit, $v['Crit'].'%'); } else { $v['Crit'] = false; }
+if ($v['Uv']) {        $v['Uv']         = sprintf(_forthings_uv, $v['Uv'].'%'); } else { $v['Uv'] = false; }
+if ($v['AntiCrit']) {  $v['AntiCrit']   = sprintf(_forthings_Aсrit, $v['AntiCrit'].'%'); } else { $v['AntiCrit'] = false; }
+if ($v['AntiUv']) {    $v['AntiUv']     = sprintf(_forthings_Auv, $v['AntiUv'].'%'); } else { $v['AntiUv'] = false; }
+if ($v['Stre_add']) {  $v['Stre_add']   = sprintf(_forthings_sila, $v['Stre_add']); } else { $v['Stre_add'] = false; }
+if ($v['Agil_add']) {  $v['Agil_add']   = sprintf(_forthings_lovkost, $v['Agil_add']); } else { $v['Agil_add'] = false; }
+if ($v['Intu_add']) {  $v['Intu_add']   = sprintf(_forthings_inta, $v['Intu_add']); } else { $v['Intu_add'] = false; }
+if ($v['Endu_add']) {  $v['Endu_add']   = sprintf(_forthings_endu, $v['Endu_add']); } else { $v['Endu_add'] = false; }
+if ($v['MagicID']) {   $v['MagicID']    = sprintf(_forthings_magicID, $v['MagicID']); } else { $v['MagicID'] = false; }
+?>
+		<tr bgcolor="<?=$bgcolor;?>">
+		<td align="center"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif"><br /><a href="<?=($v['Slot'] == 15 ? 'javascript:sell(\''.$v['Id'].'\');' : 'apteka.php?sale_thing='.$v['Un_Id']);?>"><?=( $v['Slot'] == 15 ? sprintf(_SHOP_sell1, $price[$v['Id']]['sell'], 'кр') : sprintf(_SHOP_sell1, round($v['Cost']/2), 'кр') );?></a></td>
+		<td><span><?=$v['Thing_Name'];?></span>
+		<? if($v['Clan_need']): ?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['Clan_need'];?>.gif"><? endif; ?><br />
+		<b><?=sprintf(_forthings_cost, $v['Cost'], 'кр.');?></b> <br />
+        <? if($v['Slot'] != 15): ?>
+	    <br /><?=_forthings_text2;?><br />
+        <?=$v['Stre_need'].$v['Agil_need'].$v['Intu_need'].$v['Endu_need'].$v['Level_need'];?>
+        <br /><?=_forthings_text1;?><br />
+        <?=$v['Level_add'].$v['MAXdamage'].$v['Armor1'].$v['Armor2'].$v['Armor3'].$v['Armor4'].$v['Crit'].$v['Uv'].$v['AntiCrit'].$v['AntiUv'].$v['Stre_add'].$v['Agil_add'].$v['Intu_add'].$v['Endu_add'].$v['MagicID'];?>
+        <? else: echo 'Количество: '.$v['Count']; endif; ?>
+        </td>
+        </tr>
+<? endforeach; ?>
+<? else: ?>
+<tr><td bgcolor="#e2e0e0" align="center">Ваш рюкзак пуст.</td></tr>
+<? endif; ?>
+
+<? elseif( !empty($_SESSION['otdel']) && $_SESSION['otdel'] == 1 ): ?>
+
+<?
+if ( !empty($b) ):
+
+foreach ( $b as $v ):
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+
+if ($v['Cost'] > $player->Money) { $v['Cost'] = '<font color=red>'.$v['Cost'].'</font>'; }
+if ($v['Level_need']) { if ($v['Level_need'] > $player->Level) { $v['Level_need'] = '<font color=red><b>'.$v['Level_need'].'</b></font>'; }  }
+if ($v['Level_need']){ $v['Level_need'] = sprintf(_forthings_level, $v['Level_need']); } else { $v['Level_need'] = false; }
+?>
+		<tr bgcolor=<?=$bgcolor;?>>
+		<td align="center"><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['Id'];?>.gif"><br /><a href="apteka.php?buy=<?=$v['Id'];?>"><?=_SHOP_buy1;?></a></td>
+  	    <td valign="top"><a href="http://<?=$db_config[DREAM]['server'];?>/info/<?=$v['Id'];?>.html" target=_blank><?=$v['Thing_Name'];?></a>
+		<?if($v['Clan_need']):?><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/clan/<?=$v['Clan_need'];?>.gif"><? endif; ?><br />
+   	    <b><?=sprintf(_forthings_cost, $v['Cost'], 'кр.');?></b> <small><?=sprintf(_SHOP_howmany, $v['Amount']);?></small><br />
+		<br /><?=_forthings_text2;?><br />
+        <?=$v['Level_need'];?>
+        <br / />
+        <?=$v['About'];?>
+        </td>
+        </tr>
+<? endforeach; ?>
+<?  else: ?>
+<tr><td bgcolor="#e2e0e0" align="center"><?=_SHOP_MSG4;?></td></tr>
+<? endif;?>
+
+
+<? elseif( !empty($_SESSION['otdel']) && $_SESSION['otdel'] == 2 ): ?>
+
+
+<?
+if ( !empty($c) ):
+$i = 1;
+?>
+<tr>
+<?
+foreach ( $c as $v ):
+
+if ($bgcolor == '#C7C7C7'): $bgcolor = '#D5D5D5'; elseif($bgcolor == '#D5D5D5'): $bgcolor = '#C7C7C7'; endif;
+
+if ($v['Cost'] > $player->Money) { $v['Cost'] = '<font color=red>'.$v['Cost'].'</font>'; }
+?>
+		<td width="30%" align="center" bgcolor=<?=$bgcolor;?>>
+		<img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$v['trava'];?>.gif" align="left"><b><? echo constant(_FOREST_.str_replace( 'items/', '', $v['trava'] ));?></b><br />Цена: <?=$price[$v['trava']]['buy'];?> кр.<br />Количество: <?=$v['num'];?>
+		<br /><a href="javascript:buy('<?=$v['trava'];?>');"><?=_SHOP_buy1;?></a>
+		</td>
+		<? if( $i%3 == 0 ) echo '</tr><tr>'; ?>
+<? $i++; endforeach; ?>
+</tr>
+<?  else: ?>
+<tr><td bgcolor="#e2e0e0" align="center"><?=_SHOP_MSG4;?></td></tr>
+<? endif;?>
+
+
+<? endif; ?>
+</table>
+</td></tr>
+</table>
+
+  </td>
+	<td valign="top" width="280px">
+
+	<center><b><?=sprintf(_howmany, '<font color="#339900">'.sprintf ("%.2f", $player->Money).'</font>', 'кр.');?></b></center>
+	<div style="MARGIN-LEFT:15px; MARGIN-TOP: 10px;">
+ <? if (!empty($sale)): ?>
+<INPUT TYPE="submit" value='<?=_SHOP_buy;?>'  class='oo' ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" name='salo'><br />
+<? else: ?>
+<INPUT TYPE="submit" value='<?=_SHOP_sell;?>' class='oo' ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" name='sale'><br />
+<div style="background-color:#d2d0d0; padding:1"><center><b><?=_SHOP_otdel;?></b></center></div>
+<a href="apteka.php?otdel=1">Рецепты</a><br />
+<a href="apteka.php?otdel=2">Травы</a><br />
+<? endif; ?>
+    </div>
+
+    </td>
+    </form>
+</tr>
+</table>

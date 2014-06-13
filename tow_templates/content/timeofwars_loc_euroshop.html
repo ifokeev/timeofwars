@@ -1,0 +1,104 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/euroshop.js"></script>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/JsHttpRequest.js"></script>
+<script type="text/javascript" language="JavaScript">
+function doLoad(value) {
+var req = new JsHttpRequest();
+req.onreadystatechange = function() {
+if (req.readyState == 4) {
+document.getElementById('otd').innerHTML    = req.responseJS.otdname;
+document.getElementById('result').innerHTML = req.responseText;
+}
+}
+
+req.open('POST', 'ajax/euroshopload.php', true);
+req.send( { q: value } );
+}
+</script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0" onload="doLoad('<?=( !empty($otdel) ? $otdel : '1' );?>');">
+ <div id="cr" style="position: absolute; display: none; top: 30px; left: 34px;">
+  <table border="0" cellspacing="0" cellpadding="0" width="303px" align="center">
+   <tr>
+    <td style="padding:0 5px 5px 0;">
+	 <table border="0" cellspacing="0" cellpadding="0" width="300px" align="center">
+	  <tr valign="top">
+	   <td class="loginForm">
+        <?=_EUROSHOP_MSG3;?>
+	    <form action="euroshop.php" method="post">
+	     <table width="100%" border="0" cellspacing="5" cellpadding="0">
+	      <tr>
+	       <td>
+	        <?=_EUROSHOP_MSG4;?>
+	       </td>
+	       <td>
+	        <input name="wanttoconv" type="text" value="" size="5" /> Euro
+	       </td>
+	      </tr>
+	      </table>
+	     <br />
+	     <center>
+	     <input type="submit" value="<?=_EUROSHOP_button2;?>" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';"/><br />
+	     <input type="button" value="<?=_EUROSHOP_button3;?>" onClick="hideCr()" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';"/>
+	     </center>
+	    </form>
+	   </td>
+	  </tr>
+	 </table>
+	</td>
+   </tr>
+  </table>
+ </div>
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td>
+    <h3><?=_EUROSHOP_title;?></h3>
+   </td>
+   <td align="right">
+    <input type="button" onclick="showCr()" value="<?=_EUROSHOP_button1;?>"  class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    <input type="button" value="<?=_EUROSHOP_button4;?>" onClick="window.location.href='euroshop.php?otdel=<?=$otdel;?>'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    <input type="button" onclick="javascript:window.location.href='?goto=pl'" value="<?=_GOOUT;?>" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+   </td>
+  </tr>
+ </table>
+<font color="red"><b><?=$err;?></b></font><br />
+ <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+   <td valign="top" align="left">
+    <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#A5A5A5">
+     <tr>
+	  <td align="center">
+	   <b><?=_SHOP_title1;?> "<b id="otd">Одежда</b>"</b>
+	  </td>
+     </tr>
+     <tr>
+      <td>
+       <div id="result"> </div>
+      </td>
+     </tr>
+    </table>
+   </td>
+   <td valign="top" width="280px">
+    <center>
+     <b><?=sprintf(_howmany, '<font color=339900>'.sprintf ("%.2f", $Money).'</FONT>', 'Euro');?><br /><?=sprintf(_howmany, '<font color="#339900">'.sprintf ("%.2f", $money_kr).'</font>', 'кр.');?></b><br /><?=_EUROSHOP_MSG2;?>
+    </center>
+    <div style="MARGIN-LEFT:15px; MARGIN-TOP: 10px;background-color:#d2d0d0;padding:1">
+     <center><b><?=_SHOP_otdel;?></b></center>
+    </div>
+     <a href="javascript:doLoad('1')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel1;?></a><br />
+     <a href="javascript:doLoad('2')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel2;?></a><br />
+     <a href="javascript:doLoad('3')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel3;?></a><br />
+     <a href="javascript:doLoad('4')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel4;?></a><br />
+     <a href="javascript:doLoad('5')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel5;?></a><br />
+     <a href="javascript:doLoad('6')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_EUROSHOP_otdel6;?></a><br />
+
+     <br />
+     <br />
+     <a href="javascript:doLoad('7')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Улучшение артефактов</a><br /><br />
+	 <center>
+     <input type="button" onclick="if (confirm('Вы уверены, что хотите купить двойной урон за 0.7 еврокр?')) window.navigate('?du')" value="Двойной урон за 0.7 екр"  style="width:200px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+     <input type="button" onclick="if (confirm('Вы уверены, что хотите купить тройной урон за 2 еврокр?')) window.navigate('?tu')" value="Тройной урон за 2 екр"  style="width:200px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+     <input type="button" onclick="if (confirm('Вы уверены, что хотите купить *полное восстановление хп* за 0.05 еврокр?')) window.navigate('?fullhp')" value="Пополнение хп за 0.05 екр." style="width:200px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+     </center>
+   </td>
+  </tr>
+ </table>

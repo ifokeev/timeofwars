@@ -1,0 +1,377 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="#f0f0f0"
+<center><font color="Red"><b><?=$msgError?></b></font></center>
+<center>
+<? if( $clanInfo['id_clan'] > 0 ): ?>
+<div align="right">
+<input type="button" value="Вернуться" onClick="window.location.href='?goto=pl'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+</div>
+<table width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#a5a5a5">
+<tr align="center">
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == '' 			? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=">Заявки на вступление </a></td>
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == 'weapons'	? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=weapons">Оружейная</a></td>
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == 'align'		? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=align">Военное положение </a></td>
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == 'rank'		? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=rank">Ранги</a></td>
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == 'members'	? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=members">Члены клана </a></td>
+	<td width="18%" nowrap="nowrap" bgcolor="<?=($requestPage == 'setup'		? '#a5a5a5' : '#D4D2D2' )?>"><a href="cl.php?page=setup">Setup</a></td>
+</tr>
+<? endif; ?>
+
+<? if( $clanInfo['id_clan'] == 0 ): ?>
+
+<? if( $demandInfo['id_clan'] == 0 ): ?>
+
+<b>Вы не состоите ни в одном клане,<br />
+но Вы можете подать заявку на прием в любой клан,<br />
+для этого выберите интересующий клан и подайте заявку.</b><br />
+либо вернитесь на площадь<br />
+<input type="button" onclick="window.location.href='?goto=pl';") value="Вернуться" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+
+<table  border="0" cellpadding="2" cellspacing="1" bgcolor="#D3D1D1" width="80%" align="center">
+<tr align="center" bgcolor="#999999">
+<td>Клан</td>
+<td>Девиз</td>
+<td>Реклама</td>
+<td>Сайт</td>
+<td>Ваша информация</td>
+<td></td>
+	</tr>
+<? if(!empty($clanList)) foreach( $clanList as $clan ): ?>
+<tr  align="center"  bgcolor="#E2E0E0">
+<form method="POST">
+		<td align="left"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?=$clan['id_clan']?>.gif"><b><?=$clan['title']?></b></td>
+		<td><?=$clan['slogan']?></td>
+		<td><?=$clan['advert']?></td>
+		<td><a href="<?=$clan['link']?>" target="_blank">тут</a></td>
+		<td><input type="text" name="MYDEMANDTEXT" /></td>
+		<td><input type="submit" name="ADDMYCLANDEMAND" value="Ок" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+		<input type="hidden" name="ADDMYCLANDEMANDID" value="<?=$clan['id_clan']?>" />
+</form>
+</tr>
+<? endforeach; ?>
+	</table>
+<? else: ?>
+Вы уже подали заявку в клан <b><?=$demandInfo['title']?></b>, но вы можете отозвать ее.
+	<form method="POST">
+	<input type="submit" name="DELMYCLANDEMAND" value="Отозвать свою заявку" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></form>
+	</font><br /> Вы можете ускорить вступление если обратитесь к главе клана
+	<a target="_blank" href="inf.php?uname=<?=$demandInfo['name']?>"><?=$demandInfo['name']?></a><br /> либо вернуться на площадь<br />
+<input type="button" onclick="window.location.href='?goto=pl';") value="Вернуться" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+
+<? endif; ?>
+
+<? elseif( $requestPage == "" ): ?>
+
+	<tr align="center" bgcolor="#e2e0e0">
+		<td colspan="6" class="cl">
+			<? if( empty($clanDemands) ): ?>
+
+				Заявок на поступление в ваш клан нет
+
+			<? elseif( $rankInfo['perm_demands'] == 1 || $clanInfo['admin'] == 1 ): foreach( $clanDemands as $clanDemand ):?>
+
+				<table  border="0" cellpadding="5" cellspacing="1" bgcolor="#BEBDBD">
+				<tr align="center" bgcolor="#E2E0E0">
+					<td width="33%" nowrap="nowrap">
+						<script>dlogin(<?=sprintf( "'%s', %d, %d, %d", $clanDemand['Username'], $clanDemand['Level'], 0, $clanDemand['ClanID'] )?>)</script>
+					</td>
+					<form action="<?=$_SERVER['REQUEST_URI'];?>" method="POST">
+					<td width="33%" nowrap="nowrap">
+						<input type="submit" name="Submit" value="Принять в клан" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> за <?=$clanDemand['join_price']?> кр.
+						<input type="hidden" name="action" value="acceptDemand" />
+						<input type="hidden" name="demandUser" value="<?=$clanDemand['Username'];?>" />
+						<input type="hidden" name="demandAddPrice" value="<?=$clanDemand['join_price'];?>" />
+						<input type="hidden" name="id_clan" value="<?=$clanDemand['id_clan'];?>" />
+					</td>
+					</form>
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+					<td width="33%" nowrap="nowrap">
+						<input type="hidden" name="action" value="delDemand" />
+						<input type="hidden" name="demandUser" value="<?=$clanDemand['Username'];?>" />
+						<input type="submit" name="Submit" value="Удалить заявку" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+					</td>
+					</form>
+				</tr>
+				</table>
+
+			<? endforeach; else: ?>
+
+				У вас нет прав доступа для просмотра этой информации!
+
+			<? endif; ?>
+
+		</td>
+	</tr>
+
+<? elseif( $requestPage == "weapons" ): ?>
+
+  <tr align="center" bgcolor="#e2e0e0">
+    <td colspan="6" class="cl"><p>В доработке </P></td>
+  </tr>
+
+<? elseif( $requestPage == "align" ): ?>
+
+
+   	<tr align="center" bgcolor="#e2e0e0">
+    <td colspan="6" class="cl">
+
+
+    <table border="0" cellpadding="5" cellspacing="1" bgcolor="#D3D1D1">
+      <tr align="center" bgcolor="#D4D2D2">
+          <td nowrap="nowrap">Клан</td>
+          <td nowrap="nowrap">Война</td>
+          <td nowrap="nowrap">Мир</td>
+          <td nowrap="nowrap">Союз</td>
+          <td nowrap="nowrap">Нейтрал</td>
+          <td nowrap="nowrap">Наша причина </td>
+          <td nowrap="nowrap">От них </td>
+          <td nowrap="nowrap">Их причина </td>
+          <td nowrap="nowrap">Действие</td>
+        </tr>
+<?
+switch (ClanRelations::getRelationTitle($aca['relationFrom'])):
+case WAR:       $align_txt="Война";   break;
+case PEACE:     $align_txt="Мир";     break;
+case ALLIANCE:  $align_txt="Союз";    break;
+case NEUTRAL:   $align_txt="Нейтрал"; break;
+endswitch;
+?>
+<? if(!empty($clanRelations)) foreach( $clanRelations as $aca ): ?>
+ <form action="" method="POST">
+        <tr align="center" bgcolor="#E2E0E0">
+          <td nowrap="nowrap"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?echo $aca['id_clan'];?>.gif" title="<?=$aca['title']?>" /> </td>
+          <td nowrap="nowrap"><input name="align[<?echo $aca['id_clan'];?>]" type="radio" value="WAR" <?=($aca['relationTo'] == 'WAR' ? "checked" : "")?> /></td>
+          <td nowrap="nowrap"><input name="align[<?echo $aca['id_clan'];?>]" type="radio" value="PEACE" <?=($aca['relationTo'] == 'PEACE' ? "checked" : "")?> /></td>
+          <td nowrap="nowrap"><input name="align[<?echo $aca['id_clan'];?>]" type="radio" value="ALLIANCE" <?=($aca['relationTo'] == 'ALLIANCE' ? "checked" : "")?> /></td>
+          <td nowrap="nowrap"><input name="align[<?echo $aca['id_clan'];?>]" type="radio" value="NEUTRAL" <?=($aca['relationTo'] == 'NEUTRAL' ? "checked" : "")?> /></td>
+          <td nowrap="nowrap"><input type="text" name="reasonTo" value="<?=$aca['reasonTo']?>" /></td>
+          <td nowrap="nowrap"><?=$align_txt?></td>
+          <td nowrap="nowrap"><?=$aca['reasonFrom']?></td>
+          <td nowrap="nowrap">
+          <input type="hidden" name="idClan" value="<?echo $aca['id_clan'];?>" /><input type="hidden" name="titleClan" value="<?=$aca['title']?>" />
+          <input type="hidden" name="action" value="updateAlign" />
+          <input type="submit" name="Submit" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+</tr></form>
+<? endforeach; ?>
+      </table></td>
+  </tr>
+
+</table>
+
+
+
+<? elseif( $requestPage == "members" ): ?>
+
+<tr align="center" bgcolor="#e2e0e0">
+	<td colspan="6" class="cl">
+		<table  border="0" cellpadding="5" cellspacing="1" bgcolor="#BEBDBD">
+
+		<? if( !empty($clanMembers) ) foreach( $clanMembers as $clanMember ): ?>
+        <tr align="center" bgcolor="#E2E0E0">
+        	<td width="33%" nowrap="nowrap"><?echo $clanMember['Username']?></td>
+
+			<form method="POST" action="<?=$_SERVER['REQUEST_URI']?>">
+        	<td width="33%" nowrap="nowrap">
+
+        	<? if( !empty($clanRankAll) ):?>
+        		<select name="id_rank">
+        		<option value="0">Нет ранга</option>
+        		<? foreach( $clanRankAll as $id_rank => $clanRank ): ?>
+
+        			<option value="<?=$id_rank?>" <?=( $clanMember['id_rank'] == $id_rank ? "selected" : "")?> ><?=$clanRank['Name']?></option>
+				<? endforeach; ?>
+				</select>
+			<? else: ?>
+
+            <? endif; ?>
+
+            </td>
+            <input type="hidden" name="action" value="updateRank" />
+            <input type="hidden" name="clanUser" value="<?=$clanMember['Username']?>" />
+          <td width="33%" nowrap="nowrap"><input type="submit" name="Submit" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+          </form>
+
+          <form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+          <td width="33%" nowrap="nowrap">
+          <input type="hidden" name="action" value="deleteFromClan" />
+          <input type="hidden" name="clanUser" value="<?=$clanMember['Username']?>" />
+          <input type="submit" name="Submit" value="Выгнать из клана" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+          </td>
+          </form>
+        </tr>
+		<? endforeach; ?>
+		</table>
+	</td>
+</tr>
+<? elseif( $requestPage == "rank" ): ?>
+
+	<tr align="center" bgcolor="#e2e0e0">
+		<td colspan="6" class="cl">
+
+			<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+			<input type="hidden" name="addClanRank" value="1" />
+			<table width="500" border="0">
+			  <tr>
+			    <td width="1%" nowrap="nowrap">Имя ранга:</td>
+			    <td width="90" nowrap="nowrap"><input type="text" name="rankName"  width="50" /></td>
+			    <td width="81" nowrap="nowrap"><input type="submit" name="addClanRank" value="Добавить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+			  </tr>
+			</table>
+			</form>
+
+			<? if(!empty($clanRankAll)) foreach( $clanRankAll as $id_rank => $rankRules ): ?>
+
+			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#D3D1D1">
+			<tr>
+				<td class="table-top"><table width="100%" border="0" cellpadding="5" cellspacing="0">
+					<tr align="left">
+						<td width="1%" nowrap="nowrap"><StrONG><?=$rankRules['Name']?></StrONG>
+						<? if( $rankRules['rankIcon'] > 0 ): ?>
+						<img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/rank/<?=sprintf("%d_%d", $id_clan, $rankRules['rankIcon'])?>.gif" border="0" />
+						<? else: ?>
+						<img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?=sprintf("%d", $id_clan)?>.gif" border="0" />
+  				<? endif; ?>
+						</td>
+
+						<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+						<input type="hidden" name="id_rank" value="<?=$id_rank?>" />
+						<input type="hidden" name="delClanRank" value="Удалить" />
+						<td width="1%"><input type="submit" name="delClanRank" value="Удалить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+						</form>
+
+						<? if( !empty($rulesAll) ):?>
+						<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+						<input type="hidden" name="id_rank" value="<?=$id_rank?>" />
+						<input type="hidden" name="addClanRankRule" value="Добавить" />
+						<td width="300" align="left">
+							<select name="id_admin">
+								<? foreach ($rulesAll as $rule): ?>
+								<option value="<?=$rule['id_admin_rules']?>"><?=$rule['Title']." ".sec2Date( $rule['Time'] )?></option>
+								<? endforeach; ?>
+							</select>
+
+						</td>
+						<td width="100" align="left"><input type="submit" name="addClanRankRule" value="Добавить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+						</form>
+    		<? endif; ?>
+						<td></td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			<tr align="center">
+				<td><table width="100%" border="0" bgcolor="#FFFFFF" cellpadding="5" cellspacing="0">
+					<tr>
+						<td>&nbsp;</td>
+						<td><table width="300" border="0">
+							<? if(!empty($rankRules['rules'])) foreach ( $rankRules['rules'] as $rankRule ):  ?>
+							<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+							<input type="hidden" name="id_admin" value="<?=$rankRule['id_admin_rules'] ?>" />
+							<input type="hidden" name="id_rank" value="<?=$id_rank?>" />
+							<tr align="center" bgcolor="#<?=(++$i %2)?"EEEEEE":"DDDDDD"?>">
+								<td nowrap="nowrap"><?=$rankRule['Title'].", ".sec2Date( $rankRule['Time'])?></td>
+								<td width="116"><input type="submit" name="delClanRankRule" value="Удалить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+							</tr>
+							</form>
+							<?endforeach;?>
+							</table>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+			<? endforeach;?>
+		</td>
+	</tr>
+
+<? elseif( $requestPage == "setup" ): ?>
+
+	<form action="" method="POST">
+  	<tr align="center" bgcolor="#e2e0e0">
+    <td colspan="6" class="cl">
+    	<table border="0" cellpadding="5" cellspacing="1" bgcolor="#D3D1D1" width="80%">
+        <tr align="center" bgcolor="#D4D2D2">
+          <td width="1%" nowrap="nowrap" bgcolor="#D4D2D2">Ссылка на клановый сайт </td>
+          <td nowrap="nowrap" bgcolor="#E2E0E0"><input type="text" name="clanLink" value="<?=$clanSetup['link']?>" style="width:100%;" /></td>
+          <td width="1%" nowrap="nowrap" bgcolor="#E2E0E0"><input type="submit" name="updateLink" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        </tr>
+        <tr align="center" bgcolor="#E2E0E0">
+          <td nowrap="nowrap" bgcolor="#D4D2D2">Девиз клана </td>
+          <td nowrap="nowrap" bgcolor="#E2E0E0"><input type="text" name="clanSlogan" value="<?=$clanSetup['slogan']?>"  style="width:100%;" /></td>
+          <td nowrap="nowrap" bgcolor="#E2E0E0"><input type="submit" name="updateSlogan" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        </tr>
+        <tr align="center" bgcolor="#E2E0E0">
+          <td nowrap="nowrap" bgcolor="#D4D2D2">Реклама </td>
+          <td nowrap="nowrap" bgcolor="#E2E0E0"><input type="text" name="clanAdvert" value="<?=$clanSetup['advert']?>"  style="width:100%;" /></td>
+          <td nowrap="nowrap" bgcolor="#E2E0E0"><input type="submit" name="updateAdvert" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        </tr>
+        <input type="hidden" name="action" value="updateSetup" />
+        </form>
+      </table><br />
+
+      <table width="100%" border="1" cellpadding="3" cellspacing="0" bordercolor="#CCCCCC">
+ 	 <tr>
+     <td align="center" bgcolor="#CCCCCC">Сообщение всем членам клана:<br /><small>Если персонажа в данный момент нет в клубе, сообщение будет доставлено когда он войдет в игру
+Стоимость сообщения 0.5 кр за каждого члена клана.</small></td>
+ 	 </tr>
+ 	 <tr>
+  	  <td height="86" align="center">
+      <form  method="post" action="">
+        <textarea name="msgText" cols="30"  rows="2"></textarea>
+        <br />
+        <input type="submit" name="Submit" value="Отправить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+        <input type="hidden" name="action" value="clanMembersMessage" />
+      </form></td>
+	  </tr>
+	</table>
+
+
+      <p>Распределение прав доступа для рангов </p>
+      <table border="0" cellpadding="5" cellspacing="1" bgcolor="#D3D1D1">
+        <tr align="center" bgcolor="#D4D2D2">
+          <td nowrap="nowrap">Ранг</td>
+          <td nowrap="nowrap">Заявки</td>
+          <td nowrap="nowrap">Оружейная</td>
+          <td nowrap="nowrap">Военное положение </td>
+          <td nowrap="nowrap">Ранги</td>
+          <td nowrap="nowrap">Члены клана </td>
+          <td nowrap="nowrap">Setup</td>
+          <td nowrap="nowrap">Действие</td>
+        </tr>
+<?
+for ($x=0; mysql_num_rows($sql_all_ranks)>$x; $x++):
+$all_ranks=mysql_fetch_assoc($sql_all_ranks);
+?>
+        <form action="" method="POST">
+        <tr align="center" bgcolor="#E2E0E0">
+          <td nowrap="nowrap"><?echo $all_ranks['rank_name']?></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permDemands" value="1" <? if ($all_ranks['perm_demands'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permWeapons" value="1" <? if ($all_ranks['perm_weapons'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permAlign" value="1" <? if ($all_ranks['perm_align'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permRank" value="1" <? if ($all_ranks['perm_rank'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permMembers" value="1" <? if ($all_ranks['perm_members'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="checkbox" name="permSetup" value="1" <? if ($all_ranks['perm_setup'] == 1): echo "checked"; endif; ?> /></td>
+          <td nowrap="nowrap"><input type="hidden" name="action" value="updateSetupPerms" />
+          <input type="hidden" name="id_rank" value="<? echo $all_ranks['id_rank']?>" />
+          <input type="submit" name="Submit" value="Сохранить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+        </tr>
+        </form>
+<? endfor; ?>
+      </table></td>
+  </tr>
+</table>
+
+<? else: ?>
+
+<tr align="center" bgcolor="#e2e0e0">
+	<td colspan="6"> У вас нет прав доступа.</td>
+</tr>
+
+<? endif; ?>
+
+</table>
+
+</div>
+

@@ -1,0 +1,173 @@
+body
+{
+	background: #fff;
+	margin: 25px;
+
+}
+table
+{
+	margin: 0;
+}
+.attack_table
+{
+	float: left;
+	padding-left: 5%;
+
+}
+.table_do_attack
+{
+	padding: 30px 50px 0 0;
+
+}
+.btn:focus{outline:none;}
+.btn:hover,.button:focus{background-position:0 -6px;border-color:#999 #999 #888;color:#000;}
+.btn:active{background-image:none;text-shadow:none;outline:none;}
+.btn
+{
+	background:#ddd url("http://admin.dnlab.ru/css/bg-btn.gif") repeat-x 0 0;
+	font:11px/14px "Lucida Grande",Sans-serif;
+	width:auto;
+	margin:0;
+	overflow:visible;
+	padding:4px 8px 5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#ddd;
+	border-bottom-color:#ccc;
+	-moz-border-radius:4px;
+	-khtml-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	color:#333;
+	text-shadow:1px 1px 0 #fff;
+}
+.btn::-moz-focus-inner{padding:0;border:0;}
+.btn-m
+{
+	background-position:0 -200px;
+	font-size:15px;
+	line-height:20px;
+	padding:5px 15px 6px;
+	-moz-border-radius:5px;
+	-khtml-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	width:220px;
+}
+.otstup_left
+{
+	padding-left: 10px;
+}
+.otstup_right
+{
+	padding-right: 20px;
+}
+
+.modif
+{
+	position:relative;
+	top: -390px;
+}
+
+.modif_left{
+		left:15px;
+}
+
+.modif_right
+{
+	right: 70px;
+
+}
+
+
+.modif2
+{
+	position:relative;
+	top: -250px;
+}
+
+.modif3
+{
+	position:relative;
+	top: -450px;
+}
+
+.modifikatori_left
+{
+	left: -30px;
+}
+.armor_left
+{
+	left: 235px;
+}
+
+.modifikatori_right
+{
+	right: -15px;
+}
+.armor_right
+{
+	right: 265px;
+}
+
+.items
+{
+	position:relative;
+	top: 0px;
+
+}
+.items_right
+{
+	right: 20px;
+}
+#msg
+{
+	display:none;
+	position:absolute;
+	top:0px;
+	left: 40px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#ff9f9f;
+	background-color:#ffd4d4;
+	padding:5px 15px 6px;
+
+}
+#log
+{
+	line-height: 1.5;
+	text-align:left;
+	width: 450px;
+
+}
+.team1
+{
+	color:#6666ff;
+
+}
+.team2
+{
+	color:#ff6666;
+
+}
+
+#battle_status
+{
+	position:relative;
+	top:-150px;
+	width: 370px;
+	height: 370px;
+	z-index:5;
+
+}
+.floatleft
+{
+	float:left;
+}
+.log_table
+{
+	position:absolute;
+	top: 300px;
+	z-index:0;
+
+}

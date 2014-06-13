@@ -1,0 +1,606 @@
+   <style>.m {background: #99CCCC;text-align: center;}.s {background: #BBDDDD;text-align: center;}</style>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script>var cck = 0;var cck2 = 0;</script>
+   <?
+    if(isset($r_rate) && $r_rate == 1){    echo '<meta http-equiv="refresh" content="15;url=demands.php">';  }
+    elseif(isset($r_rate) && $r_rate == 2){echo '<meta http-equiv="refresh" content="45;url=demands.php">';  }
+    elseif(isset($r_rate) && $r_rate == 3){echo '<meta http-equiv="refresh" content="120;url=demands.php">'; }
+   ?>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0" onLoad="setHP(<?=$player->HPnow;?>, <?=$player->HPall;?>)">
+  <table width="100%" cellspacing="1" cellpadding="1">
+  <form method="POST" action="demands.php" name="F1">
+  <input type="hidden" name="type" value="<?=$type;?>" />
+   <tr>
+    <td colspan="5">
+	  <table cellspacing="0" cellpadding="0">
+	   <tr>
+	    <td nowrap="nowrap">
+	     <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $player->username, $player->Level, $player->Align, $player->clanid)?>);</script>
+        </td>
+	    <td nowrap="nowrap">
+	     <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP1" id="HP1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP2" id="HP2">:</div>
+	    </td>
+       </tr>
+	 </table>
+	</td>
+    <td colspan="3" align="right">
+     <input type="button" value="Вернуться" onClick="location.href='main.php';" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+    </td>
+   </tr>
+  </table><br />
+  <table cellpadding="10" width="100%" height="250px">
+   <tbody>
+    <tr>
+     <td bgcolor="#E4ECDB" valign="top" style="border:1px solid #BCC1B6;">
+      <b>Типы поединков:</b><br /><br />
+      <a href="demands.php?type=1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<? if(isset($type) && $type == 1){ echo 'bullet_red.png'; } else{ echo 'bullet_green.png'; } ?>" width="12px" height="10px"> 1 на 1</a><br />
+      <a href="demands.php?type=3"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<? if(isset($type) && $type == 3){ echo 'bullet_red.png'; } else{ echo 'bullet_green.png'; } ?>" width="12px" height="10px"> Групповые</a><br />
+      <a href="demands.php?type=4"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<? if(isset($type) && $type == 4){ echo 'bullet_red.png'; } else{ echo 'bullet_green.png'; } ?>" width="12px" height="10px"> Тестовые</a><br />
+      <a href="demands.php?type=5"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<? if(isset($type) && $type == 5){ echo 'bullet_red.png'; } else{ echo 'bullet_green.png'; } ?>" width="12px" height="10px"> Текущие</a><br />
+      <a href="demands.php?type=6"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<? if(isset($type) && $type == 6){ echo 'bullet_red.png'; } else{ echo 'bullet_green.png'; } ?>" width="12px" height="10px"> Архив</a><br />
+     </td>
+     <td valign="top" width="85%" style="border:1px solid #BCC1B6;">
+      <table width="100%" cellspacing="0" cellpadding="0">
+       <tr>
+        <td valign="top">
+         <?
+          if( empty($type) ): print '<br /><center><b>Выберите раздел</b></center>'; endif;
+          if($type == 1):
+         ?>
+         <table cellspacing="0" cellpadding="0">
+          <tr>
+           <td>
+            <?
+             $inf1 = $db->queryRow("select * FROM ".SQL_PREFIX."players WHERE Username = '{$co2['Username']}'");
+             if (!$co1) {
+             if ($co2) {
+            ?>
+             Ожидаем подтверждения вызова от
+             <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf1['Username'], $inf1['Level'], $inf1['Align'], $inf1['ClanID'])?> );</script>
+             <input type="submit" name="close" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" value="Отозвать свою заявку" />
+            <?
+             }else {
+            ?>
+			 <fieldset>
+			  <legend>
+			   <b>Подать заявку на бой</b>
+			  </legend>
+			   Таймаут <select name="Timeout">
+			            <option value="3">3 мин</option>
+			            <option value="5">5 мин</option>
+			            <option value="7">7 мин</option>
+			            <option value="10">10 мин</option>
+			           </select>
+			   <input id="bcom" type="text" SIZE="30" name=Comment maxlength="50" value="комментарий к бою" onclick="if (cck=='0') { document.getElementById('bcom').value=''; } cck='1';" />&nbsp;<input type="submit" name="demand_make" value="Подать заявку" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+			   Тип боя <select name="Btype">
+			            <option value="1">Физический</option>
+			            <option value="3">Кулачный</option>
+			            <option value="2">Магический</option>
+			           </select>
+			 </fieldset>
+            <?
+             }
+             }else {
+            ?>
+             <input type="submit" name="demand_kill" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" value="Отозвать заявку" />
+            <?
+             }
+            ?>
+	       </td>
+	      </tr>
+	     </table>
+        </td>
+        <td align="right" valign="top">
+         <? if(!empty($err)): echo '<font color="red"><b>'.$err.'</b></font><br />'; endif; ?>
+		 <input type="submit" name="tmp" value="Обновить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+	    </td>
+       </tr>
+	  </table><br />
+      <table cellspacing="0" cellpadding="0" align="right">
+       <tr>
+        <td>
+         <fieldset>
+          <legend>Показывать заявки</legend>
+          &nbsp;<input type="radio" id="A1" name="all" value="0" <?if(isset($all) && $all == 0){ echo 'checked="checked"'; } ?> class="oo" onclick="location.href='demands.php?all=0'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A1">+/- три уровня</label><br />
+          &nbsp;<input type="radio" id="A2" name="all" value="1" <?if(isset($all) && $all == 1){ echo 'checked="checked"'; } ?>  class="oo" onclick="location.href='demands.php?all=1'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A2">все</label>
+         </fieldset><br />
+         <fieldset>
+          <legend>Обновлять через</legend>
+          &nbsp;<input type="radio" id="A3" name="r_rate" value="1" <?if(isset($r_rate) && $r_rate == 1){ echo 'checked="checked"'; } ?>  class="oo" onclick="location.href='demands.php?r_rate=1'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A3">15 сек</label><br />
+          &nbsp;<input type="radio" id="A4" name="r_rate" value="2" <?if(isset($r_rate) && $r_rate == 2){ echo 'checked="checked"'; } ?> class="oo" onclick="location.href='demands.php?r_rate=2'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A4">45 сек</label><br />
+          &nbsp;<input type="radio" id="A5" name="r_rate" value="3" <?if(isset($r_rate) && $r_rate == 3){ echo 'checked="checked"'; } ?> class="oo" onclick="location.href='demands.php?r_rate=3'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A5">2 мин</label><br />
+          &nbsp;<input type="radio" id="A6" name="r_rate" value="4" <?if(isset($r_rate) && $r_rate == 4){ echo 'checked="checked"'; } ?>  class="oo" onclick="location.href='demands.php?r_rate=4'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A6">не обновлять</label>
+         </fieldset>
+        </td>
+       </tr>
+      </table>
+      <?
+       if (   $pr = @$db->SQL_result( $db->query("SELECT Name_pr FROM ".SQL_PREFIX."demands WHERE (Username = '$player->username') AND (Name_pr IS NOT NULL)"), 0, 0 )   ):
+       $inf1 = $db->queryRow("SELECT * FROM ".SQL_PREFIX."players WHERE Username = '$pr'");
+      ?>
+       <br /><font color="RED"><b>Внимание!</b></font>
+       Вашу заявку принял
+       <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf1['Username'], $inf1['Level'], $inf1['Align'], $inf1['ClanID'])?> );</script>
+       <input type="hidden" name="Name_pr" value="<?=$inf1['Username'];?>" /> <input type="submit" value="В Бой!" name="battle" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <input type="submit" value="Отказать" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" name="no_battle" /><br /><br />
+      <? endif; ?>
+       <input type="submit" value="Принять вызов" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" name="pr" /><br />
+      <?
+       $res = $db->queryArray("SELECT * FROM ".SQL_PREFIX."demands WHERE In_battle = '0' ORDER by Add_time DESC");
+       if( !empty($res) ):
+       foreach( $res as $dat ):
+        $inf1 = $db->queryRow("SELECT * FROM ".SQL_PREFIX."players WHERE Username = '".$dat['Username']."'");
+        $inf2 = $db->queryRow("SELECT * FROM ".SQL_PREFIX."players WHERE Username = '".$dat['Name_pr']."'");
+        $dat['Type'] = ($dat['Type'] == 1) ? 'физический бой,' : ( ($dat['Type'] == 2) ? 'магический бой,' : ( ($dat['Type'] == 3) ? '<b>кулачный бой</b>,' : '' ));
+//        if($dat['Type'] == 1){     $dat['Type'] = 'физический бой,';      }
+//        elseif($dat['Type'] == 2){ $dat['Type'] = 'магический бой,';      }
+//        elseif($dat['Type'] == 3){ $dat['Type'] = '<b>кулачный бой</b>,'; }
+        if ($all != 1):
+        if ($inf1['Level']+3 >= $player->Level && $inf1['Level']-3 <= $player->Level):
+      ?>
+		<input type="radio" name="gocombat" <? if ($dat['Username'] == $player->username || $dat['Name_pr']) { print 'disabled="disabled"'; } ?> value="<?=$inf1['Username'];?>" />
+		<font class="date"><?=$dat['Add_time'];?></font> <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf1['Username'], $inf1['Level'], $inf1['Align'], $inf1['ClanID'])?> );</script>&nbsp;<?=$dat['Type'];?> таймаут <?=($dat['Timeout']/60);?> мин. <? if (!empty($dat['Comment'])) { print '(<i>'.$dat['Comment'].'</i>)'; } ?>
+      <?
+       if ($dat['Name_pr']):
+      ?>
+	   Ожидает подтверждения от <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf2['Username'], $inf2['Level'], $inf2['Align'], $inf2['ClanID'])?> );</script>
+      <?
+       endif;
+      ?>
+       <br />
+      <?
+       endif;
+       else:
+      ?>
+	   <input type="radio" name="gocombat" <? if ($dat['Username'] == $player->username || $dat['Name_pr']) { print 'disabled="disabled"'; } ?> value="<?=$inf1['Username']; ?>">
+	   <font class="date"><?=$dat['Add_time'];?></font> <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf1['Username'], $inf1['Level'], $inf1['Align'], $inf1['ClanID'])?> );</script>&nbsp;<?=$dat['Type'];?> таймаут <?=($dat['Timeout']/60);?> мин. <? if (!empty($dat['Comment'])) { print '(<i>'.$dat['Comment'].'</i>)'; } ?>
+      <?
+       if ($dat['Name_pr']):
+	  ?>
+	   Ожидает подтверждения от <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf2['Username'], $inf2['Level'], $inf2['Align'], $inf2['ClanID'])?> );</script>
+      <?
+       endif;
+      ?>
+       <br />
+      <?
+       endif;
+
+
+       endforeach;
+       endif;
+      ?>
+       <input type="submit" value="Принять вызов" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" name="pr" />
+      <?
+       endif;
+       if ($type == 3 && $player->Level > 1):
+       if ( !empty($_POST['open_group']) ):
+      ?>
+	   <table width="100%">
+	    <tr>
+	     <td>
+		  <table>
+		   <tr>
+		    <td>
+		     <h3>Подать заявку на групповой бой</h3><br />
+		     <table>
+		      <tr>
+		       <td>Начало боя через</td>
+		       <td>
+		        <select name="start_time">
+		         <option value="600">10 минут</option>
+		         <option value="900" selected="selected">15 минут</option>
+		         <option value="1800">30 минут</option>
+		         <option value="2700">45 минут</option>
+		         <option value="3600">1 час</option>
+		        </select>
+		       </td>
+		      </tr>
+		      <tr>
+		       <td>Тип боя</td>
+		       <td>
+		        <select name="gbtype2">
+		         <option value="1" selected="selected">физический (любое оружие)</option>
+		         <option value="2">кулачный</option>
+		        </select>
+		       </td>
+		      </tr>
+		      <tr>
+		       <td>Ваша команда</td>
+		       <td><input type="text" name="team1_num" size="3" maxlength="2" /> игроков</td>
+		      </tr>
+		      <tr>
+		       <td>Уровни союзников </td>
+		       <td><input type="text" name="team1_level_min" size="3" maxlength="3" value="0" id="gsgs1" onclick="document.getElementById('gsgs1').value='';" />-<input type="text" name="team1_level_max" size="3" maxlength="3" value="<?=$player->Level;?>" id="gsgs2" onclick="document.getElementById('gsgs2').value='';" /></td>
+		      </tr>
+		      <tr>
+		       <td>Противники</td>
+		       <td><input type="text" name="team2_num" size="3" maxlength="2"> бойцов</td>
+		      </tr>
+		      <tr>
+		       <td>Уровни противников</td>
+		       <td><input type="text" name="team2_level_min" size="3" maxlength="3" value="0" id="gsgs3" onclick="document.getElementById('gsgs3').value='';" />-<input type="text" name="team2_level_max" size="3" maxlength="3" value="<?=$player->Level;?>" id="gsgs4" onclick="document.getElementById('gsgs4').value='';" /></td>
+		      </tr>
+		      <tr>
+		       <td>Комментарий к бою</td>
+		       <td><input type="text" name="Comment" maxlength="40" size="40" /></td>
+		      </tr>
+		     </table>
+		    </td>
+		   </tr>
+		   <tr>
+		    <td align="center">
+		     <input type="submit" value="Вперед" name="open_group_2" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+		    </td>
+		   </tr>
+		  </table>
+		 </td>
+		 <td align="right" valign="top">
+		  <input type="submit" value="Вернуться" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+		 </td>
+		</tr>
+	   </table>
+	  </td>
+	 </tr>
+	</tbody>
+   </table>
+   <?
+    else:
+    if ( !empty($_POST['group_confirm_ok']) ):
+   ?>
+   <table width="100%">
+    <tr>
+     <td></td>
+     <td align="right">
+      <input type="submit" value="Вернуться" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+     </td>
+    </tr>
+   </table>
+   <h3>Выберите команду</h3>
+   <table align="center" cellspacing="4" cellpadding="1">
+    <tr>
+     <td bgcolor="#99CCCC">
+      <b>Команда 1:</b><br />
+      Максимальное кол-во: <?=$data['Team1_num'];?><br />
+      Ограничения по уровню: <?=$data['Team1_level'];?>
+     </td>
+     <td bgcolor="#99CCCC">
+      <b>Команда 2:</b><br />
+      Максимальное кол-во: <?=$data['Team2_num'];?><br />
+      Ограничения по уровню: <?=$data['Team2_level'];?>
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <?
+       foreach ($ta1 as $v):
+       if ($v != ''):
+        $dat = $db->queryRow("SELECT Username, Level, Align, ClanID FROM ".SQL_PREFIX."players WHERE Username = '$v'");
+      ?>
+       <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID'])?> );</script><br />
+      <?
+       endif;
+       endforeach;
+      ?>
+     </td>
+     <td align="center">
+      <?
+       foreach ($ta2 as $v):
+       if ($v != ''):
+        $dat = $db->queryRow("select Username, Level, Align, ClanID FROM ".SQL_PREFIX."players WHERE Username = '$v'");
+      ?>
+       <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID'])?> );</script><br />
+      <?
+       endif;
+       endforeach;
+
+       if (!$ta2[0]):
+        print '<i>Никого</i>';
+       endif;
+      ?>
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <?
+       if ($data['Team1_num'] <= $team1_num): echo '';
+       else: print '<input type="submit" name="group_confirm_1" value="Я за этих!" class="oo" onmouseover="this.className = "on";" onmouseout="this.className = "oo";" />'; endif;
+      ?>
+     </td>
+     <td align="center">
+      <?
+       if ($data['Team2_num'] <= $team2_num): echo '';
+       else: print '<input type="submit" name="group_confirm_2" value="Я за этих!" class="oo" onmouseover="this.className = "on";" onmouseout="this.className = "oo";" />'; endif;
+      ?>
+     </td>
+    </tr>
+   </table>
+<input type="hidden" value="<?=$_POST['go_group_combat'];?>" name="go_group_combat" />
+   <?
+    else:
+   ?>
+   <table width="100%">
+    <tr>
+     <td>
+      <?
+       if ($player_in_demand != 1):
+      ?>
+	  <input type="submit" value="Подать новую заявку" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" name="open_group" />
+      <?
+       else:
+        if ($co1):
+      ?>
+         Вы уже подали заявку на одиночный бой <input type="submit" name="demand_kill" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" value="Отозвать заявку" />
+      <?
+        endif;
+        if ( $db->queryRow("SELECT * FROM ".SQL_PREFIX."group_demands WHERE (Team1 = '$player->username;') AND (Team2 is NULL)") ):
+      ?>
+         Ожидаем начала боя...<br />
+         <input type="submit" value="Отозвать" name="group_del_demand" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+      <?
+        endif;
+      ?>
+         <br />
+      <?
+       endif;
+      ?>
+     </td>
+     <td align="right" valign="top">
+	  <input type="submit" value="Обновить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+	 </td>
+	</tr>
+   </table><br /><br />
+   <table cellspacing="0" cellpadding="0" align="right">
+    <tr>
+     <td>
+      <fieldset>
+       <legend>Обновлять через</legend>
+       &nbsp;<input type="radio" id="A3" name="r_rate" value="1" <?if(isset($r_rate) && $r_rate == 1){ echo 'checked="checked"'; } ?>  class="oo" onclick="location.href='demands.php?r_rate=1'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A3">15 сек</label><br />
+       &nbsp;<input type="radio" id="A4" name="r_rate" value="2" <?if(isset($r_rate) && $r_rate == 2){ echo 'checked="checked'; } ?> class="oo" onclick="location.href='demands.php?r_rate=2'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A4">45 сек</label><br />
+       &nbsp;<input type="radio" id="A5" name="r_rate" value="3" <?if(isset($r_rate) && $r_rate == 3){ echo 'checked="checked'; } ?> class="oo" onclick="location.href='demands.php?r_rate=3'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A5">2 мин</label><br />
+       &nbsp;<input type="radio" id="A6" name="r_rate" value="4" <?if(isset($r_rate) && $r_rate == 4){ echo 'checked="checked'; } ?>  class="oo" onclick="location.href='demands.php?r_rate=4'" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /> <label for="A6">не обновлять</label>
+      </fieldset>
+	 </td>
+	</tr>
+   </table>
+   <?
+    if(!empty($err)): echo '<font color="red"><b>'.$err.'</b></font><br />'; endif;
+    if ($player_in_demand != 1):
+   ?>
+	<input type="submit" value="Принять участие в поединке" name="group_confirm" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+   <?
+    endif;
+    $res = $db->queryArray("SELECT * FROM ".SQL_PREFIX."group_demands WHERE (In_battle = '0')");
+    if( !empty($res) ):
+     $dem_present = 1;
+    foreach( $res as $dat ):
+     $dat['Type'] = ($dat['Type'] == 1) ? 'физический бой,' : ( ($dat['Type'] == 2) ? '<b>кулачный бой</b>' : '' );
+
+     $ta1 = split(';', $dat['Team1']);
+     $ta2 = split(';', $dat['Team2']);
+
+    $time_left = round( ($dat['Start_time'] - time('void'))/60, 1 );
+    if ($time_left >= 0):
+   ?>
+	<input type="radio" name="go_group_combat" value="<?=$ta1[0];?>">
+	<font class="date"><?=$dat['Add_time'];?></font> <b><?=$dat['Team1_num'];?></b> (<?=$dat['Team1_level'];?>) на <b><?=$dat['Team2_num'];?></b> (<?=$dat['Team2_level'];?>) [
+   <? foreach ($ta1 as $v): ?>
+   <? if ($v != ''): ?>
+   <? $inf = $db->queryRow("SELECT Username, Level, Align, ClanID FROM ".SQL_PREFIX."players WHERE Username = '$v'"); ?>
+    <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf['Username'], $inf['Level'], $inft['Align'], $inf['ClanID'])?> );</script>
+   <? endif; ?>
+   <? endforeach; ?>
+    ] <font class="dsc"><i>против</i></font> [
+   <?
+    if (!$dat['Team2']):
+   ?>
+    <i>пока противников не нашлось...</i>
+   <?
+    else:
+   ?>
+   <? foreach ($ta2 as $v): ?>
+   <? if ($v != ''): ?>
+   <? $inf = $db->queryRow("SELECT Username, Level, Align, ClanID FROM ".SQL_PREFIX."players WHERE Username = '$v'"); ?>
+    <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $inf['Username'], $inf['Level'], $inft['Align'], $inf['ClanID'])?> );</script>
+   <? endif; ?>
+   <? endforeach; ?>
+   <?
+    endif;
+   ?>
+   <? $dat['Comment'] = TestStroka($dat['Comment']); ?>
+	] <font class="dsc"><i>Бой начнется через <b><?print $time_left;?></b> мин., таймаут <?=($dat['Timeout']/60); ?> мин. <?=$dat['Type'];?>  <? if ($dat['Comment']) { print '('.$dat['Comment'].')'; } ?></font></i><br />
+   <?
+    endif;
+   ?>
+   <? endforeach; ?>
+   <? endif;
+    if ( empty($dem_present) ): print '<br /><b>Активных заявок нет</b><br /><br />'; endif;
+    if ($player_in_demand != 1):
+   ?>
+	<input type="submit" value="Принять участие в поединке" name="group_confirm" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';">
+   <?
+    endif;
+    endif;
+    endif;
+
+    endif;
+    if ($type == 3 && $player->Level < 2):
+     print '<br /><center><b>Групповые бои доступны со 2-го уровня</b></center>';
+    endif;
+     if($type == 4):
+     ?>
+     <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+       <td>
+         <?
+         if( empty($my_zayava) ): ?>
+          <? if( empty($ya_opponent) ): ?>
+         <input type="button" onclick="window.location.href='?zayavka=add'" value="Добавить заявку" style="width: 160px; height: 30px;" class="bt1">
+          <? endif; ?>
+         <?
+         else:
+             if( !empty($my_zayava['Username']) ):
+         ?>
+         Персонаж <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $my_zayava['Username'], $my_zayava['Level'], $my_zayava['Align'], $my_zayava['ClanID'])?> );</script> принял вашу заявку<br />
+         <input type="button" onclick="window.location.href='?demand=accept'" value="Принять" style="width: 160px; height: 30px;" class="bt1">
+         <input type="button" onclick="window.location.href='?demand=decline'" value="Отлонить" style="width: 160px; height: 30px;" class="bt1">
+         <?
+             else:
+         ?>
+             <input type="button" onclick="window.location.href='?zayavka=remove'" value="Отменить заявку" style="width: 160px; height: 30px;" class="bt1">
+         <?
+             endif;
+         endif;
+         ?>
+       </td>
+      </tr>
+      <tr>
+       <td><? if(!empty($err)): echo '<font color="red"><b>'.$err.'</b></font><br />'; endif; ?>&nbsp;</td>
+      </tr>
+     </table>
+     <br /><br />
+
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <?
+      if( !empty($zayavki) ):
+        foreach( $zayavki as $dat ):
+      ?>
+      <tr>
+       <td>
+         <?=date( 'm, j, Y, H:i', $dat['time']);?> <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID'])?> );</script> <? if( empty($my_zayava) && empty($ya_opponent) && empty($dat['opponent_id']) ): ?><input type="button" onclick="window.location.href='?zayavka=ok&id=<?=$dat['id'];?>'" value="Принять" style="width: 100px; height: 20px;" class="bt1"><? elseif( !empty($ya_opponent) && $ya_opponent == $dat['id'] ): ?><input type="button" onclick="window.location.href='?demand=delete'" value="Удалить" style="width: 100px; height: 20px;" class="bt1"><? endif; ?>
+       </td>
+      </tr>
+      <?
+        endforeach;
+      else:
+      ?>
+      <tr>
+       <td>
+         <i>Заявок не обнаружено</i>
+       </td>
+      </tr>
+      <?
+      endif;
+      ?>
+     </table>
+     <?
+     endif;
+    if ($type == 5):
+   ?>
+    <table width="100%">
+     <tr>
+      <td><b>Текущие поединки:</b></td>
+      <td align="right"><input type="button" onClick="window.location.href='demands.php'" value="Обновить" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /></td>
+     </tr>
+    </table><br />
+   <?
+    $i        = 1;
+    $battleid = 0;
+    $tm       = 1;
+    $str      = '';
+    $res      = $db->queryArray("SELECT b.Username, b.Align, b.HPnow, b.HPall, b.ClanID, b.Level, a.Id, a.Team FROM ".SQL_PREFIX."players b LEFT JOIN ".SQL_PREFIX."battle_list a ON (a.Id = b.BattleID) WHERE b.BattleID <> '0' AND b.Username = a.Player order by a.Id DESC, a.Team ASC LIMIT 50");
+     if( !empty($res) ):
+     foreach( $res as $dat ):
+      if ($dat['ClanID'] == ''): $dat['ClanID'] = 0; endif;
+      if ($dat['Id'] != $battleid && $battleid != 0):
+       if($shouldwrite):
+        $str        .= $last.'&nbsp;<a href="log.php?id='.$battleid.'" target="_blank">лог боя</a><br />';
+       endif;
+        $shouldwrite = 0;
+        $last        = '<li><script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script> ['.$dat['HPnow'].'/'.$dat['HPall'].']';
+        $battleid    = $dat['Id'];
+        $tm          = $dat['Team'];
+      else:
+        $battleid    = $dat['Id'];
+        if ($tm != $dat['Team']):
+         $last       .= ' против ';
+         $tm          = $dat['Team'];
+         $shouldwrite = 1;
+         $last       .= '<script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script> ['.$dat['HPnow'].'/'.$dat['HPall'].']';
+        else:
+         if ($i != 1):
+          $last .= ', <script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script> ['.$dat['HPnow'].'/'.$dat['HPall'].']';
+         else:
+          $last .= '<li><script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script> ['.$dat['HPnow'].'/'.$dat['HPall'].']';
+         endif;
+        endif;
+      endif;
+     if ($i == count($res) && $tm == 2): $str .= $last.'&nbsp;<a href="log.php?id='.$dat['Id'].'" target="_blank">лог боя</a><br />'; endif;
+           $i++;
+     endforeach;
+    endif;
+    echo $str;
+    endif;
+
+   if ($type == 6):
+   if ( empty($_POST['name']) ): $_POST['name'] = $player->username; endif;
+  ?>
+   <br /><b>Завершённые бои персонажа <?=$_POST['name'];?>:</b><br /><br />
+   Показать бои персонажа:
+    <form method="post">
+     <input type="hidden" name="type" value="6" />
+     <input type="text" name="name" value="<?=$_POST['name'];?>" />
+     <input type="submit" value="Показать" class="oo" onmouseover="this.className='on';" onmouseout="this.className='oo';" /><br />
+    </form>
+    <form method="post">
+     <input type="hidden" name="type" value="6" />
+     <input type="hidden" name="name" value="<?=$_POST['name'];?>" />
+     <input type="submit" value="Обновить" class="oo" onmouseover="this.className='on';" onmouseout="this.className='oo';"><br />
+    </form>
+   <ol>
+  <?
+   $i        = 1;
+   $battleid = 0;
+   $tm       = 1;
+
+   $res = $db->queryArray("SELECT b.Username, b.Align, b.HPnow, b.HPall, a.Dead, b.ClanID, b.Level, a.Id, a.Team FROM ".SQL_PREFIX."battle_list a, ".SQL_PREFIX."battle_list c, ".SQL_PREFIX."players b WHERE c.Player = '".$_POST['name']."' AND c.Id = a.Id && a.Player = b.Username ORDER BY a.Id DESC, a.Team ASC LIMIT 50");
+
+   if( !empty($res) ):
+   foreach( $res as $dat ):
+
+    if ($dat['ClanID'] == ''): $dat['ClanID'] = 0; endif;
+     if ($dat['Id'] != $battleid && $battleid != 0):
+      if (!$dead_team):
+       $str      .= '<img src="http://'.$db_config[DREAM_IMAGES][server].'/won.gif" width="10px" height="10px" alt="Победитель">';
+      endif;
+       $str      .= '&nbsp;<a href="log.php?id='.$battleid.'" target="_blank">лог боя</a><br />';
+       $str      .= '<li><script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script>';
+       $battleid  = $dat['Id'];
+       $tm        = $dat['Team'];
+       $dead_team = $dat['Dead'];
+     else:
+       $battleid  = $dat['Id'];
+      if ($tm != $dat['Team']):
+       if (!$dead_team):
+        $str     .= '<img src="http://'.$db_config[DREAM_IMAGES][server].'/won.gif" width="10px" height="10px" alt="Победитель">';
+       endif;
+        $dead_team= $dat['Dead'];
+        $str     .= ' против ';
+        $tm       = $dat['Team'];
+        $str     .= '<script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script>';
+      else:
+        @$dead_team = ($dead_team) or ($dat['Dead']);
+       if($i != 1):
+        $str.= ',<script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script>';
+       else:
+        $str .= '<li><script>dlogin('.sprintf( " '%s', %d, %d, %d ", $dat['Username'], $dat['Level'], $dat['Align'], $dat['ClanID']).');</script>';
+       endif;
+      endif;
+     endif;
+
+     if ( $i == count($res) ):
+      $dead_team = ($dead_team) or ($dat['Dead']);
+      if (!$dead_team):
+       $str .= '<img src="http://'.$db_config[DREAM_IMAGES][server].'/won.gif" width="10px" height="10px" alt="Победитель">';
+      endif;
+       $str .= '&nbsp;<a href="log.php?id='.$dat['Id'].'" target="_blank">лог боя</a><br />';
+     endif;
+    $i++;
+   endforeach;
+    echo $str;
+   else:
+    echo '<b>П У С Т О</b>';
+   endif;
+
+   endif;
+  ?>
+</form>

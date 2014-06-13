@@ -1,0 +1,42 @@
+<? if(!empty($msg)) echo '<center><font color=RED><b>'.$msg.'</b></font></center>'; ?>
+<h3> Последние новости </h3>
+
+<? if( !empty($dat) ): ?>
+<? foreach( $dat as $v ): ?>
+<? $a   = $db->query("SELECT msgdate, msgtext FROM ".SQL_PREFIX."posts WHERE topicid = '".$v['id']."' ORDER BY msgdate ASC"); ?>
+<? $num = $db->SQL_numrows($a); ?>
+<? $res = $db->SQL_fetch_assoc($a); ?>
+<? $res['msgtext'] = bbcode($res['msgtext']); ?>
+<? $res['msgtext'] = string_cut($res['msgtext'], 30); ?>
+<? $res['msgtext'] = ogran($res['msgtext'], 75); ?>
+<? $v['name']      = ogran($v['name'], 15); ?>
+<hr color="#432D16">
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+				<td align="center" valign="middle" style="FONT-SIZE: 11px;" width="30%" nowrap="nowrap"><b><a href="http://<?=$db_config[DREAM]['server'];?>/forum/index.php?viewtopic=<?=$v['id'];?>" target="_blank"><?=$v['name'];?></a></b></td>
+        <td width="30%">&nbsp;</td>
+				<td align="right" valign="middle" style="FONT-SIZE: 11px;" width="30%" nowrap="nowrap"><span><?=date('j.n.Y H:i', $res['msgdate']);?></span></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td valign="middle" style="FONT-SIZE: 11px;">
+           <?=$res['msgtext'];?>
+        </td>
+      </tr>
+    </table>
+    <table cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td align="left" valign="middle" style="FONT-SIZE: 11px;" width="30%" nowrap="nowrap">
+		      <a href="http://<?=$db_config[DREAM]['server'];?>/forum/index.php?viewtopic=<?=$v['id'];?>&func=getLast" target="_blank">комментариев: <?=($num-1);?></a>
+	      </td>
+       <td width="30%">&nbsp;</td>
+      	<td align="right" valign="middle" style="FONT-SIZE: 11px;" width="30%" nowrap="nowrap">
+		      <a href="http://<?=$db_config[DREAM]['server'];?>/forum/index.php?viewtopic=<?=$v['id'];?>" target="_blank">подробнее...</a>
+	      </td>
+      </tr>
+    </table>
+<hr color="#432D16">
+<br /><br />
+<? endforeach; ?>
+<? endif; ?>

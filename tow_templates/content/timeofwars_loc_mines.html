@@ -1,0 +1,56 @@
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js"></script>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/effects.js"></script>
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/modalbox.js"></script>
+<script type="text/javascript">
+var g_iCount;startCountdown=function()
+{if((g_iCount-1)>=0)
+{g_iCount-=1;$('numberCountdown').update('<br />Буду копать еще '+g_iCount+' сек.');setTimeout('startCountdown()',1000);}else{$('numberCountdown').update();Go_go(3);}}
+minesGo=function(y)
+{rand=y!=0?Math.floor(Math.random()*11):0;if(rand!=0)
+{g_iCount=3;startCountdown();}
+new Ajax.Request('ajax/mines.php',{method:'post',parameters:{slot:rand},onSuccess:function(transport)
+{var json=transport.responseText.evalJSON();$('level').update(json.level);$('table').update(json.table);$('newexp').update(json.newexp);$('exp').update(json.exp);if(json.msg)$('msg').update(json.msg);if(rand!=0)Go_stop(3);}});}
+Go_stop=function(a)
+{for(i=1;i<=a;i++)
+{$('d'+i).update('копать');}}
+Go_go=function(a)
+{for(i=1;i<=a;i++)
+{$('d'+i).update('<a href="javascript:minesGo(1)">копать</a>');}}
+Go=function(a)
+{for(i=1;i<=a;i++)
+{elem=$('d'+i);elem2=$('d0');if(elem)
+{elem.style.position='absolute';elem.style.top=parseInt(10+(parseInt(elem2.style.width)-10)*Math.random())+'px';elem.style.left=parseInt(400+(parseInt(elem2.style.width)-50)*Math.random())+'px';}}
+setTimeout('Go(3)',1500);}
+</script>
+   <link rel="stylesheet" href="http://<?=$db_config[DREAM]['other'];?>/css/modalbox.css" type="text/css" />
+</head>
+<body bgcolor="#f0f0f0" onload="Go(3);minesGo(0);">
+
+
+
+<div align="center">
+<font color="#ff0015"><b>Перед началом копания ОБЯЗАТЕЛЬНО прочтите <a href="/templates/help/mines.html" target=_blank>подсказку</a></b></font>
+<table border="0"><tr><td>Ваш уровень - <font color="#000000" id="level"></font></td><td>  |  </td>
+<td>Ваш опыт - <font color="#000000" id="exp"></font></td><td>  |  </td>
+<td>След. уровень - <font color="#000000" id="newexp"></font></td><td>  |  </td>
+<td>У Вас: <font color="#000000" id="table"></font></td>
+</tr>
+</table>
+<table cellpadding="0" cellspacing="0" valign="top" style="margin:10px">
+<tr>
+<td>
+<input type="button" value="Кузница" onclick="javascript:window.location.href='?goto=smith'" style="width:80px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<input type="button" value="Выход" onclick="javascript:window.location.href='?goto=land'" style="width:80px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+<input type="button" value="Магазин" onclick="Modalbox.show('ajax/_smith_shop.php', {title: 'Купить/продать металл', method: 'post', params: { act: 'buysell' },  width: 400, onHide: minesGo(0) });" style="width:80px" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+</td>
+</tr>
+</table>
+<div><font color="#ff0015" id="msg"></font><font color="#ff0015" id="numberCountdown"></font></div>
+<div id='d0' style='position:absolute;height:200px;width:300px;top:50px;left:0;'>
+
+<div id='d1'><a href="javascript:minesGo(1)">копать</a></div>
+<div id='d2'><a href="javascript:minesGo(2)">копать</a></div>
+<div id='d3'><a href="javascript:minesGo(3)">копать</a></div>
+</div>
+
+</div>

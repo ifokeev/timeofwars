@@ -1,0 +1,158 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+   <script language="javascript">function move(id){ location='map.php?id='+id; }</script>
+</head>
+<body bgcolor="#f0f0f0" onload="setHP(<?=$HPnow;?>, <?=$HPall;?>);" leftMargin="5" topMargin="5" marginheight="5" marginwidth="5">
+ <? if( !empty($err) ){ echo '<font color="red"><b>'.$err.'</b></font>'; } ?>
+  <table border="0" align="center" cellpadding="0" cellspacing="1">
+   <tr>
+    <td width="17%">
+     <table cellspacing="0" cellpadding="0">
+      <tr>
+       <td nowrap="nowrap">
+        <div id="HP">
+          <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP1" id="HP1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP2" id="HP2">:</div>
+        </div>
+       </td>
+      </tr>
+     </table>
+     <table cellpadding="0" cellspacing="0" width="243px">
+      <td>
+       <div style="position:relative;" width="242px" height="290px" border="0">
+       <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/frames/_main/pers_i_s.gif" width="242px" height="290px" border="0">
+       <div width="242px" height="20px" style="position:absolute;left:0px; top:-5px; z-index:1;"></div>
+        <div style="position:absolute; left:95px; top:13px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][7];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][7];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][7];?>.gif" width="50px" height="51px" />
+         </a>
+        </div>
+        <div style="position:absolute; left:17px; top:66px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][2];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][2];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][2];?>.gif" width="50px" height="50px" />
+         </a>
+        </div>
+        <div style="position:absolute; left:170px; top:62px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][9];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][9];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][9];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:160px; top:145px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][3];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][3];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][3];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:23px; top:210px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/book0.gif" alt="Пустой слот аксесуары" />
+        </div>
+        <div style="position:absolute; left:22px; top:150px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][8];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][8];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][8];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:173px; top:220px;z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][10];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][10];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][10];?>.gif" width="50px" height="35px" />
+         </a>
+        </div>
+        <div align="center" style="position:absolute; left:70px; top:69px; width:100px ;height:200px; z-index:2; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/pict/<?=$id_picture;?>.gif" width="70px" height="180px" title="<?=$username;?>" />
+        </div>
+        <div style="position:absolute; left:27px; top:35px; z-index:1; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][1];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][1];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][1];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:170px; top:35px; z-index:1;width:50px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][0];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][0];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][0];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:90px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][4];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][4];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][4];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:113px; top:258px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][5];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][5];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][5];?>.gif" />
+         </a>
+        </div>
+        <div style="position:absolute; left:134px; top:260px; z-index:1;width:20px ;height:20px; filter:progid:DXImageTransform.Microsoft.Alpha( Opacity=100, Style=0);">
+         <a href="thing.php?thing=<?=$item['Slot_id'][6];?>" target="_blank">
+          <img alt="<?=$item['Slot_name'][6];?>" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/<?=$item['Slot'][6];?>.gif" />
+         </a>
+        </div>
+        </td>
+        </tr>
+       </table>
+      </td>
+      <td align="center">
+       <table border="3" align="center" cellpadding="0" cellspacing="1">
+        <tr>
+         <td>
+          <table align="center" valign="middle" border="1" cellpadding="0" cellspacing="0">
+           <? while( $yy <= ($y+1) ): ?>
+           <tr>
+            <? for( $xx=$x-2; $xx <= ($x+2); $xx++ ): ?>
+            <? list($url, $id, $acses) = $db->queryCheck("SELECT url, id, acses FROM ".SQL_PREFIX."map WHERE x = '$xx' AND y = '$yy'"); ?>
+            <? $idd = 'x'.$xx.';y'.$yy; ?>
+            <? if( $yy == $y && $xx == $x ): ?>
+             <td onmouseout="window.status=' ';" onmouseover="window.status='<?=$idd?>';" align="center" background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/map/<?=$url;?>">
+              <img border="0" src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/hero.gif" class="aFilter1" onmouseover="imover(this)" onmouseout="imout(this);" title="<?=$login;?>" />
+             </td>
+            <? else: ?>
+             <td  background="http://<?=$db_config[DREAM_IMAGES]['server'];?>/map/<?=$url;?>" width="100px" height="100px" onmouseout="window.status=' ';" onmouseover="window.status='<?=$idd;?>';" <? if( ($yy==$y+1 || $yy==$y-1 || $yy==$y) && ($xx==$x-1 || $xx==$x || $xx==$x+1) ): if($acses != 1): ?> title="Перейти на локацию <?=$idd;?>" style="cursor:hand" onclick="move('<?=$id;?>');"> <? else: ?> title="Нельзя пройти по воде"> <? endif; endif; ?>
+              &nbsp;
+             </td>
+            <? endif; ?>
+            <? endfor; ?>
+           </tr>
+           <? $yy++; ?>
+           <? endwhile; ?>
+          </table>
+         </td>
+         <a name="map"></a>
+        </tr>
+       </table>
+<? if( $elka == true ): ?>
+<script src="http://<?=$db_config[DREAM]['other'];?>/js/loadpic.js" type="text/javascript"></script>
+       <table border="0" cellpadding="0" cellspacing="0" style="position:absolute; top:5px; padding: 0px"  valign="top">
+        <tr>
+          <td><a href="#" title="Злой челопук, меняющий ветки на игрушки." style="cursor: hand" onclick="window.open('elka.php', 'ADM', 'height=280px, width=800px, location=no, menubar=yes, status=no, toolbar=no, scrollbars=yes')" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','http://<?=$db_config[DREAM_IMAGES][server];?>/4el13.png',1)"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/4el12.png" name="Image2"  border="0" id="Image2" /></a></td>
+        </tr>
+       </table>
+<? endif; ?>
+      </td>
+      <td align="center" valign="top">
+       <b>Персонажи на этой локации:</b><br /><br />
+        <table cellSpacing="0" cellPadding="0" align="center" border="1">
+        <? if( !empty($dat) ): ?>
+        <? foreach( $dat as $v ): ?>
+         <form action="#" method="POST">
+          <input type="hidden" name="player" value="<?=$v['Username'];?>" />
+           <tr>
+            <td align="center" width="170px" nowrap="nowrap">
+             <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $v['Username'], $v['Level'], $v['Align'], $v['ClanID'])?>);</script>
+            </td>
+            <td align="center" width="50px">
+             <? if( empty($v['BattleID2']) ): ?>
+              <input type="submit" value="Напасть" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+             <? endif; ?>
+            </td>
+           </tr>
+          </form>
+         <? endforeach; ?>
+         <? else: ?>
+          <? echo '<br />Никого<br /><br />'; ?>
+         <? endif; ?>
+       </table>
+        <br />
+         <? if($map_id == 588 || $map_id == 589): ?>
+          <input type="button" style="width:130px;" onclick="location.href='?goto=land'" value="Вернуться в город" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+         <? endif; ?>
+          <input type="button" style="width:130px;" onclick="top.frames['TOP'].location='map.php';" value="Обновить страницу" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br />
+           Локация: <b><?=$idd;?></b><br />
+          <? if($clanid == 255 || $clanid == 100): echo '<br />Номер локации:<b>'.$map_id.'</b>'; endif; ?>
+      </td>
+    </tr>
+  </table>
+

@@ -1,0 +1,93 @@
+td{
+font-size: 12px;
+font-weight: bold;
+color:silver;
+}
+a.menu:link,
+a.menu:active,
+a.menu:visited{
+FONT-WEIGHT: bold;
+font-size: 12px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+TEXT-DECORATION: none;
+COLOR: #DDDDDD;
+}
+a.menu:hover {
+COLOR: #ffffff;
+FONT-WEIGHT: bold;
+font-size: 12px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+TEXT-DECORATION: none;
+}
+.small {
+font-size: 9pt;
+color: #000000;
+}
+a {
+font-size: 10px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+FONT-WEIGHT: bold;
+COLOR: #003388;
+TEXT-DECORATION: none;
+}
+a:visited {
+font-size: 10px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+FONT-WEIGHT: bold;
+COLOR: #003388;
+TEXT-DECORATION: none;
+}
+a:active {
+font-size: 10px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+COLOR: #6f0000;
+TEXT-DECORATION: none;
+}
+a:hover {
+font-size: 10px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+COLOR: #0066ff;
+TEXT-DECORATION: none;
+}
+img {
+BORDER-RIGHT: 0px;
+BORDER-TOP: 0px;
+BORDER-LEFT: 0px;
+BORDER-BOTTOM: 0px;
+}
+table {
+BORDER-RIGHT: 0px;
+BORDER-TOP: 0px;
+BORDER-LEFT: 0px;
+BORDER-BOTTOM: 0px;
+}
+html, td, ol, ul, li , p {
+FONT-SIZE: 10px;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+FONT-WEIGHT: normal;
+COLOR: #000000;
+scrollbar-3dlight-color: #634638;
+scrollbar-arrow-color: #696a69;
+scrollbar-base-color: #2f0e03;
+scrollbar-darkshadow-color: #2f0e03;
+scrollbar-face-color: #2f0e03;
+scrollbar-highlight-color: #696a69;
+scrollbar-shadow-color: #9f8561;
+scrollbar-track-color: #2b0d02;
+}
+.text {
+FONT-SIZE: 10px;
+COLOR: #000000;
+FONT-WEIGHT: normal;
+FONT-FAMILY: Verdana, Arial, Helvetica, Tahoma, sans-serif;
+}
+input,select{
+COLOR: #f5f5f5;
+BACKGROUND-COLOR: #000000;
+BORDER: 1px solid #634638;
+}
+.private {
+FONT-WEIGHT: bold;
+COLOR: red;
+BACKGROUND-COLOR: #fae0e0;
+}

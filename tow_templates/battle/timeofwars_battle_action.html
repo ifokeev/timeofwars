@@ -1,0 +1,135 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/battle22.css" rel="stylesheet" type="text/css" media="screen" />
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/player_visual.css" rel="stylesheet" type="text/css" media="screen" />
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.4.2");
+
+     var last_enemy_id = '<?=$enemy->Id;?>';
+
+    google.setOnLoadCallback(function() {
+
+    	$.getScript("http://<?=$db_config[DREAM]['other'];?>/js/tooltip.js", function(){ $('img').wTooltip(); } );
+        $.getScript("http://<?=$db_config[DREAM]['other'];?>/js/jquery.alerts.js");
+
+
+        $.getScript("http://<?=$db_config[DREAM]['other'];?>/js/battle2.js");
+
+
+	});
+
+	var intervalID=setInterval(function(){checker()},5000);
+ 	</script>
+<!--[if IE 6 or 7]>
+<style>
+.table_do_attack
+{
+
+	left:-30%;
+
+
+}
+</style>
+<![endif]-->
+</head>
+<body>
+    <?
+       $mf = $player->get_modif_player();
+       $mf2 = $enemy->get_modif_player();
+    ?>
+
+<div id="batid" style="display:none"><?=$player->battle_id;?></div>
+<div id="msg"></div>
+
+<div id="player_<?=$player->Id;?>" class="items items_left">
+    <?=$player->load_pers_visual();?>
+    <div class="icons_modif icons_modif_left">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_head.jpg" title="Броня головы <?=$mf['Armor1'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_chest.jpg" title="Броня корпуса <?=$mf['Armor2'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_belt.jpg" title="Броня пояса <?=$mf['Armor3'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_boots.jpg" title="Броня ног <?=$mf['Armor4'];?>" /><br /><br />
+
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/hit.jpg" title="Удар <?=$mf['min_damage'];?> - <?=$mf['max_damage'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/krit.jpg" title="Крит <?=$mf['crit'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/antikrit.jpg" title="Антикрит <?=$mf['acrit'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/uvorot.jpg" title="Уворот <?=$mf['uv'];?>" /> <br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/antiuv.jpg" title="Антиуворот <?=$mf['auv'];?>" /><br />
+    </div>
+    <div class="loge loge_left">
+      <div class="stats stats_left">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/stre.png" title="Сила <?=$player->Stre;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/agil.png"  title="Ловкость <?=$player->Agil;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/intu.png"  title="Интуиция <?=$player->Intu;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/intl.png"  title="Интеллект <?=$player->Intl;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/endu.png"  title="Выносливость <?=$player->Endu;?>" />
+      </div>
+    </div>
+</div>
+<div id="enemy" class="items items_right">
+    <?=$enemy->load_pers_visual();?>
+    <div class="icons_modif icons_modif_right">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_head.jpg" title="Броня головы <?=$mf2['Armor1'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_chest.jpg" title="Броня корпуса <?=$mf2['Armor2'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_belt.jpg" title="Броня пояса <?=$mf2['Armor3'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/armor_boots.jpg" title="Броня ног <?=$mf2['Armor4'];?>" /><br /><br />
+
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/hit.jpg" title="Удар <?=$mf2['min_damage'];?> - <?=$mf2['max_damage'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/krit.jpg" title="Крит <?=$mf2['crit'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/antikrit.jpg" title="Антикрит <?=$mf2['acrit'];?>" /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/uvorot.jpg" title="Уворот <?=$mf2['uv'];?>" /> <br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/antiuv.jpg" title="Антиуворот <?=$mf2['auv'];?>" /><br />
+    </div>
+    <div class="loge loge_right">
+      <div class="stats stats_right">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/stre.png" title="Сила <?=$enemy->Stre;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/agil.png"  title="Ловкость <?=$enemy->Agil;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/intu.png"  title="Интуиция <?=$enemy->Intu;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/intl.png"  title="Интеллект <?=$enemy->Intl;?>" /><img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/slots/icons/endu.png"  title="Выносливость <?=$enemy->Endu;?>" />
+      </div>
+    </div>
+</div>
+<div id="battle_status"> </div>
+          <div class="log_table">
+             <strong>Команда <font color="#ff6666">красных</font>:</strong> <font color="#000000" id="team1"><?=$log['team1'];?></font><br />
+             <strong>Команда <font color="#6666ff">синих</font>:</strong> <font color="#000000" id="team2"><?=$log['team2'];?></font><br />
+             <?=$log['nachalo'];?><br />
+             <div id="log">
+             <?
+              if( !empty($log['log']) ):
+                $i = 0;
+                krsort($log['log']);
+                foreach( $log['log'] as $k => $v ):
+                $i++;
+                 if( $i <= 5 ):
+
+             ?>
+               <br />Ход номер <?=$k;?>: <br />
+                <?
+	             if( !empty($log['death'][$k]) )
+           		 {
+           			foreach( $log['death'][$k] as $d_str )
+		           		 $return .= $battle_log->from_xml($d_str).'<br />';
+           		 }
+
+                 if( !empty($v) )
+                 {
+                 	krsort($v);
+                  	foreach( $v as $str)
+                    	echo $battle_log->from_xml($str).'<br />';
+                 }
+                 else
+                  	echo 'Действия не обнаружены';
+
+
+                  endif;
+
+                 if( !empty($log['abil'][$k]) )
+          		 {
+           	    	echo '<hr color=#ebebeb />';
+
+           			foreach( $log['abil'][$k] as $d_str )
+           		 		echo '<font color=green>'.$battle_log->from_xml($d_str).'</font><br />';
+           	     	echo '<hr color=#ebebeb />';
+          		 }
+
+                endforeach;
+
+                 echo '<br /><br />Набито '.$hited.' поинтов. <a href="logs2.php?id='.$player->battle_id.'" target="_blank">Полный лог.</a>';
+                endif;
+             ?>
+            </div>
+          </div>

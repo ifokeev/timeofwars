@@ -1,0 +1,76 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/JsHttpRequest.js"></script>
+<script type="text/javascript" language="JavaScript">
+function show(id) { document.getElementById(id).style.display = ""; }
+function hide(id) { document.getElementById(id).style.display = "none"; }
+function doLoad(value) {
+var req = new JsHttpRequest();
+req.onreadystatechange = function() {
+if (req.readyState == 4) {
+document.getElementById('otd').innerHTML    = req.responseJS.otdname;
+document.getElementById('result').innerHTML = req.responseText;
+}
+}
+
+req.open('POST', 'ajax/shopload.php?shop=<?=$zamok;?>', true);
+req.send( { q: value } );
+}
+</script>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0" onload="doLoad('<?=( !empty($otdel) ? $otdel : '0' );?>');">
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td>
+    <h3><?=_SHOP_title;?></h3>
+   </td>
+   <td align="right">
+    <input type="button" onclick="window.location.href='?goto=zamok'" value="<?=_GOOUT;?>" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+   </td>
+  </tr>
+ </table>
+<font color="red"><b><?=$err;?></b></font><br />
+ <table width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+    <td valign="top" align="left">
+     <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#A5A5A5" id="items">
+      <tr>
+	   <td align="center">
+	    <b><?=_SHOP_title1;?> "<b id="otd">Оружие: фехтовальное</b>"</b>
+	   </td>
+      </tr>
+      <tr>
+       <td>
+        <div id="result"> </div>
+       </td>
+      </tr>
+     </table>
+    </td>
+    <td valign="top" width="280px">
+     <center><b><?=sprintf(_howmany, '<font color="#339900">'.sprintf ("%.2f", $player->Money).'</font>', 'кр.');?></b></center>
+     <div style="MARGIN-LEFT:15px; MARGIN-TOP: 10px;">
+      <? if($admin == 1): ?><input type="button" value="Функции администратора" onclick="window.location.href='zamok_shop_adm.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" /><br /> <? endif;?>
+      <div style="background-color:#d2d0d0;padding:1"><center><B><?=_SHOP_otdel;?></B></center></div>
+        <?=_SHOP_otdel_name1;?><br />
+       <a href="javascript:doLoad('0')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_1;?></a><br />
+       <a href="javascript:doLoad('1')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_2;?></a><br />
+       <a href="javascript:doLoad('3')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_3;?></a><br />
+       <a href="javascript:doLoad('4')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_4;?></a><br />
+       <a href="javascript:doLoad('5')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_5;?></a><br />
+        <?=_SHOP_otdel_name2;?><br />
+       <a href="javascript:doLoad('6')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_6;?></a><br />
+       <a href="javascript:doLoad('7')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_7;?></a><br />
+       <a href="javascript:doLoad('8')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_8;?></a><br />
+       <a href="javascript:doLoad('9')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_9;?></a><br />
+       <a href="javascript:doLoad('10')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_10;?></a><br />
+        <?=_SHOP_otdel_name3;?><br />
+       <a href="javascript:doLoad('11')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_11;?></a><br />
+       <a href="javascript:doLoad('12')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_12;?></a><br />
+       <a href="javascript:doLoad('13')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_13;?></a><br />
+        <?=_SHOP_otdel_name4;?><br />
+       <a href="javascript:doLoad('14')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_14;?></a><br />
+       <a href="javascript:doLoad('19')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_15;?></a><br />
+       <a href="javascript:doLoad('16')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_16;?></a><br />
+       <a href="javascript:doLoad('17')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=_SHOP_otdel_17;?></a><br />
+      </div>
+     </td>
+   </tr>
+ </table>

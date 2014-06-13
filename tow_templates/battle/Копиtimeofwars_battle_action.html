@@ -1,0 +1,168 @@
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/battle2.css" rel="stylesheet" type="text/css" media="screen" />
+   <link href="http://<?=$db_config[DREAM]['other'];?>/css/player_visual.css" rel="stylesheet" type="text/css" media="screen" />
+   <script src="http://www.google.com/jsapi"></script>
+   <script type="text/javascript">
+
+    google.load("jquery", "1.4.2");
+
+    google.setOnLoadCallback(function() {    	$.getScript("http://<?=$db_config[DREAM]['other'];?>/js/tooltip.js", function(){ $('img').wTooltip(); } );
+        $.getScript("http://<?=$db_config[DREAM]['other'];?>/js/jquery.alerts.js");
+        $.getScript("http://<?=$db_config[DREAM]['other'];?>/js/battle2.js");
+$('.btn1').click(function() {
+$( '#pict_' + this.id ).show();
+	});
+
+$('.btn2').click(function() {
+$( '#pict_' + this.id ).hide();
+
+	});
+
+        <? if( !empty($msg) ) echo "$('#msg').show(300).html('".$msg."');"; ?>
+    });
+   </script>
+
+</head>
+<body>
+<div id="batid" style="display:none"><?=$player->battle_id;?></div>
+ <table width="100%">
+  <tr>
+  <!---- player ---->
+   <td align="left" width="30%" class="otstup_left">
+    <div id="player_<?=$player->Id;?>" class="items"><?=$player->load_pers_visual();?></div>
+    <?
+       $mf = $player->get_modif_player();
+       $slots = $player->itemsinfo();
+    ?>
+    <? $mf2 = $enemy->get_modif_player(); ?>
+       <div class="modif2 modifikatori_left">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/krit.png" title="Крит <?=$mf['crit'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/anti-krit.png" title="Антикрит <?=$mf['acrit'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/uvorot.png" title="Уворот <?=$mf['uv'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/anti-uvorot.png" title="Антиуворот <?=$mf['auv'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/ydar.png" title="Удар <?=$mf['min_damage'];?> - <?=$mf['max_damage'];?>" /><br /><br />
+       </div>
+       <div class="modif3 armor_left">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/armor_helm.png" title="Броня головы <?=$mf['Armor1'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/korpus.png" title="Броня корпуса <?=$mf['Armor2'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/belt_armor.png" title="Броня пояса <?=$mf['Armor3'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/feet_armor.png" title="Броня ног <?=$mf['Armor4'];?>" /><br /><br />
+       </div>
+
+       <div class="modif modif_left">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/str.gif" title="Сила <?=$player->Stre;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/dex.gif"  title="Ловкость <?=$player->Agil;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/wis.gif"  title="Интуиция <?=$player->Intu;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/con_.gif"  title="Выносливость <?=$player->Endu;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/intel.gif"  title="Интеллект <?=$player->Intl;?>" />
+       </div>
+
+   </td>
+  <!---- end player block ---->
+  <!---- center ---->
+   <td align="center">
+    <table width="100%" height="320px" border="0">
+     <tr>
+      <td align="center">
+       <div id="msg">&nbsp;</div>
+
+      </td>
+     </tr>
+     <tr>
+      <td align="center">
+       <div id="battle_status"> </div>
+
+        <table border="0" cellspacing="0" cellpadding="0" align="left" class="log_table" valign="top">
+        <!---- log ---->
+         <tr>
+          <td align="left">
+             <strong>Команда <font color="#6666ff">синих</font>:</strong> <font color="#000000" id="team1"><?=$log['team1'];?></font><br />
+             <strong>Команда <font color="#ff6666">красных</font>:</strong> <font color="#000000" id="team2"><?=$log['team2'];?></font><br />
+             <?=$log['nachalo'];?><br />
+             <div id="log">
+             <?
+              if( !empty($log['log']) ):
+                $i = 0;
+                krsort($log['log']);
+                foreach( $log['log'] as $k => $v ):
+                $i++;
+                 if( $i <= 5 ):
+
+             ?>
+               <br />Ход номер <?=$k;?>: <br />
+                <?
+                 if( !empty($v) ):
+                 krsort($v);
+                  foreach( $v as $str):
+                    echo from_xml($str).'<br />';
+                  endforeach;
+                 else:
+                  echo 'Действия не обнаружены';
+                 endif;
+
+                  endif;
+
+
+
+                endforeach;
+
+                 echo '<br /><br />Набито '.$hited.' поинтов. <a href="logs2.php?id='.$player->battle_id.'" target="_blank">Полный лог.</a>';
+                endif;
+             ?>
+            </div>
+          </td>
+         </tr>
+       <!---- end log ---->
+        </table>
+
+
+      </td>
+     </tr>
+     <!-----tr>
+      <td>
+      <? if( ($mf['crit'] - $mf2['crit']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/krit.png" title="У вас выше шанс крит. удара на '.($mf['crit'] - $mf2['crit']).'" />'; ?>
+      <? if( ($mf['acrit'] - $mf2['acrit']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/anti-krit.png" title="У вас выше шанс антикрит. удара на '.($mf['acrit'] - $mf2['acrit']).'" />'; ?>
+      <? if( ($mf['uv'] - $mf2['uv']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/uvorot.png" title="У вас выше шанс уворота на '.($mf['uv'] - $mf2['uv']).'" />'; ?>
+      <? if( ($mf['auv'] - $mf2['auv']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/anti-uvorot.png" title="У вас выше шанс антиуворота на '.($mf['auv'] - $mf2['auv']).'" />'; ?>
+      <? if( ($mf['crit'] - $mf2['crit']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/krit.png" title="У вас выше шанс крит. удара на '.($mf['crit'] - $mf2['crit']).'" />'; ?>
+      <br />
+      <? if( ($mf['Armor1'] - $mf2['Armor1']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/armor_helm.png" title="У вас больше брони головы на '.($mf['Armor1'] - $mf2['Armor1']).'" />'; ?>
+      <? if( ($mf['Armor2'] - $mf2['Armor2']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/korpus.png" title="У вас больше брони корпуса на '.($mf['Armor2'] - $mf2['Armor2']).'" />'; ?>
+      <? if( ($mf['Armor3'] - $mf2['Armor3']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/belt_armor.png" title="У вас больше брони пояса на '.($mf['Armor3'] - $mf2['Armor3']).'" />'; ?>
+      <? if( ($mf['Armor4'] - $mf2['Armor4']) > 0 ) echo '<img src="http://'.$db_config[DREAM_IMAGES]['server'].'/battle2/feet_armor.png" title="У вас больше брони ног на '.($mf['Armor4'] - $mf2['Armor4']).'" />'; ?>
+      </tr>
+     </tr------>
+    </table>
+   </td>
+  <!---- end center block ---->
+  <!---- enemy ----->
+  <td align="right" width="30%" class="otstup_right">
+   <div id="player_<?=$enemy->Id;?>" class="items items_right"><?=$enemy->load_pers_visual();?></div>
+       <div class="modif2 modifikatori_right">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/krit.png" title="Крит <?=$mf2['crit'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/anti-krit.png" title="Антикрит <?=$mf2['acrit'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/uvorot.png" title="Уворот <?=$mf2['uv'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/anti-uvorot.png" title="Антиуворот <?=$mf2['auv'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/ydar.png" title="Удар <?=$mf2['min_damage'];?> - <?=$mf2['max_damage'];?>" /><br /><br />
+       </div>
+       <div class="modif3 armor_right">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/armor_helm.png" title="Броня головы <?=$mf2['Armor1'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/korpus.png" title="Броня корпуса <?=$mf2['Armor2'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/belt_armor.png" title="Броня пояса <?=$mf2['Armor3'];?>" /><br /><br />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/feet_armor.png" title="Броня ног <?=$mf2['Armor4'];?>" /><br /><br />
+       </div>
+
+       <div class="modif modif_right">
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/str.gif" title="Сила <?=$enemy->Stre;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/dex.gif"  title="Ловкость <?=$enemy->Agil;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/wis.gif"  title="Интуиция <?=$enemy->Intu;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/con_.gif"  title="Выносливость <?=$enemy->Endu;?>" />
+         <img src="http://<?=$db_config[DREAM_IMAGES]['server'];?>/battle2/intel.gif"  title="Интеллект <?=$enemy->Intl;?>" />
+       </div>
+
+
+  </td>
+  <!----- end enemy block --->
+  </tr>
+
+ </table>

@@ -1,0 +1,32 @@
+</head>
+<body leftmargin="0" topmargin="2" marginwidth="0" marginheight="0" bgcolor="#f0f0f0">
+<div align="right">
+ <input type="button" value="<?=_GOOUT;?>" onClick="window.location.href='inv.php'" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" />
+</div>
+<center><b>Внимание!</b> Образ выбирается 1 раз за всю жизнь персонажа<br /><br />
+<? if($dat == 'M'): ?>
+<a href="?pict_value=7"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/7.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=8"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/8.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=9"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/9.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=10"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/10.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=11"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/11.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=12"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/12.gif" /></a> <br />
+<a href="?pict_value=13"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/13.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=14"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/14.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=15"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/15.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=16"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/16.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=17"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/M/17.gif" /></a>&nbsp;&nbsp;
+<? elseif($dat == 'F'): ?>
+<a href="?pict_value=30"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/30.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=31"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/31.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=32"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/32.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=33"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/33.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=34"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/34.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=35"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/35.gif" /></a> <br />
+<a href="?pict_value=36"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/36.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=37"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/37.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=38"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/38.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=39"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/39.gif" /></a>&nbsp;&nbsp;
+<a href="?pict_value=40"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/pict/F/40.gif" /></a>&nbsp;&nbsp;
+<? endif; ?>
+</center>

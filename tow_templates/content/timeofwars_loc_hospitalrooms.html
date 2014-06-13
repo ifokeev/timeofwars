@@ -1,0 +1,56 @@
+<script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+<script>function changet() {var newt = prompt('Табличка на двери:', '<?=$arr['Name']; ?>');if ((newt != '<?=$arr['Name']; ?>') && (newt != null)) {window.location.href='hospitalrooms.php'+'?newt='+newt;}}</script>
+</head>
+<body bgcolor="#f0f0f0" onload="setHP<? if ($qr == 1): ?>2<? endif; ?>(<?=$player->HPnow;?>,<?=$player->HPall;?>);" leftMargin="5" topMargin="5" marginheight="5" marginwidth="5">
+<table width="100%" cellspacing="0" cellpadding="0">
+ <tr>
+  <td valign="top">
+   <b>Госпиталь города Желаний</b><br />Комната №<?=$Id;?><br /><br />
+  </td>
+  <td>
+   <input type="button" value="Выйти из квартиры" onClick="window.location.href='?goto=hospital'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" />
+  </td>
+  <td>
+   <input type="button" value="Сделать дубликат ключа" onClick="if (confirm('Вы уверены, что хотите сделать дубликат ключа за 5 кр?')) window.location.href='hospitalrooms.php?make_key=1'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" />
+  </td>
+  <td>
+   <input type="button" value="Сменить табличку на двери" onclick="changet();" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" /><br />
+  </td>
+  <td>
+   <input type="button" value="Осмотреться" onClick="window.location.href='hospitalrooms.php'" class="oo" ONMOUSEOVER="this.className = 'on';" ONMOUSEOUT="this.className = 'oo';" />
+  </td>
+   <table cellspacing="0" cellpadding="0">
+    <tr>
+     <td align="center">
+      <script>dlogin("<?=$player->username;?>", <?=$player->Level;?>, <?=$player->Align;?>, <?=$player->clanid;?>)</script>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <nobr>
+	     <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP1" id="HP1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP2" id="HP2">:</div>
+      </nobr>
+     </table>
+    <br />
+    <? if (!empty($r)): ?>
+     <? foreach ($r as $v): ?>
+      <table cellspacing="0" cellpadding="0">
+       <tr>
+        <td align="center">
+         <script>dlogin("<?=$v['Username'];?>", <?=$v['Level'];?>, <?=$v['Align'];?>, <?=$v['ClanID'];?>)</script>
+        </td>
+       </tr>
+      <tr>
+       <td>
+        <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="10" height="10" alt="Уровень жизни" /> [<?=$v['HPnow'];?>/<?=$v['HPall'];?>]
+       </td>
+      </tr>
+     </table>
+    <br />
+<? endforeach; ?>
+<? endif; ?>
+   <td align="left">
+    <font color="red"><b><?=$err;?></b></font><br />
+   </td>
+  </tr>
+</table>

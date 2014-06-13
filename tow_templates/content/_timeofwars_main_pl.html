@@ -1,0 +1,180 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/style.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/index/1.js" type="text/javascript"></script>
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/loadpic.js" type="text/javascript"></script>
+   <style>
+   .rc {
+    background: #f0f0f0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+   }
+   .rc-top,
+   .rc-top div,
+   .rc-bot,
+   .rc-bot div {
+    height: 9px;
+    line-height: 0;
+    background: url(http://<?=$db_config[DREAM_IMAGES][server];?>/rx7.gif) no-repeat left top;
+   }
+
+   .rc-bot {background-position: left -9px;}
+   .rc-top div {background-position: right -18px;}
+   .rc-bot div {background-position: right -27px;}
+
+   .rc-top,
+   .rc-bot {
+    position: relative;
+    z-index: 2;
+   }
+
+   .rc-content {
+    position: relative;
+    margin: -9px 0;
+    z-index: 1;
+   }
+</style>
+</head>
+<body bgColor="#f0f0f0" leftMargin="5" topMargin="5" marginheight="5" marginwidth="5">
+
+<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td align="right">&nbsp;</td>
+   <td align="center">
+    <table align="center">
+     <tr>
+      <td align="left">
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+       <? if( !empty($present) ): ?>
+        <tr>
+          <td align="center"><a href="#" title="Вам подарок!" style="cursor: hand" onclick="window.location.href='?act=podarok';"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/present.gif"   border="0"   /></a></td>
+        </tr>
+       <? endif; ?>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="городская Арена" onclick="javascript:window.location.href='?goto=main'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Гос. магазин" onclick="javascript:window.location.href='?goto=shop'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Цветочный магазин" onclick="javascript:window.location.href='?goto=flower'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Местная аптека" onclick="javascript:window.location.href='?goto=apteka'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Заморская лавка" onclick="javascript:window.location.href='?goto=euroshop'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Комиссионный магазин" onclick="javascript:window.location.href='?goto=comission'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Ремонтная мастерская" onclick="javascript:window.location.href='?goto=repair'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Сердце леса" onclick="javascript:window.location.href='?goto=turnir'"></td>
+        </tr>
+       </table>
+      </td>
+      <td width="100px">&nbsp;</td>
+      <td align="center">
+       <div class="rc">
+        <div class="rc-top"><div></div></div>
+        <div class="rc-content">
+<map name="town">
+<area href="javascript:window.location.href='?goto=main'" shape="poly" onMouseOver="return overlib('<?=_PL_text_main;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="700,284,700,302,655,319,639,335,640,360,593,351,515,351,409,317,315,338,314,323,306,315,196,349,189,358,191,384,176,387,177,466,207,498,654,498,687,478,707,448,708,420,703,405,739,400,756,389,765,369,762,344,762,329,704,303">
+<area href="javascript:window.location.href='?goto=shop'" shape="poly" onMouseOver="return overlib('<?=_PL_text_shop;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="355,302,423,277,421,244,425,238,406,227,382,215,378,226,373,225,373,214,370,223,333,212,312,237,311,245,331,264,332,293">
+<area href="javascript:window.location.href='?goto=euroshop'" shape="poly" onMouseOver="return overlib('<?=_PL_text_euroshop;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="388,183,397,178,401,189,426,170,452,165,496,177,503,184,507,247,435,276,424,268,426,235,388,215">
+<area href="javascript:window.location.href='?goto=comission'" onMouseOver="return overlib('<?=_PL_text_comission;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" shape="poly" coords="476,302,531,221,706,217,791,252,792,292,736,310,702,284,571,339,474,320">
+<area href="javascript:alert('<?=_PL_text_shiperr2;?>');" onMouseOver="return overlib('<?=_PL_text_shiperr;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" shape="poly" coords="580,3,584,101,637,157,746,224,798,242,797,1">
+<area href="javascript:window.location.href='?goto=repair'" onMouseOver="return overlib('<?=_PL_text_repair;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" shape="poly" coords="220,252,201,210,137,192,90,199,57,233,49,265,127,270">
+<area href="javascript:window.location.href='?goto=temple'" shape="poly" onMouseOver="return overlib('<?=_PL_text_temple;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="385,210,303,218,240,206,247,25,306,29,312,105,398,141">
+<area href="javascript:window.location.href='?goto=forest'" onMouseOver="return overlib('<?=_PL_text_forest;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="0,-8,199,128">
+<area href="javascript:window.location.href='?goto=casino'" shape="poly" onMouseOver="return overlib('<?=_PL_text_casino;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="271,222,220,260,195,299,204,335,239,331,297,312,317,320,340,315,333,294,330,260">
+<area href="javascript:window.location.href='?goto=tavern'" shape="poly" onMouseOver="return overlib('<?=_PL_text_tavern;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="64,274,105,265,139,316,138,381,81,400,61,393,61,352,31,307,39,298,49,296">
+<area href="javascript:window.location.href='?goto=hospital'" shape="poly" onMouseOver="return overlib('<?=_PL_text_hospital;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="156,299,139,330,137,377,33,413,38,499,174,497,171,336">
+<area href="javascript:window.location.href='?goto=flower'" shape="poly" onMouseOver="return overlib('<?=_PL_text_flower;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="12,292,40,310,60,346,63,402,22,421,7,412,0,416,0,327">
+<area href="javascript:window.location.href='?goto=cl'" shape="poly" onMouseOver="return overlib('<?=_PL_text_cl;?>',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="575,106,536,121,520,166,514,165,513,207,553,224,607,189,607,135,602,147">
+<area href="javascript:window.location.href='?goto=land'" shape="poly" onMouseOver="return overlib('Пригород. Не изучено.',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="396,2,398,65,512,91,551,72,550,0">
+<area href="javascript:window.location.href='?goto=apteka'" shape="poly" onMouseOver="return overlib('Аптека. Изучено недоконца.',CAPTION,'<?=_PL_text;?>',WIDTH,'200');" onMouseOut="return nd();" coords="522,117,522,153,510,166,511,178,470,188,425,171,423,146,424,119,432,128,481,112,502,115">
+</map>
+<?
+/*
+if( empty($vetka_cnt) || ($vetka_cnt >= 0 && $vetka_cnt <= 20) ) $img = 'gorod_zima.gif';
+elseif( $vetka_cnt > 20 && $vetka_cnt <= 40 ) $img = 'gorod_zima1.gif';
+elseif( $vetka_cnt > 40 && $vetka_cnt <= 60 ) $img = 'gorod_zima2.gif';
+elseif( $vetka_cnt > 60 && $vetka_cnt <= 70 ) $img = 'gorod_zima3.gif';
+elseif( $vetka_cnt > 70 && $vetka_cnt <= 80 ) $img = 'gorod_zima4.gif';
+elseif( $vetka_cnt > 80 && $vetka_cnt <= 90 ) $img = 'gorod_zima5.gif';
+elseif( $vetka_cnt > 90 && $vetka_cnt <= 100 ) $img = 'gorod_zima6.gif';
+elseif( $vetka_cnt > 100 && $toys_cnt >= 15 && $toys_cnt <= 30 ) $img = 'gorod_zima7.gif';
+elseif( $vetka_cnt > 100 && $toys_cnt > 30 ) $img = 'gorod_zima8.gif';
+
+
+if( empty($vetka_cnt) || ($vetka_cnt >= 0 && $vetka_cnt <= 20) ) $img = 'gorod_zima.gif';
+elseif( $vetka_cnt > 20 && $vetka_cnt <= 60 ) $img = 'gorod_zima1.gif';
+elseif( $vetka_cnt > 60 && $vetka_cnt <= 90 ) $img = 'gorod_zima2.gif';
+elseif( $vetka_cnt > 90 && $vetka_cnt <= 120 ) $img = 'gorod_zima3.gif';
+elseif( $vetka_cnt > 120 && $vetka_cnt <= 150 ) $img = 'gorod_zima4.gif';
+elseif( $vetka_cnt > 150 && $vetka_cnt <= 200 ) $img = 'gorod_zima5.gif';
+elseif( $vetka_cnt > 200 && $vetka_cnt <= 250 ) $img = 'gorod_zima6.gif';
+elseif( $vetka_cnt > 250 && $toys_cnt >= 15 && $toys_cnt <= 30 ) $img = 'gorod_zima7.gif';
+elseif( $vetka_cnt > 250 && $toys_cnt > 30 ) $img = 'gorod_zima8.gif';
+*/
+
+if( date('H') >= 19 && date('H') < 21 ) $img = 'vecherob.gif';
+elseif( date('H') >= 21 ) $img = 'nochob.gif';
+elseif( date('H') <= 06 && date('H') >= 00 ) $img = 'nochob.gif';
+else $img = 'gorod.jpg';
+?>
+
+<img src="http://<?=$db_config[DREAM_IMAGES][server];?>/<?=$img;?>" width="800px" height="500px" border="0" usemap="#town">
+        </div>
+        <div class="rc-bot"><div></div></div>
+       </div>
+      </td>
+      <td width="100px">&nbsp;</td>
+      <td align="right">
+<? if( $elka == true ): ?>
+       <table border="0" cellpadding="0" cellspacing="0" style="position:absolute; top:5px; padding: 0px"  valign="top">
+        <tr>
+          <td><a href="#" title="Злой челопук, меняющий ветки на игрушки." style="cursor: hand" onclick="window.open('elka.php', 'ADM', 'height=230px, width=750px, location=no, menubar=yes, status=no, toolbar=no, scrollbars=yes')" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image2','','http://<?=$db_config[DREAM_IMAGES][server];?>/4el13.png',1)"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/4el12.png" name="Image2"  border="0" id="Image2" /></a></td>
+        </tr>
+       </table>
+<? endif; ?>
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+
+
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="Пригород" onclick="javascript:window.location.href='?goto=land'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="Порт" onclick="javascript:window.location.href='?goto=port'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Таверна" onclick="javascript:window.location.href='?goto=tavern'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Лазарет" onclick="javascript:window.location.href='?goto=hospital'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Кланхолл" onclick="javascript:window.location.href='?goto=cl'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Казино" onclick="javascript:window.location.href='?goto=casino'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Храм" onclick="javascript:window.location.href='?goto=temple'"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Волшебный лес" onclick="javascript:window.location.href='?goto=forest'"></td>
+        </tr>
+       </table>
+       </td>
+     </tr>
+    </table>
+   </td>
+   <td align="left">&nbsp;</td>
+ </tr>
+</table>

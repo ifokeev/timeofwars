@@ -1,0 +1,176 @@
+   <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/main.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script>
+</head>
+<body bgcolor="#e2e0e0">
+<b><a onClick="inverse('info')" style="cursor:hand">Заметки о персонаже (<?=( empty($info) ) ? '0' : count($info);?>):</a></b><br /><br />
+ <table id="info" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($info) ):        ?>
+    <? foreach( $info as $row ):   ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b>: <i><?=$row['Text'];?></i><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('shuted')" style="cursor:hand">Наложили молчанки (<?=( empty($shut) ) ? '0' : count($shut);?>):</a></b><br /><br />
+ <table id="shuted" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($shut) ):        ?>
+    <? foreach( $shut as $row ):   ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> запретил общение персонажу "<?=$row['Username'];?>" на <?=$row['On_time'];?> часа(ов). Причина: <i><?=$row['Text'];?></i><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('unshuted')" style="cursor:hand">Cняли молчанки (<?=( empty($unshut) ) ? '0' : count($unshut);?>):</a></b><br /><br />
+ <table id="unshuted" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($unshut) ):      ?>
+    <? foreach( $unshut as $row ): ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> вернул голос персонажу "<?=$row['Username'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('prokl')" style="cursor:hand">Наложеные проклятия (<?=( empty($chaos) ) ? '0' : count($chaos);?>):</a></b><br /><br />
+ <table id="prokl" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($chaos) ):       ?>
+    <? foreach( $chaos as $row ):  ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> наложил проклятье на персонажа "<?=$row['Username'];?>" на <?=$row['On_time'];?> часа(ов). Причина: <i><?=$row['Text'];?></i><br />, ссылка на форум: <font color=blue><i><?=$row['link'];?></i></font><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('noprokl')" style="cursor:hand">Снятые проклятья (<?=( empty($uchaos) ) ? '0' : count($uchaos);?>):</a></b><br /><br />
+ <table id="noprokl" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($uchaos) ):      ?>
+    <? foreach( $uchaos as $row ): ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> снял проклятье с персонажа "<?=$row['Username'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('blok')" style="cursor:hand">Блок персонажа (<?=( empty($blok) ) ? '0' : count($blok);?>):</a></b><br /><br />
+ <table id="blok" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($blok) ):        ?>
+    <? foreach( $blok as $row ):   ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> заблокировал "<?=$row['Username'];?>". Причина: <i><?=$row['Text'];?></i><br />, ссылка на форум: <font color=blue><i><?=$row['link'];?></i></font><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('noblok')" style="cursor:hand">Снятие блока (<?=( empty($deblok) ) ? '0' : count($deblok);?>):</a></b><br /><br />
+ <table id="noblok" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($deblok) ):      ?>
+    <? foreach( $deblok as $row ): ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> разблокировал "<?=$row['Username'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('klan')" style="cursor:hand">Назначение клана (<?=( empty($klan) ) ? '0' : count($klan);?>):</a></b><br /><br />
+ <table id="klan" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($klan) ):        ?>
+    <? foreach( $klan as $row ):   ?>
+     <font class="date"><?=date('d-m-Y H:i', $row['Time']);?></font> Хранитель <b><?=$row['hranitel'];?></b> назначил новый клан персонажу "<?=$row['Username'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('from')" style="cursor:hand">Передачи игрока(<?=( empty($trfrom) ) ? '0' : count($trfrom);?>):</a></b><br /><br />
+ <table id="from" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($trfrom) ):      ?>
+    <? foreach( $trfrom as $row ): ?>
+     <font class="date"><?=$row['Date'];?></font> От <b><?=$row['From'];?></b> к <b><?=$row['To'];?></b> передано "<?=$row['What'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('to')" style="cursor:hand">Передачи к игроку(<?=( empty($trTO) ) ? '0' : count($trTO);?>):</a></b><br /><br />
+ <table id="to"  style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($trTO) ):        ?>
+    <? foreach( $trTO as $row ):   ?>
+     <font class="date"><?=$row['Date'];?></font> От <b><?=$row['From'];?></b> к <b><?=$row['To'];?></b> передано "<?=$row['What'];?>"<br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table><hr />
+<? if ($ClanID == 1 || $ClanID == 53 || $ClanID == 50 || $ClanID == 255  || $ClanID == 2): ?>
+<b><a onClick="inverse('inventory')" style="cursor:hand">Предметы в рюкзаке (<?=( empty($things) ) ? '0' : count($things);?>):</a></b><br /><br />
+ <table id="inventory" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($things) ):      ?>
+    <? foreach( $things as $row ): ?>
+     <a href="thing.php?thing=<?=$row['Un_Id'];?>" target=_blank><?=$row['Thing_Name'];?></a> - цена = <b><?=$row['Cost'];?> кр</b><br />
+    <? $Syma_cr += $row['Cost'];   ?>
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+     <hr /><font class="private">Всего вещей</font> на сумму = <b><?=$Syma_cr;?> кр</b>
+   </td>
+  </tr>
+ </table>
+<b><a onClick="inverse('other')" style="cursor:hand">Другое:</a></b><br /><br />
+ <table id="other" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    Денег в кармане = <b><?=$m;?> кр</b><br />
+    <? unset($m, $query, $row, $res); ?>
+   </td>
+  </tr>
+ </table>
+
+<a onclick="inverse('refer_good')" style="cursor:hand">Подтверждение рефералов (<?=( empty($ref_good) ) ? '0' : count($ref_good);?>):</a></b><br /><br />
+ <table id="refer_good" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($ref_good) ):        ?>
+    <? foreach( $ref_good as $row ):   ?>
+     <font class="date"><?=date('j', $row['add_time']).' '.getmonth(date('F', $row['add_time'])).', '.date('Y', $row['add_time']).' г.';?></font> Получил <b><?=$row['money'];?> Euro</b> с реферала <?=slogin($row['Username'], $row['Level'], $row['ClanID']);?><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+
+ <a onclick="inverse('refer_good')" style="cursor:hand">Отказы на выплаты (<?=( empty($ref_bad) ) ? '0' : count($ref_bad);?>):</a></b><br /><br />
+ <table id="refer_good" style="display:none" border="1" width="97%">
+  <tr>
+   <td>
+    <? if( !empty($ref_bad) ):        ?>
+    <? foreach( $ref_bad as $row ):   ?>
+     <font class="date"><?=date('j', $row['add_time']).' '.getmonth(date('F', $row['add_time'])).', '.date('Y', $row['add_time']).' г.';?></font> Получил отказ после заявки на получение денег с реферала <?=slogin($row['Username'], $row['Level'], $row['ClanID']);?><br />
+    <? endforeach;                 ?>
+    <? endif;                      ?>
+   </td>
+  </tr>
+ </table>
+<? endif; ?>
+<? unset($ClanID); ?>

@@ -1,0 +1,51 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/roulette.js"></script>
+   <script>lefttime=<?=$lefttime;?>;</script>
+</head>
+<body bgcolor="#f0f0f0" topmargin="2" onload="firstload();">
+ <div align="right">
+  <input type="button" onclick="window.location.href='?goto=casino'" value="<?=_GOOUT;?>" class="oo" onmouseover="this.className = 'on';" onmouserout="this.className = 'oo';" /><br />
+  <a href="help/roulet_help.php" target="_blank"><b><font color="red"><?=_ROULETTE_rules;?></font></b></a>
+ </div>
+ <table align="center">
+  <tr>
+   <td align="center">
+    <? if(!empty($outstr)): echo '<font color="red"><b>'.$outstr.'</b></font>'; endif; ?><br>
+    <?=sprintf(_ROULETTE_money, sprintf("%.1f", $Money));?><br />
+    <?=_ROULETTE_time;?><b id="timercl">0:00</b>
+   </td>
+  </tr>
+  <tr>
+   <td align="center">
+    <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/roulette.gif" border="0" usemap="#RouletteMap" /><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/roul.gif" border="0" />
+
+<MAP NAME="RouletteMap" id="RouletteMap">
+
+<script>buildtable();</script>
+
+</MAP>
+   </td>
+  </tr>
+  <tr>
+   <td align="center">
+    <form id="betform" name="betform">
+     <?=_ROULETTE_button;?>
+    </form>
+     <? if (!empty($r)): ?>
+      <?=_ROULETTE_lastwins;?>
+       <table>
+        <thead>
+         <th>
+          <?=_ROULETTE_stay;?>
+         </th>
+         <th>
+          <?=_ROULETTE_winmoney;?>
+         </th>
+        </thead>
+         <? foreach ($r as $v): ?>
+          <? echo '<tr><td>'.$v['bet'].' кр. на '.$roul_names[$v['betto']].'</td><td align="center">'.$v['win'].'</td></tr>'; ?>
+         <? endforeach; ?>
+       </table>
+     <? endif; ?>
+   </td>
+  </tr>
+ </table>

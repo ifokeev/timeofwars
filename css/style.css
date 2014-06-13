@@ -1,0 +1,12 @@
+.ol_foreground {
+	BACKGROUND-COLOR: #ffffdd
+}
+.ol_background {
+	BACKGROUND-COLOR: #2f0501
+}
+.ol_caption {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.ol_text {
+	FONT-SIZE: 10px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}

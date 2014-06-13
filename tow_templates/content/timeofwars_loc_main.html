@@ -1,0 +1,111 @@
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/main.js"></script><script>function imover(im){im.filters.Glow.Enabled=true;}function imout(im){im.filters.Glow.Enabled=false;}</script><script type="text/javascript"> function copy_link(){ clipboardData.setData("Text", "http://<?=$db_config[DREAM]['server'];?>/register.php?join=<?=$player->user_id;?>"); } </script><style>img.aFilter { filter:Glow(color=#7DF3B7,Strength=4,Enabled=0); cursor:hand }</style>
+	    <link rel="stylesheet" type="text/css" href="http://<?=$db_config[DREAM]['other'];?>/css/style.css">
+   <script src="http://<?=$db_config[DREAM]['other'];?>/js/index/1.js" type="text/javascript"></script>
+   <style>
+   .rc {
+    background: #f0f0f0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+   }
+   .rc-top,
+   .rc-top div,
+   .rc-bot,
+   .rc-bot div {
+    height: 9px;
+    line-height: 0;
+    background: url(http://<?=$db_config[DREAM_IMAGES][server];?>/rx7.gif) no-repeat left top;
+   }
+
+   .rc-bot {background-position: left -9px;}
+   .rc-top div {background-position: right -18px;}
+   .rc-bot div {background-position: right -27px;}
+
+   .rc-top,
+   .rc-bot {
+    position: relative;
+    z-index: 2;
+   }
+
+   .rc-content {
+    position: relative;
+    margin: -9px 0;
+    z-index: 1;
+   }
+</style>
+</head>
+<body bgcolor="#f0f0f0" onload="setHP(<?=$player->HPnow;?>, <?=$player->HPall;?>)">
+ <center>
+   <script>dlogin(<?=sprintf( " '%s', %d, %d, %d ", $player->username, $player->Level, $player->Align, $player->clanid)?>);</script>
+	 <table cellspacing="0" cellpadding="0">
+	   <tr>
+	    <td nowrap="nowrap">
+	     <div id="HP"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/herz.gif" width="8px" height="8px" alt="<?=hplevel;?>"> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP1" id="HP1"><img src="http://<?=$db_config[DREAM_IMAGES][server];?>/hpsilver.gif" width="1px" height="8px" alt="<?=hplevel;?>" name="HP2" id="HP2">:</div>
+        </td>
+       </tr>
+	 </table>
+
+<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td align="right">&nbsp;</td>
+   <td align="center">
+    <table align="center">
+     <tr>
+      <td align="left">
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="<?=_MAIN_room6;?>" onclick="window.location.href='?upd=main';"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="Тренировочный зал" onclick="window.location.href='?goto=bot_train';"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="Зал поединков" onclick="window.location.href='demands.php';"></td>
+        </tr>
+       </table>
+      </td>
+      <td width="100px">&nbsp;</td>
+      <td align="center">
+      <?=sprintf(_refsystem, 'http://'.$db_config[DREAM][server].'/register.php?join='.$player->user_id); ?> <?=sprintf(_a_href, 'javascript:copy_link();', '', _MAIN_copy);?><br />
+      <map name="arena">
+      <area shape="poly" href="javascript:window.location.href='?upd=main';" onMouseOver="return overlib('Зал радости',CAPTION,'<?=_PL_text_loc;?>',WIDTH,'200');" onMouseOut="return nd();" coords="331,12,320,25,318,110,367,113,373,113,373,25,352,7">
+      <area shape="poly" href="javascript:window.location.href='?upd=newby';" onMouseOver="return overlib('Комната новичков',CAPTION,'<?=_PL_text_loc;?>',WIDTH,'200');" onMouseOut="return nd();" coords="410,6,398,25,398,111,453,112,452,21,433,5">
+      <area shape="poly" href="javascript:window.location.href='demands.php'" onMouseOver="return overlib('Зал поединков',CAPTION,'<?=_PL_text_loc;?>',WIDTH,'200');" onMouseOut="return nd();" coords="217,81,197,86,180,102,166,137,164,219,265,207,261,153,256,122,234,91">
+      <area shape="poly" href="javascript:window.location.href='?goto=bot_train'" onMouseOver="return overlib('Тренировочный зал',CAPTION,'<?=_PL_text_loc;?>',WIDTH,'200');" onMouseOut="return nd();" coords="196,255,275,239,307,263,224,292,177,264">
+      <area shape="poly" href="javascript:window.location.href='inv.php'" onMouseOver="return overlib('Раздевалка',CAPTION,'<?=_PL_text_loc;?>',WIDTH,'200');" onMouseOut="return nd();" coords="91,130,96,241,154,231,153,125">
+      <area shape="poly" href="javascript:alert( '{:€' )" onMouseOver="return overlib('За шторкой прячется чебурашка!',CAPTION,'Информация',WIDTH,'200');" onMouseOut="return nd();" coords="64,24,65,91,6,99,5,29,20,5,36,2,56,10">
+      </map>
+      <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/buildings/arena/arena.jpg" width="500px" height="300px" border="0" usemap="#arena">
+
+      </td>
+      <td width="100px">&nbsp;</td>
+      <td align="right">
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="<?=_MAIN_room3;?>" onclick="window.location.href='?upd=newby';"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Выход в город" onclick="window.location.href='?goto=pl';"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Раздевалка" onclick="window.location.href='inv.php';"></td>
+        </tr>
+       </table>
+       </td>
+     </tr>
+    </table>
+   </td>
+   <td align="left">&nbsp;</td>
+ </tr>
+</table>
+   <small>
+    <?=sprintf(_a_href, 'http://tow.su/templates/help/help.html', 'target="_blank"', '<font color="red">'._MAIN_ahref1.'</font> ');?> |
+    <?=sprintf(_a_href, 'index.php', 'target="_blank"', _MAIN_ahref2.' ');?> |
+    <?=sprintf(_a_href, 'forum/', 'target="_blank"', _MAIN_ahref3.' ');?> |
+    <?=sprintf(_a_href, 'top5.php', 'target="_blank"', _MAIN_ahref4.' ');?> |
+   </small>
+<? if ($player->Ups > 0): ?> <br /> <?=sprintf(_a_href, "javascript:window.location.href='inv.php'", '', '<font color="red"<b>'._MAIN_UPSalert.'</b></font>');?> <? endif; ?>
+<?=_MAIN_redalert;?>
+

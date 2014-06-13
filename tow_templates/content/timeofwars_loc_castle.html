@@ -1,0 +1,134 @@
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/lib/prototype.js"></script>
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/lib/scriptaculous.js?load=effects"></script>
+
+   <script type="text/javascript" src="http://<?=$db_config[DREAM]['other'];?>/js/modalbox.js"></script>
+   <link rel="stylesheet" href="http://<?=$db_config[DREAM]['other'];?>/css/modalbox.css" type="text/css" />
+
+   <style type="text/css" media="screen">
+   #MB_loading {
+   font-size: 13px;
+   }
+   .errmsg {
+			margin: 1em;
+			padding: 1em;
+			color: #C30;
+			background-color: #FCC;
+			border: 1px solid #F00;
+	}
+   .rc {
+    background: #f0f0f0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: 500px;
+    height: 375px;
+   }
+   .rc-top,
+   .rc-top div,
+   .rc-bot,
+   .rc-bot div {
+    height: 9px;
+    line-height: 0;
+    background: url(http://<?=$db_config[DREAM_IMAGES]['server'];?>/rx7.gif) no-repeat left top;
+   }
+
+   .rc-bot {background-position: left -9px;}
+   .rc-top div {background-position: right -18px;}
+   .rc-bot div {background-position: right -27px;}
+
+   .rc-top,
+   .rc-bot {
+    position: relative;
+    z-index: 2;
+   }
+
+   .rc-content {
+    position: relative;
+    margin: -9px 0;
+    z-index: 1;
+   }
+   </style>
+</head>
+<body leftmargin="5" topmargin="5" marginwidth="5" marginheight="5" bgcolor="#f0f0f0">
+<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
+  <tr>
+   <td align="right">&nbsp;</td>
+   <td align="center">
+   <b>Замок &laquo;<?=$zamok['title'];?>&raquo;</b><br />
+   принадлежит клану <a href="http://<?=$db_config[DREAM]['server'];?>/top5.php?show=<?=$clan['id_clan'];?>" target="_blank"><?=$clan['title'];?> <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/clan/<?=$clan['id_clan'];?>.gif" border="0"></a><br /><? if(!empty($msg)): echo '<font color="red"><b>'.$msg.'</b></font><br />'; endif; ?>
+   В клановой казне: <b><?=$zamok['balance'];?></b> кр. <? if( $admin == 1 ) { ?><a href="#" title="Казна клана" onclick="Modalbox.show('ajax/zamok_money_take1.php', {title: this.title, method: 'post', params: { kazna_clan_id: '<?=$clan['id_clan'];?>' },  width: 300});">Забрать деньги</a> / <a href="#" onclick="window.location.reload();" title="Обновить">Обновить</a><? } ?> / <a href="#" title="Казна клана" onclick="Modalbox.show('ajax/zamok_log.php', {title: 'Лог замка', method: 'get', params: { clan_id: '<?=$clan['id_clan'];?>' },  width: 300});">Лог</a><br />
+    <table align="center">
+     <tr>
+      <td align="left">
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px; font-weight: bold;" value="Вернуться" onclick="javascript:window.location.href='?goto=land'"></td>
+        </tr>
+        <tr>
+         <? if($flower == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин подарков" onclick="javascript:window.location.href='?goto=<?=$ChatRoom.'_flower';?>'"></td>
+         <? else: ?>
+         <? if($admin == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин подарков [buy]" onclick="if (confirm('Вы уверены, что хотите купить локацию &laquo;Магазин подарков&raquo; за 400 кр?')) window.navigate('?buy=flower')"></td>
+         <? else:?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин подарков" disabled="true"></td>
+         <? endif; ?>
+         <? endif; ?>
+        </tr>
+        <tr>
+         <? if($pict == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин образов" onclick="javascript:window.location.href='?goto=<?=$ChatRoom.'_Pict';?>'"></td>
+         <? else: ?>
+         <? if($admin == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин образов [buy]" onclick="if (confirm('Вы уверены, что хотите купить локацию &laquo;Магазин образов&raquo; за 600 кр?')) window.navigate('?buy=pict')"></td>
+         <? else:?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Магазин образов" disabled="true"></td>
+         <? endif; ?>
+         <? endif; ?>
+        </tr>
+        <tr>
+         <? if($train == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Татами" onclick="javascript:window.location.href='?goto=<?=$ChatRoom.'_train';?>'"></td>
+         <? else: ?>
+         <? if($admin == '1'): ?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Татами [buy]" onclick="if (confirm('Вы уверены, что хотите купить локацию &laquo;Татами&raquo; за 800 кр?')) window.navigate('?buy=train')"></td>
+         <? else:?>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="Татами" disabled="true"></td>
+         <? endif; ?>
+         <? endif; ?>
+        </tr>
+       </table>
+      </td>
+      <td width="50px">&nbsp;</td>
+      <td align="center" height="150px">
+       <div class="rc">
+        <div class="rc-top"><div></div></div>
+        <div class="rc-content">
+         <img src="http://<?=$db_config[DREAM_IMAGES][server];?>/buildings/screen.jpg" width="500px" height="375px">
+        </div>
+        <div class="rc-bot"><div></div></div>
+       </div>
+      </td>
+      <td width="50px">&nbsp;</td>
+      <td align="right">
+       <table border="0" cellpadding="0" cellspacing="0" style="padding: 2px" width="98%">
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="локация недоступна" disabled="true"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="локация недоступна" disabled="true"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="локация недоступна" disabled="true"></td>
+        </tr>
+        <tr>
+         <td width="50%" height="35px" align="center"><input type="button" class="oo" onmouseover="this.className = 'on';" onmouseout="this.className = 'oo';" style="width:150px; height:20px;" value="локация недоступна" disabled="true"></td>
+        </tr>
+       </table>
+       </td>
+     </tr>
+    </table>
+   </td>
+   <td align="left">&nbsp;</td>
+ </tr>
+</table>
